@@ -121,7 +121,7 @@
 
 <!-- ===================== TOP BAR ===================== -->
 <div class="hidden md:block bg-ink-900 text-white text-sm">
-  <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
     <div class="flex items-center gap-6 text-ink-100">
       <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Aarau · Basel · Langenthal · Olten · Trimbach</span>
       <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>4.9 / 5 · Google Bewertungen</span>
@@ -135,15 +135,15 @@
 </div>
 
 <!-- ===================== NAVIGATION ===================== -->
-<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-ink-100">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-glow">
-        <i data-lucide="car-front" class="w-6 h-6 text-white"></i>
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-ink-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
+    <a href="#top" class="flex items-center gap-2 sm:gap-3">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-glow flex-shrink-0">
+        <i data-lucide="car-front" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
       </div>
       <div class="leading-tight">
-        <div class="font-display font-extrabold text-ink-900 text-lg">Verkehrsschule</div>
-        <div class="text-brand-500 font-display font-bold text-sm tracking-wide">MITTELLAND</div>
+        <div class="font-display font-extrabold text-ink-900 text-base sm:text-lg">Verkehrsschule</div>
+        <div class="text-brand-500 font-display font-bold text-xs sm:text-sm tracking-wide">MITTELLAND</div>
       </div>
     </a>
 
@@ -155,13 +155,33 @@
       <a href="#team" class="hover:text-brand-500 transition">Team</a>
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
       <a href="tel:+41791361616" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ink-200 hover:border-brand-500 hover:text-brand-500 transition font-medium">
         <i data-lucide="phone" class="w-4 h-4"></i>Anrufen
       </a>
-      <a href="#preise" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition shadow-glow">
+      <a href="#preise" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition shadow-glow">
         Jetzt buchen <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </a>
+      <!-- Mobile menu button -->
+      <button id="mobileMenuBtn" aria-label="Menü öffnen" class="lg:hidden w-10 h-10 rounded-xl border border-ink-200 flex items-center justify-center text-ink-700 hover:bg-ink-50 transition">
+        <i data-lucide="menu" id="mobileMenuIcon" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu drawer -->
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-ink-100 bg-white">
+    <div class="px-4 sm:px-6 py-4 space-y-1">
+      <a href="#angebote" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50 transition"><span>Angebote</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="#weg" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50 transition"><span>Dein Weg</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="#preise" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50 transition"><span>Preise</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="#ueber" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50 transition"><span>Über uns</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="#team" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50 transition"><span>Team</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <div class="pt-3 mt-3 border-t border-ink-100 grid grid-cols-2 gap-2">
+        <a href="tel:+41791361616" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold hover:border-brand-500 transition"><i data-lucide="phone" class="w-4 h-4"></i>Anrufen</a>
+        <a href="https://wa.me/41791361616" target="_blank" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold hover:border-brand-500 transition"><i data-lucide="message-circle" class="w-4 h-4"></i>WhatsApp</a>
+      </div>
+      <a href="#preise" class="mobile-link block text-center px-4 py-3 rounded-xl bg-brand-500 text-white font-bold hover:bg-brand-600 transition mt-2">Jetzt buchen</a>
     </div>
   </div>
 </header>
@@ -183,48 +203,48 @@
   <div class="absolute -top-32 -left-32 w-[500px] h-[500px] blob"></div>
   <div class="absolute top-40 -right-32 w-[400px] h-[400px] blob"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 grid lg:grid-cols-12 gap-12 items-center">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-16 lg:pt-24 lg:pb-32 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
     <div class="lg:col-span-7 reveal">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-xs sm:text-sm mb-6 sm:mb-8">
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
         Neue Kurse · Anmeldung läuft
       </div>
 
-      <h1 class="font-display font-extrabold text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-ink-900">
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-ink-900">
         Ab hinters Steuer.<br/>
         <span class="gradient-text">Mit Spass zum Führerschein.</span>
       </h1>
 
-      <h2 class="mt-6 font-display font-bold text-2xl md:text-3xl text-brand-600 leading-tight">
+      <h2 class="mt-5 sm:mt-6 font-display font-bold text-xl sm:text-2xl md:text-3xl text-brand-600 leading-tight">
         Verkehrsschule Mittelland, deine Auto-Fahrschule.
       </h2>
 
-      <p class="mt-6 text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed">
+      <p class="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed">
         Fahrstunden, Verkehrskundeunterricht, Theorieunterricht und Nothelferkurse in deiner Umgebung — in Aarau, Basel, Langenthal, Olten und Trimbach.
       </p>
 
-      <div class="mt-10 flex flex-wrap items-center gap-4">
-        <a href="#preise" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-500 text-white font-semibold text-lg hover:bg-brand-600 transition shadow-glow">
+      <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+        <a href="#preise" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full bg-brand-500 text-white font-semibold text-base sm:text-lg hover:bg-brand-600 transition shadow-glow">
           Fahrstunde buchen <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>
-        <a href="#weg" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border-2 border-ink-200 text-ink-700 font-semibold text-lg hover:border-brand-500 hover:text-brand-500 transition">
+        <a href="#weg" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full border-2 border-ink-200 text-ink-700 font-semibold text-base sm:text-lg hover:border-brand-500 hover:text-brand-500 transition">
           So funktioniert's
         </a>
       </div>
 
       <!-- Stats -->
-      <div class="mt-14 grid grid-cols-3 gap-6 max-w-2xl">
+      <div class="mt-10 sm:mt-14 grid grid-cols-3 gap-3 sm:gap-6 max-w-2xl">
         <div>
-          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">95.-</div>
-          <div class="text-sm text-ink-500 mt-1">CHF/45 Min · Fahrstunde</div>
+          <div class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink-900">95.-</div>
+          <div class="text-xs sm:text-sm text-ink-500 mt-1 leading-tight">CHF/45 Min<br class="sm:hidden"/> Fahrstunde</div>
         </div>
         <div>
-          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">5</div>
-          <div class="text-sm text-ink-500 mt-1">Standorte · Region Mittelland</div>
+          <div class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink-900">5</div>
+          <div class="text-xs sm:text-sm text-ink-500 mt-1 leading-tight">Standorte<br class="sm:hidden"/> Mittelland</div>
         </div>
         <div>
-          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">4.9★</div>
-          <div class="text-sm text-ink-500 mt-1">Google Bewertungen</div>
+          <div class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink-900">4.9★</div>
+          <div class="text-xs sm:text-sm text-ink-500 mt-1 leading-tight">Google<br class="sm:hidden"/> Bewertungen</div>
         </div>
       </div>
     </div>
@@ -233,39 +253,39 @@
     <div class="lg:col-span-5 reveal">
       <div class="relative">
         <!-- Card stack -->
-        <div class="relative bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-8 shadow-glow text-white overflow-hidden">
+        <div class="relative bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-6 sm:p-8 shadow-glow text-white overflow-hidden">
           <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10"></div>
           <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-white/5"></div>
 
           <div class="relative">
-            <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center gap-3 mb-5 sm:mb-6">
               <i data-lucide="badge-check" class="w-6 h-6"></i>
-              <div class="text-sm font-semibold uppercase tracking-wider opacity-90">Starter Box</div>
+              <div class="text-xs sm:text-sm font-semibold uppercase tracking-wider opacity-90">Starter Box</div>
             </div>
-            <h3 class="font-display font-extrabold text-3xl mb-3">Komplett-Paket für deinen Start</h3>
-            <p class="opacity-90 mb-6">Nothelferkurs · VKU · erste Fahrstunden — alles in einem Paket.</p>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl mb-3">Komplett-Paket für deinen Start</h3>
+            <p class="opacity-90 mb-5 sm:mb-6 text-sm sm:text-base">Nothelferkurs · VKU · erste Fahrstunden — alles in einem Paket.</p>
 
-            <div class="space-y-3 mb-8">
-              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Nothelferkurs (10h)</div>
-              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Verkehrskundeunterricht (VKU)</div>
-              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Erste Fahrlektionen</div>
-              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Persönliche Begleitung</div>
+            <div class="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8 text-sm sm:text-base">
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0"></i> Nothelferkurs (10h)</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0"></i> Verkehrskundeunterricht (VKU)</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0"></i> Erste Fahrlektionen</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0"></i> Persönliche Begleitung</div>
             </div>
 
-            <a href="#preise" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-700 font-bold hover:bg-brand-50 transition">
+            <a href="#preise" class="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white text-brand-700 font-bold hover:bg-brand-50 transition text-sm sm:text-base">
               Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
           </div>
         </div>
 
         <!-- Floating card 2 -->
-        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-soft p-4 flex items-center gap-3 animate-float" style="animation-delay:1.5s;">
-          <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-            <i data-lucide="calendar-check" class="w-6 h-6 text-green-600"></i>
+        <div class="absolute -bottom-4 right-2 sm:-bottom-6 sm:-right-6 bg-white rounded-2xl shadow-soft p-3 sm:p-4 flex items-center gap-2 sm:gap-3 animate-float" style="animation-delay:1.5s;">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="calendar-check" class="w-5 h-5 sm:w-6 sm:h-6 text-green-600"></i>
           </div>
           <div>
-            <div class="font-display font-extrabold text-ink-900 text-sm">8 Plätze frei</div>
-            <div class="text-xs text-ink-500">Nothelferkurs · Mai</div>
+            <div class="font-display font-extrabold text-ink-900 text-xs sm:text-sm">8 Plätze frei</div>
+            <div class="text-[10px] sm:text-xs text-ink-500">Nothelferkurs · Mai</div>
           </div>
         </div>
       </div>
@@ -273,9 +293,9 @@
   </div>
 
   <!-- Marquee -->
-  <div class="border-y border-ink-100 bg-white py-6 overflow-hidden">
-    <div class="flex marquee-track gap-16 whitespace-nowrap text-ink-500 font-display font-bold text-2xl uppercase tracking-wider">
-      <span class="flex items-center gap-16">
+  <div class="border-y border-ink-100 bg-white py-4 sm:py-6 overflow-hidden">
+    <div class="flex marquee-track gap-8 sm:gap-16 whitespace-nowrap text-ink-500 font-display font-bold text-base sm:text-2xl uppercase tracking-wider">
+      <span class="flex items-center gap-8 sm:gap-16">
         <span>Aarau</span><span class="text-brand-500">●</span>
         <span>Basel</span><span class="text-brand-500">●</span>
         <span>Baselland</span><span class="text-brand-500">●</span>
@@ -283,7 +303,7 @@
         <span>Olten</span><span class="text-brand-500">●</span>
         <span>Trimbach</span><span class="text-brand-500">●</span>
       </span>
-      <span class="flex items-center gap-16">
+      <span class="flex items-center gap-8 sm:gap-16">
         <span>Aarau</span><span class="text-brand-500">●</span>
         <span>Basel</span><span class="text-brand-500">●</span>
         <span>Baselland</span><span class="text-brand-500">●</span>
@@ -296,13 +316,13 @@
 </section>
 
 <!-- ===================== ANGEBOTE ===================== -->
-<section id="angebote" class="py-24 lg:py-32 bg-ink-50">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl mb-16 reveal">
+<section id="angebote" class="py-16 lg:py-32 bg-ink-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mb-12 sm:mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-ink-200 text-ink-700 font-semibold text-sm mb-6">
         <i data-lucide="layers" class="w-4 h-4 text-brand-500"></i> Unsere Angebote
       </div>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
         Alles für deinen <span class="gradient-text">Führerschein</span> — aus einer Hand.
       </h2>
       <p class="mt-6 text-lg text-ink-500">Von der ersten Fahrstunde bis zur praktischen Prüfung. Wir begleiten dich Schritt für Schritt.</p>
@@ -310,7 +330,7 @@
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Card 1 -->
-      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+      <a href="#preise" class="group bg-white rounded-3xl p-6 sm:p-8 lift border border-ink-100 reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
             <i data-lucide="car-front" class="w-7 h-7 text-brand-500 transition"></i>
@@ -323,7 +343,7 @@
       </a>
 
       <!-- Card 2 -->
-      <a href="#preise" class="group bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-8 lift text-white reveal">
+      <a href="#preise" class="group bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-6 sm:p-8 lift text-white reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center">
             <i data-lucide="graduation-cap" class="w-7 h-7 text-white"></i>
@@ -336,7 +356,7 @@
       </a>
 
       <!-- Card 3 -->
-      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+      <a href="#preise" class="group bg-white rounded-3xl p-6 sm:p-8 lift border border-ink-100 reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
             <i data-lucide="heart-pulse" class="w-7 h-7 text-brand-500 transition"></i>
@@ -349,7 +369,7 @@
       </a>
 
       <!-- Card 4 -->
-      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+      <a href="#preise" class="group bg-white rounded-3xl p-6 sm:p-8 lift border border-ink-100 reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
             <i data-lucide="caravan" class="w-7 h-7 text-brand-500 transition"></i>
@@ -362,7 +382,7 @@
       </a>
 
       <!-- Card 5 -->
-      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+      <a href="#preise" class="group bg-white rounded-3xl p-6 sm:p-8 lift border border-ink-100 reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
             <i data-lucide="clipboard-check" class="w-7 h-7 text-brand-500 transition"></i>
@@ -375,7 +395,7 @@
       </a>
 
       <!-- Card 6 -->
-      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+      <a href="#preise" class="group bg-white rounded-3xl p-6 sm:p-8 lift border border-ink-100 reveal">
         <div class="flex items-start justify-between mb-6">
           <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
             <i data-lucide="car-taxi-front" class="w-7 h-7 text-brand-500 transition"></i>
@@ -391,15 +411,15 @@
 </section>
 
 <!-- ===================== WEG ZUM FÜHRERSCHEIN ===================== -->
-<section id="weg" class="py-24 lg:py-32 bg-white relative overflow-hidden">
+<section id="weg" class="py-16 lg:py-32 bg-white relative overflow-hidden">
   <div class="absolute top-1/2 -left-32 w-[400px] h-[400px] blob opacity-50"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl mb-16 reveal">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mb-12 sm:mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-6">
         <i data-lucide="route" class="w-4 h-4"></i> Dein Weg
       </div>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
         In <span class="gradient-text">8 Schritten</span> zum Führerschein.
       </h2>
       <p class="mt-6 text-lg text-ink-500">Wir begleiten dich von Anfang an — ohne Stress, ohne Umwege. Hier ist dein Fahrplan.</p>
@@ -512,15 +532,15 @@
 </section>
 
 <!-- ===================== PREISE ===================== -->
-<section id="preise" class="py-24 lg:py-32 bg-ink-900 text-white relative overflow-hidden">
+<section id="preise" class="py-16 lg:py-32 bg-ink-900 text-white relative overflow-hidden">
   <div class="absolute top-0 right-0 w-[600px] h-[600px] blob"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl mb-16 reveal">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mb-12 sm:mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-semibold text-sm mb-6">
         <i data-lucide="tag" class="w-4 h-4 text-brand-400"></i> Faire Preise · Transparent
       </div>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-tight">
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
         Direkt buchen. <br/><span class="gradient-text">Termin sichern.</span>
       </h2>
       <p class="mt-6 text-lg text-ink-100/80">Keine versteckten Kosten. Keine Bürokratie. Wähle dein Angebot und sichere dir deinen Platz.</p>
@@ -528,7 +548,7 @@
 
     <div class="grid md:grid-cols-3 gap-6">
       <!-- Pricing 1 -->
-      <div class="reveal bg-white text-ink-900 rounded-3xl p-8 lift flex flex-col">
+      <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
             <i data-lucide="car-front" class="w-6 h-6 text-brand-500"></i>
@@ -552,7 +572,7 @@
       </div>
 
       <!-- Pricing 2 - Featured -->
-      <div class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-8 lift relative shadow-glow flex flex-col">
+      <div class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-6 sm:p-8 lift relative shadow-glow flex flex-col">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
             <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
@@ -576,7 +596,7 @@
       </div>
 
       <!-- Pricing 3 -->
-      <div class="reveal bg-white text-ink-900 rounded-3xl p-8 lift flex flex-col">
+      <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
             <i data-lucide="heart-pulse" class="w-6 h-6 text-brand-500"></i>
@@ -623,14 +643,14 @@
 </section>
 
 <!-- ===================== ÜBER UNS ===================== -->
-<section id="ueber" class="py-24 lg:py-32 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
+<section id="ueber" class="py-16 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid lg:grid-cols-12 gap-16 items-start">
       <div class="lg:col-span-5 reveal lg:sticky lg:top-32">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-6">
           <i data-lucide="sparkles" class="w-4 h-4"></i> Über uns
         </div>
-        <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
           Eine Fahrschule, <span class="gradient-text">die anders ist.</span>
         </h2>
         <p class="mt-8 text-lg text-ink-500 leading-relaxed">
@@ -643,7 +663,7 @@
 
       <!-- Werte -->
       <div class="lg:col-span-7 grid md:grid-cols-2 gap-5 auto-rows-fr">
-        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+        <div class="reveal bg-ink-50 rounded-3xl p-6 sm:p-8 lift">
           <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
             <i data-lucide="zap" class="w-7 h-7 text-white"></i>
           </div>
@@ -651,7 +671,7 @@
           <p class="text-ink-500">Digitale Lösungen stehen bei uns im Mittelpunkt — unnötige Bürokratie und versteckte Details haben keinen Platz.</p>
         </div>
 
-        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+        <div class="reveal bg-ink-50 rounded-3xl p-6 sm:p-8 lift">
           <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
             <i data-lucide="hand-helping" class="w-7 h-7 text-white"></i>
           </div>
@@ -659,7 +679,7 @@
           <p class="text-ink-500">Wir stehen dir vom ersten Schritt bis zum Abschluss zuverlässig zur Seite und sind jederzeit für dich erreichbar.</p>
         </div>
 
-        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+        <div class="reveal bg-ink-50 rounded-3xl p-6 sm:p-8 lift">
           <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
             <i data-lucide="scale" class="w-7 h-7 text-white"></i>
           </div>
@@ -667,7 +687,7 @@
           <p class="text-ink-500">Bei uns zählt Gleichbehandlung und ein wertschätzender Umgang auf Augenhöhe.</p>
         </div>
 
-        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+        <div class="reveal bg-ink-50 rounded-3xl p-6 sm:p-8 lift">
           <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
             <i data-lucide="users" class="w-7 h-7 text-white"></i>
           </div>
@@ -680,13 +700,13 @@
 </section>
 
 <!-- ===================== TEAM ===================== -->
-<section id="team" class="py-24 lg:py-32 bg-ink-50">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl mb-16 reveal">
+<section id="team" class="py-16 lg:py-32 bg-ink-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mb-12 sm:mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-ink-200 text-ink-700 font-semibold text-sm mb-6">
         <i data-lucide="users" class="w-4 h-4 text-brand-500"></i> Unser Team
       </div>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
         Die Menschen <span class="gradient-text">hinter dem Lenkrad.</span>
       </h2>
       <p class="mt-6 text-lg text-ink-500">Erfahrene Fahrlehrer, die mit Leidenschaft und Geduld an deiner Seite sind.</p>
@@ -730,24 +750,24 @@
 </section>
 
 <!-- ===================== CTA ===================== -->
-<section class="py-24 lg:py-32 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 p-12 md:p-20 text-white shadow-glow">
+<section class="py-16 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 p-8 sm:p-12 md:p-20 text-white shadow-glow">
       <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10"></div>
       <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-white/5"></div>
 
       <div class="relative max-w-3xl">
-        <h2 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-6xl leading-tight">
           Bereit, hinters Steuer zu sitzen?
         </h2>
-        <p class="mt-6 text-xl text-white/90">
+        <p class="mt-5 sm:mt-6 text-base sm:text-xl text-white/90">
           Sichere dir deine erste Fahrstunde — direkt online, ohne Anruf, ohne Stress.
         </p>
-        <div class="mt-10 flex flex-wrap gap-4">
-          <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-brand-700 font-bold text-lg hover:bg-brand-50 transition">
+        <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
+          <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full bg-white text-brand-700 font-bold text-base sm:text-lg hover:bg-brand-50 transition">
             <i data-lucide="calendar" class="w-5 h-5"></i> Termin online buchen
           </a>
-          <a href="https://wa.me/41791361616" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border-2 border-white/40 text-white font-bold text-lg hover:bg-white/10 transition">
+          <a href="https://wa.me/41791361616" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full border-2 border-white/40 text-white font-bold text-base sm:text-lg hover:bg-white/10 transition">
             <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp schreiben
           </a>
         </div>
@@ -758,7 +778,7 @@
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="bg-ink-900 text-ink-100 pt-20 pb-10">
-  <div class="max-w-7xl mx-auto px-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <!-- Brand -->
       <div class="md:col-span-1">
@@ -843,6 +863,40 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile menu toggle
+  (function() {
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+    const iconEl = document.getElementById('mobileMenuIcon');
+    if (!btn || !menu) return;
+
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      iconEl.setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+      document.body.style.overflow = '';
+    };
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      iconEl.setAttribute('data-lucide', 'x');
+      lucide.createIcons();
+    };
+
+    btn.addEventListener('click', () => {
+      if (menu.classList.contains('hidden')) openMenu(); else closeMenu();
+    });
+
+    // Close on link click
+    document.querySelectorAll('.mobile-link').forEach(a => {
+      a.addEventListener('click', closeMenu);
+    });
+
+    // Close when resizing back to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) closeMenu();
+    });
+  })();
 </script>
 
 </body>
