@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Verkehrsschule Mittelland — Deine Fahrschule. Modern. Persönlich. Fair.</title>
+<meta name="description" content="Fahrstunden, Verkehrskundeunterricht, Theorieunterricht und Nothelferkurse in Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair." />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50:  '#eaf6ff',
+            100: '#d4ecff',
+            200: '#a8d8ff',
+            300: '#7cc4ff',
+            400: '#4eafff',
+            500: '#279FF5',  // Hauptfarbe
+            600: '#1f86d6',
+            700: '#1a6cae',
+            800: '#155485',
+            900: '#0f3d62',
+          },
+          ink: {
+            50:  '#f7f8fa',
+            100: '#eef0f4',
+            200: '#dadee6',
+            500: '#5b6472',
+            700: '#2b3340',
+            900: '#0c1116',
+          }
+        },
+        fontFamily: {
+          display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        boxShadow: {
+          'soft': '0 8px 30px rgba(15, 61, 98, 0.08)',
+          'glow': '0 20px 60px -10px rgba(39, 159, 245, 0.45)',
+        },
+        animation: {
+          'fade-up': 'fadeUp 0.8s ease-out forwards',
+          'float': 'float 6s ease-in-out infinite',
+          'shimmer': 'shimmer 3s linear infinite',
+        },
+        keyframes: {
+          fadeUp: { '0%': { opacity: 0, transform: 'translateY(24px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+          float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+          shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #0c1116; background: #ffffff; }
+  h1,h2,h3,h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -0.02em; }
+
+  /* Animated gradient text */
+  .gradient-text {
+    background: linear-gradient(90deg, #279FF5 0%, #155485 50%, #279FF5 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  /* Hero blob */
+  .blob {
+    background: radial-gradient(closest-side, rgba(39,159,245,.45), transparent 70%);
+    filter: blur(40px);
+  }
+
+  /* Subtle grid pattern */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(15,61,98,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15,61,98,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Card hover */
+  .lift { transition: transform .35s ease, box-shadow .35s ease; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 60px -10px rgba(15, 61, 98, 0.18); }
+
+  /* Marquee */
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Step line */
+  .step-line {
+    background: linear-gradient(180deg, #279FF5 0%, #d4ecff 100%);
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===================== TOP BAR ===================== -->
+<div class="hidden md:block bg-ink-900 text-white text-sm">
+  <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-6 text-ink-100">
+      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Aarau · Basel · Langenthal · Olten · Trimbach</span>
+      <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>4.9 / 5 · Google Bewertungen</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="https://wa.me/41791361616" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i>WhatsApp</a>
+      <a href="tel:+41791361616" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i>+41 79 136 16 16</a>
+      <a href="mailto:info@verkehrsschule-mittelland.ch" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i>info@verkehrsschule-mittelland.ch</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NAVIGATION ===================== -->
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-ink-100">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-glow">
+        <i data-lucide="car-front" class="w-6 h-6 text-white"></i>
+      </div>
+      <div class="leading-tight">
+        <div class="font-display font-extrabold text-ink-900 text-lg">Verkehrsschule</div>
+        <div class="text-brand-500 font-display font-bold text-sm tracking-wide">MITTELLAND</div>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-ink-700 font-medium">
+      <a href="#angebote" class="hover:text-brand-500 transition">Angebote</a>
+      <a href="#weg" class="hover:text-brand-500 transition">Dein Weg</a>
+      <a href="#preise" class="hover:text-brand-500 transition">Preise</a>
+      <a href="#ueber" class="hover:text-brand-500 transition">Über uns</a>
+      <a href="#team" class="hover:text-brand-500 transition">Team</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="tel:+41791361616" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ink-200 hover:border-brand-500 hover:text-brand-500 transition font-medium">
+        <i data-lucide="phone" class="w-4 h-4"></i>Anrufen
+      </a>
+      <a href="#preise" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition shadow-glow">
+        Jetzt buchen <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="top" class="relative overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0 -z-10">
+    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=2400&q=80"
+         alt=""
+         class="w-full h-full object-cover" />
+    <!-- Gradient overlay to keep text readable -->
+    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white"></div>
+  </div>
+  <!-- Subtle grid on top -->
+  <div class="absolute inset-0 -z-10 bg-grid opacity-40"></div>
+
+  <div class="absolute -top-32 -left-32 w-[500px] h-[500px] blob"></div>
+  <div class="absolute top-40 -right-32 w-[400px] h-[400px] blob"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7 reveal">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-8">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        Neue Kurse · Anmeldung läuft
+      </div>
+
+      <h1 class="font-display font-extrabold text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-ink-900">
+        Ab hinters Steuer.<br/>
+        <span class="gradient-text">Mit Spass zum Führerschein.</span>
+      </h1>
+
+      <h2 class="mt-6 font-display font-bold text-2xl md:text-3xl text-brand-600 leading-tight">
+        Verkehrsschule Mittelland, deine Auto-Fahrschule.
+      </h2>
+
+      <p class="mt-6 text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed">
+        Fahrstunden, Verkehrskundeunterricht, Theorieunterricht und Nothelferkurse in deiner Umgebung — in Aarau, Basel, Langenthal, Olten und Trimbach.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href="#preise" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-500 text-white font-semibold text-lg hover:bg-brand-600 transition shadow-glow">
+          Fahrstunde buchen <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+        <a href="#weg" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border-2 border-ink-200 text-ink-700 font-semibold text-lg hover:border-brand-500 hover:text-brand-500 transition">
+          So funktioniert's
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-14 grid grid-cols-3 gap-6 max-w-2xl">
+        <div>
+          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">95.-</div>
+          <div class="text-sm text-ink-500 mt-1">CHF/45 Min · Fahrstunde</div>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">5</div>
+          <div class="text-sm text-ink-500 mt-1">Standorte · Region Mittelland</div>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-3xl md:text-4xl text-ink-900">4.9★</div>
+          <div class="text-sm text-ink-500 mt-1">Google Bewertungen</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Visual -->
+    <div class="lg:col-span-5 reveal">
+      <div class="relative">
+        <!-- Card stack -->
+        <div class="relative bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-8 shadow-glow text-white overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10"></div>
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-white/5"></div>
+
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-6">
+              <i data-lucide="badge-check" class="w-6 h-6"></i>
+              <div class="text-sm font-semibold uppercase tracking-wider opacity-90">Starter Box</div>
+            </div>
+            <h3 class="font-display font-extrabold text-3xl mb-3">Komplett-Paket für deinen Start</h3>
+            <p class="opacity-90 mb-6">Nothelferkurs · VKU · erste Fahrstunden — alles in einem Paket.</p>
+
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Nothelferkurs (10h)</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Verkehrskundeunterricht (VKU)</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Erste Fahrlektionen</div>
+              <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Persönliche Begleitung</div>
+            </div>
+
+            <a href="#preise" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-700 font-bold hover:bg-brand-50 transition">
+              Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Floating card 2 -->
+        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-soft p-4 flex items-center gap-3 animate-float" style="animation-delay:1.5s;">
+          <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+            <i data-lucide="calendar-check" class="w-6 h-6 text-green-600"></i>
+          </div>
+          <div>
+            <div class="font-display font-extrabold text-ink-900 text-sm">8 Plätze frei</div>
+            <div class="text-xs text-ink-500">Nothelferkurs · Mai</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="border-y border-ink-100 bg-white py-6 overflow-hidden">
+    <div class="flex marquee-track gap-16 whitespace-nowrap text-ink-500 font-display font-bold text-2xl uppercase tracking-wider">
+      <span class="flex items-center gap-16">
+        <span>Aarau</span><span class="text-brand-500">●</span>
+        <span>Basel</span><span class="text-brand-500">●</span>
+        <span>Baselland</span><span class="text-brand-500">●</span>
+        <span>Langenthal</span><span class="text-brand-500">●</span>
+        <span>Olten</span><span class="text-brand-500">●</span>
+        <span>Trimbach</span><span class="text-brand-500">●</span>
+      </span>
+      <span class="flex items-center gap-16">
+        <span>Aarau</span><span class="text-brand-500">●</span>
+        <span>Basel</span><span class="text-brand-500">●</span>
+        <span>Baselland</span><span class="text-brand-500">●</span>
+        <span>Langenthal</span><span class="text-brand-500">●</span>
+        <span>Olten</span><span class="text-brand-500">●</span>
+        <span>Trimbach</span><span class="text-brand-500">●</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ANGEBOTE ===================== -->
+<section id="angebote" class="py-24 lg:py-32 bg-ink-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-16 reveal">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-ink-200 text-ink-700 font-semibold text-sm mb-6">
+        <i data-lucide="layers" class="w-4 h-4 text-brand-500"></i> Unsere Angebote
+      </div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+        Alles für deinen <span class="gradient-text">Führerschein</span> — aus einer Hand.
+      </h2>
+      <p class="mt-6 text-lg text-ink-500">Von der ersten Fahrstunde bis zur praktischen Prüfung. Wir begleiten dich Schritt für Schritt.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
+            <i data-lucide="car-front" class="w-7 h-7 text-brand-500 transition"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-sm">ab CHF 95</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-2">Fahrstunden</h3>
+        <p class="text-ink-500 mb-6">Kategorie B · 90 Min Einzelunterricht · moderne Fahrzeuge mit Gangschaltung oder Automatik.</p>
+        <div class="flex items-center gap-2 text-brand-500 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="#preise" class="group bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-8 lift text-white reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center">
+            <i data-lucide="graduation-cap" class="w-7 h-7 text-white"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-white/20 text-white font-bold text-sm">CHF 190</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl mb-2">VKU-Kurs</h3>
+        <p class="text-white/90 mb-6">Verkehrskundeunterricht · 4× 120 Min · interaktiv und praxisnah. Pflicht vor der praktischen Prüfung.</p>
+        <div class="flex items-center gap-2 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
+            <i data-lucide="heart-pulse" class="w-7 h-7 text-brand-500 transition"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-sm">ab CHF 99</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-2">Nothelferkurs</h3>
+        <p class="text-ink-500 mb-6">Schweizweit anerkannt. 1-Tag mit eLearning oder traditionell als 2-Tageskurs.</p>
+        <div class="flex items-center gap-2 text-brand-500 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
+            <i data-lucide="caravan" class="w-7 h-7 text-brand-500 transition"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-sm">ab CHF 95</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-2">Anhänger (BE)</h3>
+        <p class="text-ink-500 mb-6">Kategorie BE · sicher mit Anhänger unterwegs. Praktische Ausbildung mit erfahrenen Fahrlehrern.</p>
+        <div class="flex items-center gap-2 text-brand-500 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+
+      <!-- Card 5 -->
+      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
+            <i data-lucide="clipboard-check" class="w-7 h-7 text-brand-500 transition"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-sm">ab CHF 95</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-2">Kontrollfahrten</h3>
+        <p class="text-ink-500 mb-6">Vorbereitung auf die Kontrollfahrt für ausländische Führerausweise — fundiert und stressfrei.</p>
+        <div class="flex items-center gap-2 text-brand-500 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+
+      <!-- Card 6 -->
+      <a href="#preise" class="group bg-white rounded-3xl p-8 lift border border-ink-100 reveal">
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
+            <i data-lucide="car-taxi-front" class="w-7 h-7 text-brand-500 transition"></i>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold text-sm">ab CHF 95</div>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-2">Taxi BPT 121/122</h3>
+        <p class="text-ink-500 mb-6">Berufsprüfung für Personentransport. Komplette Vorbereitung auf den BPT-Ausweis.</p>
+        <div class="flex items-center gap-2 text-brand-500 font-semibold">Mehr erfahren <i data-lucide="arrow-right" class="w-4 h-4"></i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WEG ZUM FÜHRERSCHEIN ===================== -->
+<section id="weg" class="py-24 lg:py-32 bg-white relative overflow-hidden">
+  <div class="absolute top-1/2 -left-32 w-[400px] h-[400px] blob opacity-50"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-16 reveal">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-6">
+        <i data-lucide="route" class="w-4 h-4"></i> Dein Weg
+      </div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+        In <span class="gradient-text">8 Schritten</span> zum Führerschein.
+      </h2>
+      <p class="mt-6 text-lg text-ink-500">Wir begleiten dich von Anfang an — ohne Stress, ohne Umwege. Hier ist dein Fahrplan.</p>
+    </div>
+
+    <!-- Steps -->
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Connector line -->
+      <div class="absolute left-8 md:left-12 top-12 bottom-12 w-px step-line hidden md:block"></div>
+
+      <div class="space-y-6">
+        <!-- Step 1 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-brand-500 text-white font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center shadow-glow">1</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="heart-pulse" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Nothelferkurs</h3>
+            </div>
+            <p class="text-ink-500">Der Besuch des Nothelferkurses ist bereits vor dem 17. Geburtstag möglich.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white border-2 border-brand-500 text-brand-500 font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center">2</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="file-text" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Lernfahrausweis bestellen</h3>
+            </div>
+            <p class="text-ink-500">Formular bei der Gemeinde holen oder online herunterladen, Augentest beim Optiker machen, Formular bei der Gemeinde abgeben.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-brand-500 text-white font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center shadow-glow">3</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Anmeldung zur Theorieprüfung</h3>
+            </div>
+            <p class="text-ink-500">Das Strassenverkehrsamt schickt dir einen Anmeldetalon. Die Theorieprüfung kannst du frühestens 4 Wochen vor dem 17. Geburtstag absolvieren.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white border-2 border-brand-500 text-brand-500 font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center">4</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="badge" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Erhalt des Lernfahrausweises</h3>
+            </div>
+            <p class="text-ink-500">Nach bestandener Theorieprüfung erhältst du den Lernfahrausweis.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-brand-500 text-white font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center shadow-glow">5</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Verkehrskundeunterricht (VKU)</h3>
+            </div>
+            <p class="text-ink-500">Besuch des Verkehrskundeunterrichts. Du kannst den VKU sehr gerne bei uns absolvieren.</p>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white border-2 border-brand-500 text-brand-500 font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center">6</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="car-front" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Fahrlektionen</h3>
+            </div>
+            <p class="text-ink-500">Fahrten mit dem Fahrlehrer oder einer Begleitperson. Wir empfehlen einen Mix für maximalen Lerneffekt.</p>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-brand-500 text-white font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center shadow-glow">7</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="award" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">Praktische Führerprüfung</h3>
+            </div>
+            <p class="text-ink-500">Anmeldung beim Strassenverkehrsamt deines Kantons — online via PIN/PID. Die Daten bekommst du per Post.</p>
+          </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="reveal flex gap-6 md:gap-8 items-start group">
+          <div class="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white border-2 border-brand-500 text-brand-500 font-display font-extrabold text-2xl md:text-4xl flex items-center justify-center">8</div>
+          <div class="flex-1 bg-white border border-ink-100 rounded-2xl p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-2">
+              <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500"></i>
+              <h3 class="font-display font-extrabold text-xl md:text-2xl text-ink-900">WAB-Kurs</h3>
+            </div>
+            <p class="text-ink-500">Die zweite Phase der Fahrausbildung: Weiterbildung zur Verkehrssicherheit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PREISE ===================== -->
+<section id="preise" class="py-24 lg:py-32 bg-ink-900 text-white relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] blob"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-16 reveal">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-semibold text-sm mb-6">
+        <i data-lucide="tag" class="w-4 h-4 text-brand-400"></i> Faire Preise · Transparent
+      </div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-tight">
+        Direkt buchen. <br/><span class="gradient-text">Termin sichern.</span>
+      </h2>
+      <p class="mt-6 text-lg text-ink-100/80">Keine versteckten Kosten. Keine Bürokratie. Wähle dein Angebot und sichere dir deinen Platz.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Pricing 1 -->
+      <div class="reveal bg-white text-ink-900 rounded-3xl p-8 lift flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
+            <i data-lucide="car-front" class="w-6 h-6 text-brand-500"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl">Fahrstunde</h3>
+        </div>
+        <p class="text-ink-500 mb-6">90 Minuten Einzelunterricht</p>
+        <div class="mb-6">
+          <span class="font-display font-extrabold text-5xl">CHF 180</span>
+          <span class="text-ink-500 ml-2">/ 90 Min</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-ink-700 flex-grow">
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Abholung & Rückbringung</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Moderne Fahrzeuge (Schaltung & Automat)</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Ab 17 Jahren möglich</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Individuelle Betreuung</li>
+        </ul>
+        <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
+          Jetzt Fahrstunde buchen
+        </a>
+      </div>
+
+      <!-- Pricing 2 - Featured -->
+      <div class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-8 lift relative shadow-glow flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+            <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl">VKU-Kurs</h3>
+        </div>
+        <p class="text-white/90 mb-6">Verkehrskundeunterricht 4× 120 Min</p>
+        <div class="mb-6">
+          <span class="font-display font-extrabold text-5xl">CHF 190</span>
+          <span class="text-white/80 ml-2">total</span>
+        </div>
+        <ul class="space-y-3 mb-8 flex-grow">
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> 2 Kursabende à 4 Lektionen</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Interaktiver Unterricht</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Zentral in Trimbach & Olten</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Pflicht vor praktischer Prüfung</li>
+        </ul>
+        <a href="#" class="block w-full py-4 rounded-full bg-white text-brand-700 font-bold text-center hover:bg-brand-50 transition">
+          Jetzt VKU-Kurs buchen
+        </a>
+      </div>
+
+      <!-- Pricing 3 -->
+      <div class="reveal bg-white text-ink-900 rounded-3xl p-8 lift flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
+            <i data-lucide="heart-pulse" class="w-6 h-6 text-brand-500"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl">Nothelferkurs</h3>
+        </div>
+        <p class="text-ink-500 mb-6">2-Tages-Kurs · 10 Stunden</p>
+        <div class="mb-6">
+          <span class="font-display font-extrabold text-5xl">CHF 140</span>
+          <span class="text-ink-500 ml-2">total</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-ink-700 flex-grow">
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Kursunterlagen inklusive</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Interaktiver Kurs mit Praxis</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Schweizweit anerkannt</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Nächster Kurs: 22.–23. Mai</li>
+        </ul>
+        <a href="#" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
+          Jetzt Nothelferkurs buchen
+        </a>
+      </div>
+    </div>
+
+    <!-- Trust elements -->
+    <div class="mt-16 grid md:grid-cols-4 gap-6 reveal">
+      <div class="flex items-center gap-3">
+        <i data-lucide="shield-check" class="w-6 h-6 text-brand-400"></i>
+        <span class="text-ink-100/80">Eidg. Fahrlehrer</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <i data-lucide="zap" class="w-6 h-6 text-brand-400"></i>
+        <span class="text-ink-100/80">Online-Buchung</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <i data-lucide="map-pin" class="w-6 h-6 text-brand-400"></i>
+        <span class="text-ink-100/80">5 Standorte</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <i data-lucide="clock" class="w-6 h-6 text-brand-400"></i>
+        <span class="text-ink-100/80">Flexible Termine</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ÜBER UNS ===================== -->
+<section id="ueber" class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-16 items-start">
+      <div class="lg:col-span-5 reveal lg:sticky lg:top-32">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-sm mb-6">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Über uns
+        </div>
+        <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+          Eine Fahrschule, <span class="gradient-text">die anders ist.</span>
+        </h2>
+        <p class="mt-8 text-lg text-ink-500 leading-relaxed">
+          Die Verkehrsschule Mittelland wurde von einem jungen Fahrlehrer gegründet, der die Fahrausbildung modern und zeitgemäss gestalten wollte. Mit zeitgemässen Methoden, einem starken Auftritt und einer offenen, frischen sowie wertschätzenden Unternehmenskultur bieten wir ein Fahrschulerlebnis, das überzeugt.
+        </p>
+        <p class="mt-4 text-lg text-ink-500 leading-relaxed">
+          Wir begleiten unsere Fahrschülerinnen und Fahrschüler in ruhiger Atmosphäre und mit einem vielseitigen Angebot sicher bis zum Führerausweis. Dabei steht für uns im Mittelpunkt, dass das Lernen Spass macht und sich alle bei uns willkommen und wohl fühlen.
+        </p>
+      </div>
+
+      <!-- Werte -->
+      <div class="lg:col-span-7 grid md:grid-cols-2 gap-5 auto-rows-fr">
+        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+          <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
+            <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-3">Unkompliziert</h3>
+          <p class="text-ink-500">Digitale Lösungen stehen bei uns im Mittelpunkt — unnötige Bürokratie und versteckte Details haben keinen Platz.</p>
+        </div>
+
+        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+          <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
+            <i data-lucide="hand-helping" class="w-7 h-7 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-3">Rundum begleitet</h3>
+          <p class="text-ink-500">Wir stehen dir vom ersten Schritt bis zum Abschluss zuverlässig zur Seite und sind jederzeit für dich erreichbar.</p>
+        </div>
+
+        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+          <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
+            <i data-lucide="scale" class="w-7 h-7 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-3">Gerecht & respektvoll</h3>
+          <p class="text-ink-500">Bei uns zählt Gleichbehandlung und ein wertschätzender Umgang auf Augenhöhe.</p>
+        </div>
+
+        <div class="reveal bg-ink-50 rounded-3xl p-8 lift">
+          <div class="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-glow">
+            <i data-lucide="users" class="w-7 h-7 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl text-ink-900 mb-3">Gemeinsam stark</h3>
+          <p class="text-ink-500">Wir denken positiv, unterstützen uns gegenseitig und teilen unsere Erfolge — denn als Team erreichen wir mehr.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEAM ===================== -->
+<section id="team" class="py-24 lg:py-32 bg-ink-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-16 reveal">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-ink-200 text-ink-700 font-semibold text-sm mb-6">
+        <i data-lucide="users" class="w-4 h-4 text-brand-500"></i> Unser Team
+      </div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight">
+        Die Menschen <span class="gradient-text">hinter dem Lenkrad.</span>
+      </h2>
+      <p class="mt-6 text-lg text-ink-500">Erfahrene Fahrlehrer, die mit Leidenschaft und Geduld an deiner Seite sind.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="reveal bg-white rounded-3xl overflow-hidden lift">
+        <div class="aspect-[4/5] bg-gradient-to-br from-brand-100 to-brand-300 flex items-center justify-center relative">
+          <div class="font-display font-extrabold text-9xl text-white/40">M</div>
+          <div class="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-white text-brand-700 font-bold text-sm">Inhaber</div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-extrabold text-2xl text-ink-900">Mehmet</h3>
+          <p class="text-ink-500 mt-1">Inhaber & Fahrlehrer</p>
+        </div>
+      </div>
+
+      <div class="reveal bg-white rounded-3xl overflow-hidden lift">
+        <div class="aspect-[4/5] bg-gradient-to-br from-brand-200 to-brand-500 flex items-center justify-center relative">
+          <div class="font-display font-extrabold text-9xl text-white/40">P</div>
+          <div class="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-white text-brand-700 font-bold text-sm">Kat. B & BE</div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-extrabold text-2xl text-ink-900">Prparim</h3>
+          <p class="text-ink-500 mt-1">Fahrlehrer Kat. B & BE</p>
+        </div>
+      </div>
+
+      <div class="reveal bg-white rounded-3xl overflow-hidden lift">
+        <div class="aspect-[4/5] bg-gradient-to-br from-brand-400 to-brand-700 flex items-center justify-center relative">
+          <div class="font-display font-extrabold text-9xl text-white/40">F</div>
+          <div class="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-white text-brand-700 font-bold text-sm">Social</div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-extrabold text-2xl text-ink-900">Florian</h3>
+          <p class="text-ink-500 mt-1">Social Media Creator</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 p-12 md:p-20 text-white shadow-glow">
+      <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10"></div>
+      <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-white/5"></div>
+
+      <div class="relative max-w-3xl">
+        <h2 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+          Bereit, hinters Steuer zu sitzen?
+        </h2>
+        <p class="mt-6 text-xl text-white/90">
+          Sichere dir deine erste Fahrstunde — direkt online, ohne Anruf, ohne Stress.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-brand-700 font-bold text-lg hover:bg-brand-50 transition">
+            <i data-lucide="calendar" class="w-5 h-5"></i> Termin online buchen
+          </a>
+          <a href="https://wa.me/41791361616" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border-2 border-white/40 text-white font-bold text-lg hover:bg-white/10 transition">
+            <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp schreiben
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-ink-900 text-ink-100 pt-20 pb-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center">
+            <i data-lucide="car-front" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <div class="font-display font-extrabold text-white text-lg">Verkehrsschule</div>
+            <div class="text-brand-400 font-display font-bold text-sm tracking-wide">MITTELLAND</div>
+          </div>
+        </div>
+        <p class="text-ink-100/70 text-sm leading-relaxed">
+          Deine Fahrschule für Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair.
+        </p>
+      </div>
+
+      <!-- Kontakt -->
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Kontakt</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i><span>Baslerstrasse 67<br/>4632 Trimbach</span></li>
+          <li><a href="tel:+41791361616" class="flex items-start gap-3 hover:text-white transition"><i data-lucide="phone" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>+41 79 136 16 16</a></li>
+          <li><a href="mailto:info@verkehrsschule-mittelland.ch" class="flex items-start gap-3 hover:text-white transition"><i data-lucide="mail" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>info@verkehrsschule-mittelland.ch</a></li>
+          <li><a href="https://wa.me/41791361616" class="flex items-start gap-3 hover:text-white transition"><i data-lucide="message-circle" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>WhatsApp Chat</a></li>
+        </ul>
+      </div>
+
+      <!-- Fahrschule -->
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Fahrschule</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li>Kategorie B (Auto)</li>
+          <li>Kategorie BE (Anhänger)</li>
+          <li>Kategorie BPT 121/122 (Taxi)</li>
+          <li>Auffrischung Kat. B</li>
+          <li>Kontrollfahrten</li>
+          <li>Schaltung & Automat</li>
+        </ul>
+      </div>
+
+      <!-- Kurse -->
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Kurse</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li>Theorieunterricht</li>
+          <li>Verkehrskundeunterricht (VKU)</li>
+          <li>Nothelferkurs (eLearning oder traditionell)</li>
+          <li>WAB-Kurs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-ink-100/60 text-sm">© 2026 Verkehrsschule Mittelland. Alle Rechte vorbehalten.</p>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#" class="text-brand-400 hover:text-white transition font-semibold">Impressum</a>
+        <a href="#" class="text-brand-400 hover:text-white transition font-semibold">Datenschutz</a>
+        <a href="#" class="text-brand-400 hover:text-white transition font-semibold">AGB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/41791361616" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-glow hover:bg-green-600 transition group">
+  <i data-lucide="message-circle" class="w-7 h-7"></i>
+  <span class="absolute right-full mr-3 px-3 py-2 rounded-lg bg-ink-900 text-white text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">Schreib uns auf WhatsApp</span>
+</a>
+
+<script>
+  // Init lucide icons
+  lucide.createIcons();
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
