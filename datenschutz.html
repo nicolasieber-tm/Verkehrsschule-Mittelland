@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Datenschutz — Verkehrsschule Mittelland</title>
+<meta name="description" content="Datenschutzerklärung der Verkehrsschule Mittelland — wie wir mit deinen persönlichen Daten umgehen." />
+<meta name="keywords" content="Verkehrsschule Mittelland, datenschutz" />
+<link rel="canonical" href="https://verkehrsschule-mittelland.ch/datenschutz" />
+
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: { 50:'#eaf6ff', 100:'#d4ecff', 200:'#a8d8ff', 300:'#7cc4ff', 400:'#4eafff', 500:'#279FF5', 600:'#1f86d6', 700:'#1a6cae', 800:'#155485', 900:'#0f3d62' },
+          ink:   { 50:'#f7f8fa', 100:'#eef0f4', 200:'#dadee6', 500:'#5b6472', 700:'#2b3340', 900:'#0c1116' }
+        },
+        fontFamily: {
+          display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        boxShadow: {
+          'soft': '0 8px 30px rgba(15, 61, 98, 0.08)',
+          'glow': '0 20px 60px -10px rgba(39, 159, 245, 0.45)',
+        },
+        animation: {
+          'float': 'float 6s ease-in-out infinite',
+          'shimmer': 'shimmer 3s linear infinite',
+        },
+        keyframes: {
+          float:  { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-12px)' } },
+          shimmer:{ '0%':{ backgroundPosition:'-200% 0' }, '100%':{ backgroundPosition:'200% 0' } },
+        }
+      }
+    }
+  }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #0c1116; background: #ffffff; }
+  h1,h2,h3,h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .gradient-text {
+    background: linear-gradient(90deg, #279FF5 0%, #155485 50%, #279FF5 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  .blob { background: radial-gradient(closest-side, rgba(39,159,245,.45), transparent 70%); filter: blur(40px); }
+  .bg-grid { background-image: linear-gradient(to right, rgba(15,61,98,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,61,98,0.05) 1px, transparent 1px); background-size: 48px 48px; }
+  .lift { transition: transform .35s ease, box-shadow .35s ease; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 60px -10px rgba(15, 61, 98, 0.18); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- TOP BAR -->
+<div class="hidden md:block bg-ink-900 text-white text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-6 text-ink-100">
+      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Aarau · Basel · Langenthal · Olten · Trimbach</span>
+      <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>4.9 / 5 · Google Bewertungen</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="https://wa.me/41791361616" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i>WhatsApp</a>
+      <a href="tel:+41791361616" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i>+41 79 136 16 16</a>
+      <a href="mailto:info@verkehrsschule-mittelland.ch" class="hover:text-brand-400 flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i>info@verkehrsschule-mittelland.ch</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-ink-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center gap-2 sm:gap-3">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-glow flex-shrink-0">
+        <i data-lucide="car-front" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
+      </div>
+      <div class="leading-tight">
+        <div class="font-display font-extrabold text-ink-900 text-base sm:text-lg">Verkehrsschule</div>
+        <div class="text-brand-500 font-display font-bold text-xs sm:text-sm tracking-wide">MITTELLAND</div>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-7 text-ink-700 font-medium">
+      <a href="index.html" class="hover:text-brand-500 transition">Home</a>
+      <div class="relative group">
+        <button class="flex items-center gap-1 hover:text-brand-500 transition">Standorte <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+        <div class="absolute top-full left-0 mt-2 w-64 bg-white border border-ink-100 rounded-2xl shadow-soft p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+          <a href="fahrschule-aarau.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Aarau</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="fahrschule-basel.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Basel</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="fahrschule-baselland.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Baselland</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="fahrschule-langenthal.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Langenthal</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="fahrschule-olten.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="fahrschule-trimbach.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="relative group">
+        <button class="flex items-center gap-1 hover:text-brand-500 transition">Kurse <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+        <div class="absolute top-full left-0 mt-2 w-60 bg-white border border-ink-100 rounded-2xl shadow-soft p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+          <div class="px-4 pt-2 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold">VKU</div>
+          <a href="vku-olten.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>VKU Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="vku-trimbach.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>VKU Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <div class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold">Nothelferkurs</div>
+          <a href="nothelferkurs-olten.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Nothelferkurs Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="nothelferkurs-trimbach.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Nothelferkurs Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="relative group">
+        <button class="flex items-center gap-1 text-brand-500 font-semibold transition">Weiteres <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+        <div class="absolute top-full left-0 mt-2 w-56 bg-white border border-ink-100 rounded-2xl shadow-soft p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+          <a href="wab.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-brand-50 text-brand-700 font-semibold"><span>WAB-Kurs</span><i data-lucide="check" class="w-4 h-4"></i></a>
+          <a href="anhanger.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Anhänger (BE)</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="kontrollfahrt.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kontrollfahrt</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="taxi-bpt.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Taxi BPT</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="gutscheine.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Gutscheine</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="starterbox.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Starter-Box</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="relative group">
+        <button class="flex items-center gap-1 hover:text-brand-500 transition">Fahrlehrer <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+        <div class="absolute top-full left-0 mt-2 w-56 bg-white border border-ink-100 rounded-2xl shadow-soft p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+          <a href="jobs.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Jobs</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="partner.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Partner werden</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="nachfolge.html" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Nachfolgelösung</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <a href="index.html#angebote" class="hover:text-brand-500 transition">Angebote</a>
+      <a href="index.html#preise" class="hover:text-brand-500 transition">Preise</a>
+      <a href="index.html#ueber" class="hover:text-brand-500 transition">Über uns</a>
+      <a href="wissen.html" class="hover:text-brand-500 transition">Wissen</a>
+    </nav>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="tel:+41791361616" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ink-200 hover:border-brand-500 hover:text-brand-500 transition font-medium">
+        <i data-lucide="phone" class="w-4 h-4"></i>Anrufen
+      </a>
+      <a href="#anmeldung" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition shadow-glow">
+        Jetzt anmelden <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+      <button id="mobileMenuBtn" aria-label="Menü öffnen" class="lg:hidden w-10 h-10 rounded-xl border border-ink-200 flex items-center justify-center text-ink-700 hover:bg-ink-50 transition">
+        <i data-lucide="menu" id="mobileMenuIcon" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-ink-100 bg-white max-h-[80vh] overflow-y-auto">
+    <div class="px-4 sm:px-6 py-4 space-y-1">
+      <a href="index.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Home</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <div class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold">Standorte</div>
+      <a href="fahrschule-aarau.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Aarau</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="fahrschule-basel.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Basel</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="fahrschule-baselland.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Baselland</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="fahrschule-langenthal.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Langenthal</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="fahrschule-olten.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Olten</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="fahrschule-trimbach.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+
+      <div class="pt-3 px-4 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold border-t border-ink-100 mt-3">Kurse</div>
+      <a href="vku-olten.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>VKU Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+      <a href="vku-trimbach.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>VKU Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="nothelferkurs-olten.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Nothelferkurs Olten</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="nothelferkurs-trimbach.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Nothelferkurs Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+
+      <div class="pt-3 px-4 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold border-t border-ink-100 mt-3">Weiteres</div>
+      <a href="wab.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl bg-brand-50 text-brand-700 font-semibold"><span>WAB-Kurs</span><i data-lucide="check" class="w-4 h-4"></i></a>
+      <a href="anhanger.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Anhänger (BE)</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="kontrollfahrt.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kontrollfahrt</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="taxi-bpt.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Taxi BPT</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="gutscheine.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Gutscheine</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="starterbox.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Starter-Box</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+
+      <div class="pt-3 px-4 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold border-t border-ink-100 mt-3">Für Fahrlehrer</div>
+      <a href="jobs.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Jobs</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="partner.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Partner werden</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="nachfolge.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Nachfolgelösung</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+
+      <div class="pt-3 mt-3 border-t border-ink-100 space-y-1">
+        <a href="index.html#angebote" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Angebote</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+        <a href="index.html#preise" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Preise</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+        <a href="index.html#ueber" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Über uns</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+        <a href="wissen.html" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Wissen</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      </div>
+      <div class="pt-3 mt-3 border-t border-ink-100 grid grid-cols-2 gap-2">
+        <a href="tel:+41791361616" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold"><i data-lucide="phone" class="w-4 h-4"></i>Anrufen</a>
+        <a href="https://wa.me/41791361616" target="_blank" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold"><i data-lucide="message-circle" class="w-4 h-4"></i>WhatsApp</a>
+      </div>
+      <a href="#anmeldung" class="mobile-link block text-center px-4 py-3 rounded-xl bg-brand-500 text-white font-bold mt-2">Jetzt anmelden</a>
+    </div>
+  </div>
+</header>
+
+<section id="top" class="relative overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-grid opacity-40"></div>
+  <div class="absolute -top-32 -left-32 w-[500px] h-[500px] blob"></div>
+  <div class="absolute top-40 -right-32 w-[400px] h-[400px] blob"></div>
+
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-12 lg:pt-20 lg:pb-16">
+    <div class="reveal">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 font-semibold text-xs sm:text-sm mb-6">
+        <i data-lucide="file-text" class="w-4 h-4"></i> Datenschutzerklärung
+      </div>
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-[1.05] text-ink-900">
+        Wie wir mit deinen <span class="gradient-text">Daten umgehen.</span>
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 lg:py-16 bg-ink-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <p class="text-ink-700 leading-relaxed mb-3">Wir freuen uns über Ihren Besuch auf unserer Internetseite verkehrsschule-mittelland.ch und Ihr Interesse an unserem Unternehmen.</p>
+      <p class="text-ink-700 leading-relaxed mb-3">Der Schutz Ihrer personenbezogenen Daten, wie z.B. Geburtsdatum, Name, Telefonnummer, Anschrift etc., ist uns ein wichtiges Anliegen.</p>
+      <p class="text-ink-700 leading-relaxed">Der Zweck dieser Datenschutzerklärung besteht darin, Sie über die Bearbeitung Ihrer personenbezogenen Daten zu informieren, die wir bei einem Seitenbesuch von Ihnen sammeln. Unsere Datenschutzpraxis steht im Einklang mit den gesetzlichen Regelungen des Bundesgesetzes über den Datenschutz (DSG) der Schweiz. Die nachfolgende Datenschutzerklärung dient der Erfüllung der Informationspflichten aus dem DSG. Diese finden sich z.B. in Art. 19 ff. DSG.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Inhaber</h2>
+      <p class="text-ink-700 leading-relaxed mb-3">Verantwortlicher der Daten im Sinne von Art. 5 Bst. j DSG sind private Personen oder das Bundesorgan, die über den Zweck und die Mittel der Bearbeitung entscheiden.</p>
+      <p class="text-ink-700 leading-relaxed mb-3">Im Hinblick auf unsere Internetseite ist der Inhaber:</p>
+      <div class="text-ink-700 space-y-1 pl-4 border-l-4 border-brand-500">
+        <div class="font-display font-bold">Verkehrsschule Mittelland</div>
+        <div>Baslerstrasse 67</div>
+        <div>4367 Trimbach</div>
+        <div>Schweiz</div>
+        <div>E-Mail: <a href="mailto:info@verkehrsschule-mittelland.ch" class="text-brand-500 hover:underline">info@verkehrsschule-mittelland.ch</a></div>
+        <div>Tel.: +41791361616</div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Bereitstellung der Website und Erstellung von Logfiles</h2>
+      <p class="text-ink-700 leading-relaxed mb-4">Bei jedem Aufruf unserer Internetseite erfasst unser System automatisiert Daten und Informationen des jeweils abrufenden Gerätes (z.B. Computer, Mobiltelefon, Tablet, etc.).</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Welche personenbezogenen Daten werden erhoben und in welchem Umfang werden diese bearbeitet?</h3>
+      <ol class="list-decimal pl-6 space-y-1 text-ink-700">
+        <li>Informationen über den Browsertyp und die verwendete Version;</li>
+        <li>Das Betriebssystem des Abrufgerätes;</li>
+        <li>Hostname des zugreifenden Rechners;</li>
+        <li>Die IP-Adresse des Abrufgerätes;</li>
+        <li>Datum und Uhrzeit des Zugriffs;</li>
+        <li>Websites und Ressourcen (Bilder, Dateien, weitere Seiteninhalte), die auf unserer Internetseite aufgerufen wurden;</li>
+        <li>Websites, von denen das System des Nutzers auf unsere Internetseite gelangte (Referrer-Tracking);</li>
+        <li>Meldung, ob der Abruf erfolgreich war;</li>
+        <li>Übertragene Datenmenge.</li>
+      </ol>
+      <p class="text-ink-700 leading-relaxed mt-3">Diese Daten werden in den Logfiles unseres Systems gespeichert. Eine Speicherung dieser Daten zusammen mit personenbezogenen Daten eines konkreten Nutzers findet nicht statt, so dass eine Identifizierung einzelner Seitenbesucher nicht erfolgt.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Rechtsgrundlage für die Bearbeitung personenbezogener Daten</h3>
+      <p class="text-ink-700 leading-relaxed">Die Bearbeitung personenbezogener Daten erfolgt nach dem Prinzip der Rechtmässigkeit (Art. 6 Abs. 1 DSG) und nach dem Gebot von Treu und Glauben (Art. 6 Abs. 2 DSG bzw. Art. 2 ZGB).</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Zweck der Datenbearbeitung</h3>
+      <p class="text-ink-700 leading-relaxed">Die vorübergehende (automatisierte) Speicherung der Daten ist für den Ablauf eines Websitebesuchs erforderlich, um eine Auslieferung der Website zu ermöglichen. Die Speicherung und Bearbeitung der personenbezogenen Daten erfolgt zudem zur Erhaltung der Kompatibilität unserer Internetseite für möglichst alle Besucher und zur Missbrauchsbekämpfung und Störungsbeseitigung. Hierfür ist es notwendig, die technischen Daten des abrufenden Rechners zu loggen, um so frühestmöglich auf Darstellungsfehler, Angriffe auf unsere IT-Systeme und/oder Fehler der Funktionalität unserer Internetseite reagieren zu können. Zudem dienen uns die Daten zur Optimierung der Website und zur generellen Sicherstellung der Sicherheit unserer informationstechnischen Systeme.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Dauer der Speicherung</h3>
+      <p class="text-ink-700 leading-relaxed">Die Löschung der vorgenannten technischen Daten erfolgt, sobald sie nicht mehr benötigt werden, um die Kompatibilität der Internetseite für alle Besucher zu gewährleisten, spätestens aber 3 Monate nach Abruf unserer Internetseite.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Einschränkungs-, Widerspruchs-, Berichtigungs- und Löschungsmöglichkeit</h3>
+      <p class="text-ink-700 leading-relaxed">Sie können jederzeit eine Berichtigung oder Löschung der Daten verlangen. Welche Rechte Ihnen zustehen und wie Sie diese geltend machen, finden Sie im unteren Bereich dieser Datenschutzerklärung.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Besondere Funktionen der Internetseite</h2>
+      <p class="text-ink-700 leading-relaxed mb-5">Unsere Seite bietet Ihnen verschiedene Funktionen, bei deren Nutzung von uns personenbezogene Daten erhoben, bearbeitet und gespeichert werden. Nachfolgend erklären wir, was mit diesen Daten geschieht:</p>
+
+      <h3 class="font-display font-bold text-xl text-ink-900 mb-3 mt-6">Buchungsanfrage-Formular</h3>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Umfang:</strong> Die von Ihnen in unser Buchungsanfrage-Formular (Datum, Personenanzahl, etc.) eingegebenen Daten werden zur Erfüllung des nachfolgenden Zwecks bearbeitet.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 DSG (Rechtmässigkeit) und Art. 6 Abs. 2 DSG bzw. Art. 2 ZGB (Treu und Glauben).</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Zweck:</strong> Vorvertraglicher Informationsaustausch zur Prüfung Ihrer Buchung und Vorbereitung eines möglichen Vertragsabschlusses.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Speicherdauer:</strong> Löschung sobald die Daten für die Bearbeitung nicht mehr benötigt werden und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+      <p class="text-ink-700 leading-relaxed"><strong>Erforderlichkeit:</strong> Die Pflichtfelder müssen ausgefüllt werden — sonst kann die Buchungsanfrage nicht bearbeitet werden.</p>
+
+      <h3 class="font-display font-bold text-xl text-ink-900 mb-3 mt-6">Kontaktformular(e)</h3>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Umfang:</strong> Die in die Eingabemaske des Kontaktformulares eingetragenen Daten.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Zweck:</strong> Ausschliesslich für die Bearbeitung der konkreten Kontaktanfrage. Wir können auch Bestätigungs-E-Mails an die angegebene Adresse senden.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Speicherdauer:</strong> Nach Bearbeitung der Anfrage werden Daten unverzüglich gelöscht, soweit keine gesetzlichen Aufbewahrungsfristen bestehen.</p>
+      <p class="text-ink-700 leading-relaxed"><strong>Erforderlichkeit:</strong> Nutzung erfolgt freiwillig — alternative Kontaktmöglichkeiten stehen zur Verfügung. Pflichtfelder müssen ausgefüllt werden, sonst kann die Anfrage nicht bearbeitet werden.</p>
+
+      <h3 class="font-display font-bold text-xl text-ink-900 mb-3 mt-6">Terminbuchungsformular</h3>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Umfang:</strong> Die im Rahmen unseres Terminbuchungsformulares eingegebenen Daten.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Zweck:</strong> Bearbeitung von Terminanfragen, die durch das Terminbuchungsformular eingehen.</p>
+      <p class="text-ink-700 leading-relaxed mb-2"><strong>Speicherdauer:</strong> Löschung 12 Monate nach dem angesetzten Termin (soweit keine Aufbewahrungspflichten bestehen). Wir behalten uns die Löschung ohne Angaben von Gründen vor.</p>
+      <p class="text-ink-700 leading-relaxed"><strong>Erforderlichkeit:</strong> Pflichtangaben müssen vollständig ausgefüllt werden, sonst kann die Buchung nicht angenommen werden.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Weitergabe von Angaben an Dritte</h2>
+      <p class="text-ink-700 leading-relaxed mb-3">Die Bearbeitung personenbezogener Daten erfolgt nach dem Prinzip der Rechtmässigkeit (Art. 6 Abs. 1 DSG) und nach dem Gebot von Treu und Glauben (Art. 6 Abs. 2 DSG bzw. Art. 2 ZGB).</p>
+      <p class="text-ink-700 leading-relaxed mb-3">Die Weitergabe von Angaben an Dritte richtet sich nach dem Umfang nachfolgend beschriebener Tätigkeiten oder Angebote unserer Website bzw. unseres Geschäftsmodells.</p>
+      <p class="text-ink-700 leading-relaxed">Grundsätzlich behalten wir Ihre Angaben nur so lange wie nötig und behandeln diese vertraulich. Ausgenommen davon sind Übertragungen personenbezogener Daten an Inkasso-Dienstleister, an öffentliche Stellen und Behörden sowie an Privatpersonen, die aufgrund gesetzlicher Bestimmungen, gerichtlicher Entscheidungen oder behördlicher Anordnungen einen Anspruch darauf haben, sowie Übertragungen an Behörden zum Zwecke der Einleitung rechtlicher Verfahren oder für Strafverfolgungszwecke, falls unsere gesetzlich geschützten Rechte angegriffen werden.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Einbindung externer Webservices und Bearbeitung von Daten ausserhalb der EU</h2>
+      <p class="text-ink-700 leading-relaxed mb-4">Auf unserer Internetseite verwenden wir aktive Inhalte von externen Anbietern, sog. Webservices. Durch Aufruf unserer Internetseite erhalten diese externen Anbieter ggf. personenbezogene Informationen über Ihren Besuch auf unserer Internetseite. Hierbei ist ggf. eine Bearbeitung von Daten ausserhalb der Schweiz möglich. Sie können dies verhindern, indem Sie ein entsprechendes Browser-Plugin installieren oder das Ausführen von Scripten in Ihrem Browser deaktivieren.</p>
+      <p class="text-ink-700 leading-relaxed font-semibold mb-3">Wir verwenden folgende externe Webservices:</p>
+
+      <div class="border-l-4 border-brand-500 pl-5 py-2 mb-5">
+        <h3 class="font-display font-bold text-lg text-ink-900 mb-2">CloudFlare</h3>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Cloudflare, Inc., 101 Townsend St, 94107 San Francisco, USA · <a href="https://www.cloudflare.com/de-de/" target="_blank" class="text-brand-500 hover:underline">Website</a></p>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Personendaten werden in unsichere Drittstaaten übermittelt. Bei Cloudflare handelt es sich um ein Content Delivery Network mit Sicherheitsfunktionen und Reverse Proxy. Zertifizierung: <a href="https://www.dataprivacyframework.gov/list" target="_blank" class="text-brand-500 hover:underline">EU-US Data Privacy Framework</a>.</p>
+        <p class="text-ink-700 text-sm">Datenschutz: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" class="text-brand-500 hover:underline">cloudflare.com/privacypolicy</a></p>
+      </div>
+
+      <div class="border-l-4 border-brand-500 pl-5 py-2 mb-5">
+        <h3 class="font-display font-bold text-lg text-ink-900 mb-2">JSDelivr</h3>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Prospect One Sp., Krolweska 65A, 30-081 Krakow, Polen · <a href="https://prospectone.io/" target="_blank" class="text-brand-500 hover:underline">Website</a></p>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Bearbeitung in sicheren Drittländern. JSDelivr ist ein Content Delivery Network, das unsere Inhalte über verschiedene Server spiegelt.</p>
+        <p class="text-ink-700 text-sm">Datenschutz: <a href="https://www.jsdelivr.com/privacy-policy-jsdelivr-com" target="_blank" class="text-brand-500 hover:underline">jsdelivr.com/privacy-policy</a></p>
+      </div>
+
+      <div class="border-l-4 border-brand-500 pl-5 py-2 mb-5">
+        <h3 class="font-display font-bold text-lg text-ink-900 mb-2">Legally ok</h3>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Legally ok GmbH, Schochenmühlestrasse 6, 6340 Baar, Schweiz · <a href="https://www.legally-ok.com/" target="_blank" class="text-brand-500 hover:underline">Website</a></p>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">Bearbeitung erfolgt ausschliesslich in der Schweiz. Rechtsgrundlage: Art. 31 Abs. 1 DSG. Mit Hilfe des Dienstes werden Inhalte unserer Rechtstexte nachgeladen.</p>
+        <p class="text-ink-700 text-sm">Datenschutz: <a href="https://www.legally-ok.com/datenschutz/" target="_blank" class="text-brand-500 hover:underline">legally-ok.com/datenschutz</a></p>
+      </div>
+
+      <div class="border-l-4 border-brand-500 pl-5 py-2">
+        <h3 class="font-display font-bold text-lg text-ink-900 mb-2">OpenJS Foundation</h3>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">OpenJS Foundation, 1 Letterman Drive, Building D, Suite D4700, 94129 San Francisco, USA · <a href="https://js.foundation/" target="_blank" class="text-brand-500 hover:underline">Website</a></p>
+        <p class="text-ink-700 leading-relaxed mb-2 text-sm">jQuery ist eine freie JavaScript-Bibliothek, die zum ordnungsgemässen Betrieb unserer Website erforderlich ist. Personendaten werden in unsichere Drittstaaten übermittelt — Rechtsgrundlage Art. 6 Abs. 6 DSG bzw. Art. 31 Abs. 1 DSG (Einwilligung).</p>
+        <p class="text-ink-700 text-sm">Datenschutz: <a href="https://openjsf.org/wp-content/uploads/sites/84/2021/04/OpenJS-Foundation-Privacy-Policy-2019-11-15.pdf" target="_blank" class="text-brand-500 hover:underline">OpenJS Foundation Privacy Policy</a></p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Informationen zur Verwendung von Cookies</h2>
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2">Umfang</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Auf verschiedenen Seiten integrieren und verwenden wir Cookies, um bestimmte Funktionen unserer Website zu ermöglichen und externe Webservices zu integrieren. Bei den sogenannten "Cookies" handelt es sich um kleine Textdateien, die Ihr Browser auf Ihrem Zugangsgerät speichern kann. Diese Textdateien enthalten eine charakteristische Zeichenkette, die den Browser eindeutig identifiziert, wenn Sie zu unserer Website zurückkehren. Cookies können sowohl von der Website selbst als auch von externen Webservices gesetzt werden.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Rechtsgrundlage</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Relevant sind Art. 6 ff. DSG (Grundsätze). Bei Cookies, die aufgrund eines berechtigten Interesses erhoben werden, besteht unser berechtigtes Interesse darin, die Funktionalität unserer Website und der eingebundenen Dienste zu gewährleisten (technisch notwendige Cookies). Mit Hilfe der Cookie-Technologie können wir einzelne Website-Besucher nur dann identifizieren, analysieren und verfolgen, wenn der Website-Besucher in die Nutzung des Cookies gem. Art. 6 Abs. 6 DSG eingewilligt hat.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Zweck</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Die Cookies werden gesetzt, um die volle Funktionalität unserer Website zu erhalten, die Benutzerfreundlichkeit zu verbessern oder um den mit Ihrer Einwilligung angegebenen Zweck zu verfolgen.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Übersicht der Cookies</h3>
+      <div class="bg-ink-50 rounded-2xl p-5 text-sm">
+        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+          <div><strong>Name:</strong> PHPSESSID</div>
+          <div><strong>Anbieter:</strong> Webseitenbetreiber</div>
+          <div><strong>Server:</strong> verkehrsschule-mittelland.ch</div>
+          <div><strong>Speicherdauer:</strong> Sitzung</div>
+          <div><strong>Rechtsgrundlage:</strong> Berechtigtes Interesse</div>
+          <div><strong>Typ:</strong> Komfort</div>
+        </div>
+        <p class="text-ink-700 mt-3"><strong>Zweck:</strong> Verwaltung der Benutzersitzung. Eindeutige Kennung für die Sitzung eines Benutzers während des Website-Besuchs. Wird beim Schliessen des Browsers gelöscht.</p>
+      </div>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Widerspruch & Widerruf</h3>
+      <p class="text-ink-700 leading-relaxed">Sie können Ihren Browser so einstellen, dass das Setzen von Cookies generell verhindert wird. Wenn Sie uns ausdrücklich die Erlaubnis erteilt haben, Ihre personenbezogenen Daten zu bearbeiten, können Sie diese Einwilligung jederzeit widerrufen. Die Rechtmässigkeit der bis zum Widerruf vorgenommenen Bearbeitung bleibt davon unberührt.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Datensicherheit und Kommunikation per E-Mail</h2>
+      <p class="text-ink-700 leading-relaxed">Ihre personenbezogenen Daten werden durch technische und organisatorische Massnahmen so bei der Erhebung, Speicherung und Bearbeitung geschützt, dass sie für Dritte nicht zugänglich sind. Bei einer unverschlüsselten Kommunikation per E-Mail kann die vollständige Datensicherheit auf dem Übertragungsweg zu unseren IT-Systemen von uns nicht gewährleistet werden, sodass wir bei Informationen mit hohem Geheimhaltungsbedürfnis eine verschlüsselte Kommunikation oder den Postweg empfehlen.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Dauer der Speicherung & Rechte der betroffenen Person</h2>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2">Dauer der Speicherung</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Wir speichern die Personendaten nur in dem Umfang und so lange, wie dies für die Erfüllung der Zwecke, für die die Personendaten erhoben wurden, erforderlich ist, wir an der Aufbewahrung ein berechtigtes überwiegendes Interesse haben oder dazu gesetzlich verpflichtet sind.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Auskunftsanspruch</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob wir personenbezogene Daten von Ihnen bearbeiten. Sofern dies der Fall ist, haben Sie ein Recht auf Auskunft über die in Art. 25 ff. DSG benannten Informationen, soweit die Auskunft nicht verweigert, eingeschränkt oder aufgeschoben werden kann (vgl. Art. 26 f. DSG). Gerne stellen wir Ihnen auch eine Kopie der Daten zur Verfügung.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Berichtigungsanspruch</h3>
+      <p class="text-ink-700 leading-relaxed mb-4">Sie haben gem. Art. 32 Abs. 1 DSG das Recht zu verlangen, dass unrichtig hinterlegte personenbezogene Daten (wie z.B. Adresse, Name, etc.) berichtigt werden, sofern keine gesetzliche Pflicht entgegensteht. Eine Vervollständigung kann jederzeit verlangt werden.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-4">Recht auf Löschung</h3>
+      <p class="text-ink-700 leading-relaxed mb-2">Sie haben das Recht, dass wir die über Sie erhobenen personenbezogenen Daten löschen, wenn:</p>
+      <ul class="list-disc pl-6 text-ink-700 space-y-1 mb-3">
+        <li>die Daten nicht mehr benötigt werden;</li>
+        <li>aufgrund des Widerrufs Ihrer Einwilligung die Rechtsgrundlage entfallen ist;</li>
+        <li>keine berechtigten Gründe für die Bearbeitung mehr vorliegen;</li>
+        <li>Ihre Daten unrechtmässig bearbeitet werden;</li>
+        <li>eine rechtliche Verpflichtung dies erfordert.</li>
+      </ul>
+      <p class="text-ink-700 leading-relaxed mb-2">Das Recht besteht nicht, wenn:</p>
+      <ul class="list-disc pl-6 text-ink-700 space-y-1">
+        <li>die Bearbeitung zur freien Meinungsäusserung erforderlich ist;</li>
+        <li>Ihre Daten auf Grundlage einer rechtlichen Verpflichtung erhoben worden sind;</li>
+        <li>die Bearbeitung aus Gründen des öffentlichen Interesses erforderlich ist;</li>
+        <li>die Daten zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen erforderlich sind.</li>
+      </ul>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Recht auf Widerruf</h3>
+      <p class="text-ink-700 leading-relaxed">Sofern Sie uns eine ausdrückliche Einwilligung in die Bearbeitung Ihrer personenbezogenen Daten erteilt haben (Art. 6 Abs. 6 DSG und Art. 31 Abs. 1 DSG), können Sie diese jederzeit widerrufen. Die Rechtmässigkeit der bis zum Widerruf erfolgten Bearbeitung bleibt davon unberührt. Angaben, für welche wir gesetzlich zur Aufbewahrung verpflichtet sind, werden nach Fristablauf gelöscht.</p>
+
+      <h3 class="font-display font-bold text-lg text-ink-900 mb-2 mt-5">Wie nehmen Sie Ihre Rechte wahr?</h3>
+      <p class="text-ink-700 leading-relaxed mb-2">Ihre Rechte können Sie jederzeit wahrnehmen, indem Sie sich an die untenstehenden Kontaktdaten wenden:</p>
+      <div class="text-ink-700 space-y-1 pl-4 border-l-4 border-brand-500">
+        <div class="font-display font-bold">Verkehrsschule Mittelland</div>
+        <div>Baslerstrasse 67, 4367 Trimbach, Schweiz</div>
+        <div>E-Mail: <a href="mailto:info@verkehrsschule-mittelland.ch" class="text-brand-500 hover:underline">info@verkehrsschule-mittelland.ch</a></div>
+        <div>Tel.: +41791361616</div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Recht auf Datenübertragbarkeit</h2>
+      <p class="text-ink-700 leading-relaxed mb-2">Wir stellen Ihnen auf Anfrage folgende Daten bereit:</p>
+      <ul class="list-disc pl-6 text-ink-700 space-y-1 mb-3">
+        <li>Daten, die aufgrund einer Einwilligung (Art. 31 Abs. 1 DSG) erhoben wurden;</li>
+        <li>Daten, die wir im Rahmen bestehender Verträge von Ihnen erhalten haben (Art. 31 Abs. 2 Bst. a DSG);</li>
+        <li>Daten, die im Rahmen eines automatisierten Verfahrens bearbeitet worden sind.</li>
+      </ul>
+      <p class="text-ink-700 leading-relaxed">Die Übertragung der personenbezogenen Daten direkt an einen von Ihnen gewünschten Verantwortlichen werden wir vornehmen, soweit dies technisch machbar ist. Daten, die in überwiegende Interessen Dritter eingreifen, dürfen gem. Art. 26 Abs. 1 Bst. b DSG nicht oder nur eingeschränkt übertragen werden.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 sm:p-10">
+      <h2 class="font-display font-extrabold text-2xl text-ink-900 mb-4">Mitteilungen an den EDÖB und Klagemöglichkeit</h2>
+      <p class="text-ink-700 leading-relaxed mb-3">Betroffene Personen können gemäss Art. 49 DSG bei der Aufsichtsbehörde eine Anzeige machen, wenn genügend Anzeichen bestehen, dass eine Datenbearbeitung gegen die Datenschutzvorschriften verstossen könnte. Aufsichtsbehörde für den Datenschutz in der Schweiz ist der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB).</p>
+      <p class="text-ink-700 leading-relaxed mb-3">Weiteres entnehmen Sie dem Kontaktformular des EDÖB: <a href="https://www.edoeb.admin.ch/edoeb/de/home/deredoeb/kontakt.html" target="_blank" class="text-brand-500 hover:underline">edoeb.admin.ch</a></p>
+      <p class="text-ink-700 leading-relaxed">Sofern Sie den Verdacht haben, dass auf unserer Seite Ihre Daten rechtswidrig bearbeitet werden, können Sie gem. Art. 32 DSG eine gerichtliche Klärung der Problematik herbeiführen. In der Regel ist hierzu eine Klage nach Art. 28 ff. ZGB anzustreben.</p>
+    </div>
+
+    <div class="bg-ink-50 rounded-2xl p-5 text-sm text-ink-500 italic">
+      Die Datenschutzerklärung, das Impressum und der Cookie-Banner dieser Website wurden mit der Datenschutzlösung Legally ok erstellt.
+    </div>
+  </div>
+</section>
+
+<section class="py-12 bg-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-brand-500 font-semibold hover:gap-3 transition"><i data-lucide="arrow-left" class="w-5 h-5"></i> Zurück zur Startseite</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink-900 text-ink-100 pt-16 sm:pt-20 pb-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center"><i data-lucide="car-front" class="w-6 h-6 text-white"></i></div>
+          <div>
+            <div class="font-display font-extrabold text-white text-lg">Verkehrsschule</div>
+            <div class="text-brand-400 font-display font-bold text-sm tracking-wide">MITTELLAND</div>
+          </div>
+        </div>
+        <p class="text-ink-100/70 text-sm leading-relaxed">Deine Fahrschule für Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair.</p>
+      </div>
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Kontakt</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li class="flex items-start gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i><span>Baslerstrasse 67<br/>4632 Trimbach</span></li>
+          <li><a href="tel:+41791361616" class="flex items-start gap-3 hover:text-white"><i data-lucide="phone" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>+41 79 136 16 16</a></li>
+          <li><a href="mailto:info@verkehrsschule-mittelland.ch" class="flex items-start gap-3 hover:text-white"><i data-lucide="mail" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>info@verkehrsschule-mittelland.ch</a></li>
+          <li><a href="https://wa.me/41791361616" class="flex items-start gap-3 hover:text-white"><i data-lucide="message-circle" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5"></i>WhatsApp Chat</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Standorte</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li><a href="fahrschule-aarau.html" class="hover:text-white">Fahrschule Aarau</a></li>
+          <li><a href="fahrschule-basel.html" class="hover:text-white">Fahrschule Basel</a></li>
+          <li><a href="fahrschule-baselland.html" class="hover:text-white">Fahrschule Baselland</a></li>
+          <li><a href="fahrschule-langenthal.html" class="hover:text-white">Fahrschule Langenthal</a></li>
+          <li><a href="fahrschule-olten.html" class="hover:text-white">Fahrschule Olten</a></li>
+          <li><a href="fahrschule-trimbach.html" class="hover:text-white">Fahrschule Trimbach</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display font-extrabold text-white mb-5">Kurse</h4>
+        <ul class="space-y-3 text-ink-100/70 text-sm">
+          <li><a href="vku-olten.html" class="hover:text-white">VKU Olten</a></li>
+          <li><a href="vku-trimbach.html" class="hover:text-white">VKU Trimbach</a></li>
+          <li><a href="nothelferkurs-olten.html" class="hover:text-white">Nothelferkurs Olten</a></li>
+          <li><a href="nothelferkurs-trimbach.html" class="hover:text-white">Nothelferkurs Trimbach</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-ink-100/60 text-sm">© 2026 Verkehrsschule Mittelland. Alle Rechte vorbehalten.</p>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="impressum.html" class="text-brand-400 hover:text-white font-semibold">Impressum</a>
+        <a href="datenschutz.html" class="text-brand-400 hover:text-white font-semibold">Datenschutz</a>
+        <a href="agb.html" class="text-brand-400 hover:text-white font-semibold">AGB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/41791361616" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-glow hover:bg-green-600 transition">
+  <i data-lucide="message-circle" class="w-7 h-7"></i>
+</a>
+
+<script>
+  lucide.createIcons();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  (function() {
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+    const iconEl = document.getElementById('mobileMenuIcon');
+    if (!btn || !menu) return;
+    const closeMenu = () => { menu.classList.add('hidden'); iconEl.setAttribute('data-lucide', 'menu'); lucide.createIcons(); };
+    const openMenu = () => { menu.classList.remove('hidden'); iconEl.setAttribute('data-lucide', 'x'); lucide.createIcons(); };
+    btn.addEventListener('click', () => { menu.classList.contains('hidden') ? openMenu() : closeMenu(); });
+    document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
+  })();
+</script>
+</body>
+</html>
