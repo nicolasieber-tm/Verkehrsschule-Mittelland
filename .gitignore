@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+Icon?
+Icon
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local state
+.claude/
+
+# Backend (dependencies + env handled in backend/.gitignore)
+backend/node_modules
+backend/.env
+backend/.env.local
+backend/*.log
+
+# Logs
+*.log

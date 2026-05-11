@@ -1,0 +1,16 @@
+<%- include('_header', { title: '2FA-Setup — VSM Admin' }) %>
+<div class="card card-narrow">
+  <h1>Zwei-Faktor-Authentifizierung einrichten</h1>
+  <p class="muted">Scanne den QR-Code mit einer Authenticator-App (Google Authenticator, 1Password, Authy, …) und gib anschließend den 6-stelligen Code zur Bestätigung ein.</p>
+  <% if (error) { %><div class="error"><%= error %></div><% } %>
+  <img class="qr" src="<%= qrDataUrl %>" alt="2FA QR-Code" width="240" height="240">
+  <p class="muted" style="text-align:center;font-size:12px">Manuell: <code><%= secret %></code></p>
+  <form method="post" action="/admin/setup-2fa">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="secret" value="<%= secret %>">
+    <label for="token">Bestätigungscode</label>
+    <input id="token" name="token" type="text" required autofocus inputmode="numeric" pattern="[0-9]{6}" placeholder="123456">
+    <div style="margin-top:20px"><button type="submit" class="btn" style="width:100%">2FA aktivieren</button></div>
+  </form>
+</div>
+<%- include('_footer') %>

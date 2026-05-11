@@ -1,0 +1,127 @@
+<%- include('../_header', { title: (course ? 'Kurs bearbeiten' : 'Neuer Kurs') + ' — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0"><%= course ? 'Kurs bearbeiten' : 'Neuer Kurs' %></h1>
+  <a href="/admin/courses" class="btn btn-ghost">Zurück</a>
+</div>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<form method="post" action="<%= course ? '/admin/courses/' + course.id : '/admin/courses' %>" id="course-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <div class="card">
+    <h2>Eckdaten</h2>
+    <div class="row">
+      <div>
+        <label>Kursnummer</label>
+        <input name="course_no" type="text" required value="<%= form.course_no || '' %>" placeholder="4632-3-2026-4">
+      </div>
+      <div>
+        <label>Raum</label>
+        <% if (rooms && rooms.length > 0) { %>
+          <select name="room_id" required>
+            <option value="">— Bitte wählen —</option>
+            <% rooms.forEach(function(r) { %>
+              <option value="<%= r.id %>" <%= String(form.room_id) === String(r.id) ? 'selected' : '' %>><%= r.name %> · <%= r.postal_code %> <%= r.city %></option>
+            <% }) %>
+          </select>
+          <div class="muted">Der Ort wird aus dem Raum übernommen. <a href="/admin/rooms" target="_blank">Räume verwalten</a></div>
+        <% } else { %>
+          <div class="error">Es sind noch keine Räume angelegt. <a href="/admin/rooms/new">Jetzt anlegen</a> und danach den Kurs erneut bearbeiten.</div>
+          <input type="hidden" name="room_id" value="">
+        <% } %>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Typ</label>
+        <select name="variant" required>
+          <option value="classic" <%= form.variant === 'classic' ? 'selected' : '' %>>Klassischer Nothelferkurs (10h)</option>
+          <option value="elearning" <%= form.variant === 'elearning' ? 'selected' : '' %>>eNothelferkurs (3h eLearning + 7h Praxis)</option>
+        </select>
+      </div>
+      <div>
+        <label>Status</label>
+        <select name="status" required>
+          <option value="open" <%= form.status === 'open' ? 'selected' : '' %>>offen (öffentlich buchbar)</option>
+          <option value="closed" <%= form.status === 'closed' ? 'selected' : '' %>>geschlossen (nicht buchbar, sichtbar)</option>
+          <option value="archived" <%= form.status === 'archived' ? 'selected' : '' %>>archiviert (versteckt)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Preis (CHF)</label>
+        <input name="price_chf" type="number" min="0" required value="<%= form.price_chf || '' %>">
+      </div>
+      <div>
+        <label>Max. Plätze</label>
+        <input name="max_seats" type="number" min="1" required value="<%= form.max_seats || '' %>">
+        <% if (course) { %><div class="muted">Aktuell belegt: <%= course.booked_seats %></div><% } %>
+      </div>
+    </div>
+    <%
+      function splitDt(s) {
+        if (!s) return { d: '', t: '' };
+        var m = String(s).match(/^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})/);
+        return m ? { d: m[1], t: m[2] } : { d: '', t: '' };
+      }
+      var startsParts = splitDt(form.starts_at);
+      var deadlineParts = splitDt(form.registration_deadline);
+    %>
+    <label>Kursbeginn (Europe/Zurich)</label>
+    <div class="row" style="margin-top:0">
+      <div>
+        <input name="starts_at_date" type="date" required value="<%= startsParts.d %>" placeholder="TT.MM.JJJJ">
+      </div>
+      <div>
+        <input name="starts_at_time" type="time" required value="<%= startsParts.t %>" placeholder="HH:MM">
+      </div>
+    </div>
+    <label style="margin-top:16px">Anmeldefrist (optional — sonst = Kursbeginn)</label>
+    <div class="row" style="margin-top:0">
+      <div>
+        <input name="registration_deadline_date" type="date" value="<%= deadlineParts.d %>">
+      </div>
+      <div>
+        <input name="registration_deadline_time" type="time" value="<%= deadlineParts.t %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Kurstermine</h2>
+    <p class="muted">Einzelne Kurstage mit Uhrzeit. Mind. 1, max. 20.</p>
+    <table id="sessions-table">
+      <thead><tr><th style="width:25%">Wochentag</th><th style="width:25%">Datum</th><th style="width:20%">Von</th><th style="width:20%">Bis</th><th></th></tr></thead>
+      <tbody id="sessions-body">
+        <% (form.sessions && form.sessions.length ? form.sessions : [{}]).forEach(function(s, i) { %>
+          <tr>
+            <td><input name="sessions[<%= i %>][day]" type="text" required value="<%= s.day || '' %>" placeholder="Freitag"></td>
+            <td><input name="sessions[<%= i %>][date]" type="date" required value="<%= s.date || '' %>"></td>
+            <td><input name="sessions[<%= i %>][from]" type="time" required value="<%= s.from || '' %>"></td>
+            <td><input name="sessions[<%= i %>][to]" type="time" required value="<%= s.to || '' %>"></td>
+            <td><button type="button" class="btn btn-ghost remove-session">×</button></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <div style="margin-top:12px"><button type="button" id="add-session" class="btn btn-ghost">+ Tag hinzufügen</button></div>
+  </div>
+
+  <div class="card">
+    <button type="submit" class="btn">Speichern</button>
+  </div>
+</form>
+
+<% if (course) { %>
+  <div class="card">
+    <h2 style="margin-top:0">Aktionen</h2>
+    <form method="post" action="/admin/courses/<%= course.id %>/delete">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Kurs wirklich löschen? Geht nur wenn keine Anmeldungen.')">Kurs löschen</button>
+    </form>
+  </div>
+<% } %>
+
+<script src="/admin-assets/sessions.js"></script>
+<%- include('../_footer') %>

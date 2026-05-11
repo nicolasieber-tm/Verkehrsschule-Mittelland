@@ -1,0 +1,19 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2 style="color:#279ff5">Anmeldebestätigung Nothelferkurs</h2>
+<p>Hallo <%= fullName %></p>
+<p>Vielen Dank für deine Anmeldung bei der Verkehrsschule Mittelland. Hier deine Buchungsdetails:</p>
+<table style="border-collapse:collapse;width:100%;margin:16px 0">
+  <tr><td style="padding:6px 0;color:#6a7180">Kurs:</td><td style="padding:6px 0"><%= variantLabel %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Kursnummer:</td><td style="padding:6px 0"><%= reg.course_no %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180;vertical-align:top">Ort:</td><td style="padding:6px 0;white-space:pre-line"><%= hasRoom ? roomAddress : reg.location %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Beginn:</td><td style="padding:6px 0"><%= startsAtPretty %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180;vertical-align:top">Termine:</td><td style="padding:6px 0;white-space:pre-line"><%= sessionsText %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Gebühr:</td><td style="padding:6px 0">CHF <%= reg.price_chf %>.–</td></tr>
+</table>
+<div style="background:#fff5e6;border-left:4px solid #f5a623;padding:12px 16px;margin:16px 0;border-radius:4px">
+  <strong>Bitte beachten:</strong> Die Kursgebühr ist <strong>am ersten Kurstag vor Kursbeginn in BAR oder per TWINT</strong> zu bezahlen.
+</div>
+<p>Wenn du Fragen hast, antworte einfach auf diese Email.</p>
+<p>Viel Erfolg und bis bald!<br>Verkehrsschule Mittelland</p>
+</body></html>

@@ -1,0 +1,14 @@
+Neue Anmeldung
+==============
+
+Kurs:    <%= reg.course_no %> · <%= reg.location %> · <%= variantLabel %>
+Beginn:  <%= startsAtPretty %>
+
+Teilnehmer:
+  Name:         <%= fullName %>
+  Adresse:      <%= reg.strasse %> <%= reg.hnr %>, <%= reg.plz %> <%= reg.ort %>
+  Geburtsdatum: <%= reg.geburt && new Date(reg.geburt).toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich' }) %>
+  Email:        <%= reg.email %>
+  Telefon:      <%= reg.telefon || '—' %>
+
+Admin: <%= process.env.ADMIN_BASE_URL || 'http://localhost:3000' %>/admin/registrations/<%= reg.id %>

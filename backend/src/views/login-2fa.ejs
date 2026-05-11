@@ -1,0 +1,19 @@
+<%- include('_header', { title: '2FA — VSM Admin' }) %>
+<div class="card card-narrow">
+  <h1>Zwei-Faktor-Code</h1>
+  <p class="muted">Gib den 6-stelligen Code aus deiner Authenticator-App ein, oder einen Recovery-Code.</p>
+  <% if (error) { %><div class="error"><%= error %></div><% } %>
+  <form method="post" action="/admin/login/2fa">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="token">Code</label>
+    <input id="token" name="token" type="text" required autofocus autocomplete="one-time-code" placeholder="123456 oder ABCD-EFGH-IJKL">
+    <div style="margin-top:20px">
+      <button type="submit" class="btn" style="width:100%">Bestätigen</button>
+    </div>
+  </form>
+  <form method="post" action="/admin/logout" style="margin-top:8px">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="btn btn-ghost" style="width:100%">Abbrechen</button>
+  </form>
+</div>
+<%- include('_footer') %>

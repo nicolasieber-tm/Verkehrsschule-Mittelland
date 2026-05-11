@@ -1,0 +1,50 @@
+<%- include('../_header', { title: 'Kurse — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Kurse</h1>
+  <a class="btn" href="/admin/courses/new">+ Neuer Kurs</a>
+</div>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+
+<div class="card" style="padding:0;overflow:hidden">
+<table>
+  <thead>
+    <tr>
+      <th>Kursnr.</th>
+      <th>Ort</th>
+      <th>Typ</th>
+      <th>Start</th>
+      <th>Plätze</th>
+      <th>Preis</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (courses.length === 0) { %>
+      <tr><td colspan="8" style="text-align:center;padding:32px;color:#6a7180">Noch keine Kurse angelegt.</td></tr>
+    <% } %>
+    <% courses.forEach(function(c) { %>
+      <tr>
+        <td><strong><%= c.course_no %></strong></td>
+        <td><%= c.location %></td>
+        <td><%= c.variant === 'classic' ? 'Klassisch' : 'eNothelfer' %></td>
+        <td><%= formatZurich(c.starts_at) %></td>
+        <td>
+          <% var free = c.max_seats - c.booked_seats; %>
+          <span class="badge <%= free === 0 ? 'badge-red' : 'badge-green' %>">
+            <%= c.booked_seats %> / <%= c.max_seats %>
+          </span>
+        </td>
+        <td>CHF <%= c.price_chf %></td>
+        <td>
+          <% if (c.status === 'open') { %><span class="badge badge-green">offen</span><% } %>
+          <% if (c.status === 'closed') { %><span class="badge badge-gray">geschlossen</span><% } %>
+          <% if (c.status === 'archived') { %><span class="badge badge-gray">archiviert</span><% } %>
+        </td>
+        <td><a href="/admin/courses/<%= c.id %>">Bearbeiten</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+</div>
+<%- include('../_footer') %>

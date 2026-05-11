@@ -1,0 +1,82 @@
+<%- include('../_header', { title: 'Anmeldung bearbeiten — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Anmeldung #<%= reg.id %></h1>
+  <a class="btn btn-ghost" href="/admin/courses/<%= reg.course_id %>/registrations">Zurück zur Liste</a>
+</div>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+
+<div class="card">
+  <h2 style="margin-top:0">Persönliche Daten</h2>
+  <table>
+    <tr><th style="width:30%">Name</th><td><%= reg.vname %> <%= reg.nname %></td></tr>
+    <tr><th>Adresse</th><td><%= reg.strasse %> <%= reg.hnr %>, <%= reg.plz %> <%= reg.ort %></td></tr>
+    <tr><th>Geburtsdatum</th><td><%= reg.geburt && new Date(reg.geburt).toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich' }) %></td></tr>
+    <tr><th>Email</th><td><%= reg.email %></td></tr>
+    <tr><th>Telefon</th><td><%= reg.telefon || '—' %></td></tr>
+    <tr><th>Kurs</th><td><a href="/admin/courses/<%= reg.course_id %>"><%= reg.course_no %></a> (<%= reg.location %>)</td></tr>
+    <tr><th>Eingegangen</th><td><%= formatZurich(reg.created_at) %></td></tr>
+    <tr><th>Status</th><td>
+      <% if (reg.status === 'confirmed') { %><span class="badge badge-green">bestätigt</span>
+      <% } else { %><span class="badge badge-red">storniert<% if (reg.cancelled_at) { %> am <%= formatZurich(reg.cancelled_at) %><% } %></span><% } %>
+    </td></tr>
+    <tr><th>Datenschutz/AGB</th><td>
+      Datenschutz: <%= reg.consent_privacy ? '✓' : '✗' %> · AGB: <%= reg.consent_terms ? '✓' : '✗' %>
+    </td></tr>
+    <tr><th>E-Mail (Teilnehmer)</th><td>
+      <%= reg.participant_mail_status %>
+      <% if (reg.participant_mail_status === 'failed') { %>
+        <form method="post" action="/admin/registrations/<%= reg.id %>/resend-mail?target=participant" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+    <tr><th>E-Mail (Schule)</th><td>
+      <%= reg.school_mail_status %>
+      <% if (reg.school_mail_status === 'failed') { %>
+        <form method="post" action="/admin/registrations/<%= reg.id %>/resend-mail?target=school" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Verwaltung</h2>
+  <form method="post" action="/admin/registrations/<%= reg.id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="checkbox-row">
+      <input type="checkbox" id="paid" name="paid" <%= reg.paid ? 'checked' : '' %>>
+      <label for="paid">Bezahlt (BAR oder TWINT am 1. Kurstag)</label>
+    </div>
+    <label>Interne Notizen</label>
+    <textarea name="admin_notes" rows="4"><%= reg.admin_notes || '' %></textarea>
+    <div style="margin-top:16px"><button class="btn" type="submit">Speichern</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Status-Aktionen</h2>
+  <div class="actions">
+    <% if (reg.status === 'confirmed') { %>
+      <form method="post" action="/admin/registrations/<%= reg.id %>/cancel">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Anmeldung wirklich stornieren? Der Platz wird wieder frei.')">Stornieren</button>
+      </form>
+    <% } %>
+    <form method="post" action="/admin/registrations/<%= reg.id %>/anonymize">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn btn-danger" type="submit" onclick="return confirm('Persönliche Daten anonymisieren? (DSG-Löschung). Datensatz bleibt für Statistik bestehen, aber alle persönlichen Informationen werden überschrieben. Anmeldung wird storniert.')">Anonymisieren (DSG)</button>
+    </form>
+    <% if (reg.status === 'cancelled') { %>
+      <form method="post" action="/admin/registrations/<%= reg.id %>/hard-delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Anmeldung WIRKLICH PHYSISCH LÖSCHEN? Unwiderruflich. Nur für DSG-Auskunfts-/Löschanfragen.')">Physisch löschen</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+<%- include('../_footer') %>

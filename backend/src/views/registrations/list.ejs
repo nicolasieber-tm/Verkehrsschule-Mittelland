@@ -1,0 +1,53 @@
+<%- include('../_header', { title: 'Anmeldungen — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Anmeldungen<% if (course) { %> · <%= course.course_no %> (<%= course.location %>)<% } %></h1>
+  <div class="actions">
+    <% if (course) { %>
+      <a class="btn btn-ghost" href="/admin/courses/<%= course.id %>">Kurs bearbeiten</a>
+      <a class="btn btn-ghost" href="/admin/courses/<%= course.id %>/registrations.csv">CSV-Export</a>
+    <% } else { %>
+      <a class="btn btn-ghost" href="/admin/courses">Alle Kurse</a>
+    <% } %>
+  </div>
+</div>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<div class="card" style="padding:0;overflow-x:auto">
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <% if (!course) { %><th>Kurs</th><% } %>
+      <th>Email</th>
+      <th>Eingegangen</th>
+      <th>Bezahlt</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (registrations.length === 0) { %>
+      <tr><td colspan="7" style="text-align:center;padding:32px;color:#6a7180">Keine Anmeldungen.</td></tr>
+    <% } %>
+    <% registrations.forEach(function(r) { %>
+      <tr>
+        <td><%= r.vname %> <%= r.nname %></td>
+        <% if (!course) { %><td><%= r.course_no %><br><span class="muted"><%= r.location %></span></td><% } %>
+        <td><%= r.email %><% if (r.telefon) { %><br><span class="muted"><%= r.telefon %></span><% } %></td>
+        <td><%= formatZurich(r.created_at) %></td>
+        <td>
+          <% if (r.paid) { %><span class="badge badge-green">bezahlt</span>
+          <% } else { %><span class="badge badge-gray">offen</span><% } %>
+        </td>
+        <td>
+          <% if (r.status === 'confirmed') { %><span class="badge badge-green">bestätigt</span>
+          <% } else { %><span class="badge badge-red">storniert</span><% } %>
+        </td>
+        <td><a href="/admin/registrations/<%= r.id %>">Bearbeiten</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+</div>
+<%- include('../_footer') %>

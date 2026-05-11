@@ -1,0 +1,42 @@
+<%- include('../_header', { title: 'Räume — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Räume</h1>
+  <a class="btn" href="/admin/rooms/new">+ Neuer Raum</a>
+</div>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+
+<div class="card" style="padding:0;overflow:hidden">
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ort</th>
+      <th>Adresse</th>
+      <th style="text-align:right">Kapazität</th>
+      <th>Status</th>
+      <th>Kurse</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (rooms.length === 0) { %>
+      <tr><td colspan="7" style="text-align:center;padding:32px;color:#6a7180">Noch keine Räume angelegt.</td></tr>
+    <% } %>
+    <% rooms.forEach(function(r) { %>
+      <tr>
+        <td><strong><%= r.name %></strong></td>
+        <td><%= r.postal_code %> <%= r.city %></td>
+        <td><%= r.address_line1 %><% if (r.address_line2) { %>, <%= r.address_line2 %><% } %></td>
+        <td style="text-align:right"><%= r.capacity || '—' %></td>
+        <td>
+          <% if (r.archived_at) { %><span class="badge badge-gray">archiviert</span>
+          <% } else { %><span class="badge badge-green">aktiv</span><% } %>
+        </td>
+        <td><%= r.course_count %></td>
+        <td><a href="/admin/rooms/<%= r.id %>">Bearbeiten</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+</div>
+<%- include('../_footer') %>

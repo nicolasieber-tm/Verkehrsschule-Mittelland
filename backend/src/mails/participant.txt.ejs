@@ -1,0 +1,24 @@
+Anmeldebestätigung Nothelferkurs
+================================
+
+Hallo <%= fullName %>
+
+Vielen Dank für deine Anmeldung bei der Verkehrsschule Mittelland.
+
+Buchungsdetails:
+  Kurs:        <%= variantLabel %>
+  Kursnummer:  <%= reg.course_no %>
+  Ort:
+<%= (hasRoom ? roomAddress : reg.location).split('\n').map(l => '    ' + l).join('\n') %>
+  Beginn:      <%= startsAtPretty %>
+  Termine:
+<%= sessionsText.split('\n').map(l => '    ' + l).join('\n') %>
+  Gebühr:      CHF <%= reg.price_chf %>.–
+
+Bitte beachten: Die Kursgebühr ist am ersten Kurstag vor Kursbeginn
+in BAR oder per TWINT zu bezahlen.
+
+Bei Fragen einfach auf diese Email antworten.
+
+Viel Erfolg und bis bald!
+Verkehrsschule Mittelland

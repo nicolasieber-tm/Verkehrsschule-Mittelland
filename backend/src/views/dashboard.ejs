@@ -1,0 +1,45 @@
+<%- include('_header', { title: 'Dashboard — VSM Admin' }) %>
+<h1>Dashboard</h1>
+
+<div class="row">
+  <div class="card">
+    <h2 style="margin-top:0">Kommende Kurse</h2>
+    <% if (upcoming.length === 0) { %>
+      <p class="muted">Noch keine kommenden Kurse. <a href="/admin/courses/new">Jetzt anlegen</a></p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Kursnr.</th><th>Start</th><th>Plätze</th></tr></thead>
+        <tbody>
+          <% upcoming.forEach(function(c) { %>
+            <tr>
+              <td><a href="/admin/courses/<%= c.id %>"><%= c.course_no %></a></td>
+              <td><%= formatZurich(c.starts_at) %></td>
+              <td><%= c.booked_seats %> / <%= c.max_seats %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Neueste Anmeldungen</h2>
+    <% if (recentRegs.length === 0) { %>
+      <p class="muted">Noch keine Anmeldungen.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Name</th><th>Kurs</th><th>Eingegangen</th></tr></thead>
+        <tbody>
+          <% recentRegs.forEach(function(r) { %>
+            <tr>
+              <td><%= r.vname %> <%= r.nname %></td>
+              <td><%= r.course_no %></td>
+              <td><%= formatZurich(r.created_at) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</div>
+<%- include('_footer') %>

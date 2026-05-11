@@ -1,0 +1,78 @@
+<%- include('../_header', { title: (room ? 'Raum bearbeiten' : 'Neuer Raum') + ' — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0"><%= room ? 'Raum bearbeiten' : 'Neuer Raum' %></h1>
+  <a href="/admin/rooms" class="btn btn-ghost">Zurück</a>
+</div>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<form method="post" action="<%= room ? '/admin/rooms/' + room.id : '/admin/rooms' %>">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <div class="card">
+    <h2 style="margin-top:0">Bezeichnung</h2>
+    <label>Name (intern)</label>
+    <input name="name" type="text" required maxlength="120" value="<%= form.name || '' %>" placeholder="z.B. Trimbach Hauptraum">
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Adresse</h2>
+    <label>Strasse und Nummer</label>
+    <input name="address_line1" type="text" required maxlength="200" value="<%= form.address_line1 || '' %>" placeholder="Baslerstrasse 67">
+
+    <label>Adresszusatz (optional)</label>
+    <input name="address_line2" type="text" maxlength="200" value="<%= form.address_line2 || '' %>" placeholder="2. OG, Eingang Hof">
+
+    <div class="row">
+      <div style="flex:0 0 140px">
+        <label>PLZ</label>
+        <input name="postal_code" type="text" required inputmode="numeric" pattern="\d{4,6}" maxlength="6" value="<%= form.postal_code || '' %>">
+      </div>
+      <div style="flex:1">
+        <label>Ort</label>
+        <input name="city" type="text" required maxlength="100" value="<%= form.city || '' %>" placeholder="Trimbach">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Zusätzliche Angaben</h2>
+    <label>Maximale Kapazität (optional)</label>
+    <input name="capacity" type="number" min="1" max="500" value="<%= form.capacity || '' %>" placeholder="z.B. 12">
+
+    <label>Interne Notizen (optional)</label>
+    <textarea name="notes" rows="3" maxlength="2000"><%= form.notes || '' %></textarea>
+  </div>
+
+  <div class="card">
+    <button type="submit" class="btn">Speichern</button>
+  </div>
+</form>
+
+<% if (room) { %>
+  <div class="card">
+    <h2 style="margin-top:0">Aktionen</h2>
+    <% if (room.course_count > 0) { %>
+      <p class="muted">Dieser Raum wird derzeit von <strong><%= room.course_count %></strong> Kurs(en) verwendet. Physisches Löschen ist nicht möglich — bitte archivieren.</p>
+    <% } %>
+    <div class="actions">
+      <% if (room.archived_at) { %>
+        <form method="post" action="/admin/rooms/<%= room.id %>/restore">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn">Reaktivieren</button>
+        </form>
+      <% } else { %>
+        <form method="post" action="/admin/rooms/<%= room.id %>/archive">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn btn-ghost" onclick="return confirm('Raum archivieren? Er wird nicht mehr im Dropdown für neue Kurse erscheinen, bestehende Kursverknüpfungen bleiben unverändert.')">Archivieren</button>
+        </form>
+      <% } %>
+      <% if (room.course_count === 0) { %>
+        <form method="post" action="/admin/rooms/<%= room.id %>/delete">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Raum endgültig löschen?')">Löschen</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+<% } %>
+<%- include('../_footer') %>

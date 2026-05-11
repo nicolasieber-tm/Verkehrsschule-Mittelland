@@ -1,0 +1,39 @@
+<%- include('_header', { title: 'Profil — VSM Admin' }) %>
+<h1>Profil</h1>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+<% if (force === 'password') { %><div class="info">Aus Sicherheitsgründen musst du dein initiales Passwort jetzt ändern.</div><% } %>
+
+<div class="card">
+  <h2>Passwort ändern</h2>
+  <form method="post" action="/admin/profile/password">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Aktuelles Passwort</label>
+    <input name="current" type="password" required autocomplete="current-password">
+    <label>Neues Passwort (mind. 12 Zeichen)</label>
+    <input name="new" type="password" required minlength="12" autocomplete="new-password">
+    <label>Neues Passwort wiederholen</label>
+    <input name="confirm" type="password" required minlength="12" autocomplete="new-password">
+    <div style="margin-top:16px"><button class="btn" type="submit">Passwort ändern</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Zwei-Faktor-Authentifizierung</h2>
+  <% if (currentAdmin.totp_enrolled_at) { %>
+    <p class="muted">Aktiviert seit <%= new Date(currentAdmin.totp_enrolled_at).toLocaleString('de-CH', { timeZone: 'Europe/Zurich' }) %>.</p>
+    <div class="actions">
+      <form method="post" action="/admin/profile/2fa-reset">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('2FA wirklich zurücksetzen? Du musst einen neuen QR-Code scannen.')">2FA zurücksetzen</button>
+      </form>
+      <form method="post" action="/admin/profile/recovery-codes">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-ghost" type="submit" onclick="return confirm('Neue Recovery-Codes generieren? Die alten werden ungültig.')">Recovery-Codes neu generieren</button>
+      </form>
+    </div>
+  <% } else { %>
+    <p>2FA ist noch nicht eingerichtet. <a href="/admin/setup-2fa">Jetzt einrichten</a></p>
+  <% } %>
+</div>
+<%- include('_footer') %>

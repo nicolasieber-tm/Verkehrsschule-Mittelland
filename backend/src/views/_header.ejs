@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title><%= typeof title !== 'undefined' ? title : 'VSM Admin' %></title>
+<style>
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f6f8;color:#1a1d23;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:24px}
+.card{background:#fff;border:1px solid #e4e7eb;border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card-narrow{max-width:440px;margin:48px auto}
+h1{margin:0 0 16px;font-size:24px}
+h2{margin:24px 0 12px;font-size:18px}
+label{display:block;margin:12px 0 4px;font-size:13px;font-weight:600;color:#3a4150}
+input[type=text],input[type=email],input[type=password],input[type=number],input[type=date],input[type=datetime-local],select,textarea{width:100%;padding:10px 12px;border:1px solid #cbd0d8;border-radius:8px;font-size:14px;font-family:inherit;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#279ff5;box-shadow:0 0 0 3px rgba(39,159,245,.15)}
+.btn{display:inline-block;padding:10px 18px;border:none;border-radius:8px;background:#279ff5;color:#fff;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:hover{background:#1f8ad6}
+.btn-danger{background:#dc3545}.btn-danger:hover{background:#bb2d3b}
+.btn-ghost{background:transparent;color:#3a4150;border:1px solid #cbd0d8}.btn-ghost:hover{background:#f5f6f8}
+.muted{color:#6a7180;font-size:13px}
+.error{background:#fde2e4;color:#a4101a;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px}
+.success{background:#dcf3e3;color:#0d5c2a;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px}
+.info{background:#e0effd;color:#1a4f7b;padding:10px 14px;border-radius:8px;margin-bottom:12px;font-size:14px}
+nav.top{background:#1a1d23;color:#fff;padding:12px 24px;display:flex;gap:24px;align-items:center;font-size:14px}
+nav.top a{color:#cbd0d8;text-decoration:none}
+nav.top a:hover{color:#fff}
+nav.top a.active{color:#fff;font-weight:600}
+nav.top .spacer{flex:1}
+nav.top form button{background:transparent;border:none;color:#cbd0d8;cursor:pointer;font-size:14px;padding:0;font-family:inherit}
+nav.top form button:hover{color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e4e7eb}
+th{font-weight:600;color:#3a4150;background:#fafbfc;font-size:13px}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:12px;font-weight:600}
+.badge-green{background:#dcf3e3;color:#0d5c2a}
+.badge-red{background:#fde2e4;color:#a4101a}
+.badge-gray{background:#e4e7eb;color:#3a4150}
+.recovery-codes{font-family:'SF Mono',Menlo,monospace;background:#1a1d23;color:#dcf3e3;padding:16px;border-radius:8px;font-size:14px;letter-spacing:.5px;line-height:1.9}
+.qr{display:block;margin:16px auto;border:8px solid #fff;border-radius:8px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row > *{flex:1;min-width:0}
+.checkbox-row{display:flex;align-items:flex-start;gap:8px;margin:12px 0}
+.checkbox-row input{margin-top:4px;flex-shrink:0;width:auto}
+.checkbox-row label{margin:0;font-weight:400}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<% if (typeof currentAdmin !== 'undefined' && currentAdmin) { %>
+<nav class="top">
+  <strong>VSM Admin</strong>
+  <a href="/admin" class="<%= active === 'dashboard' ? 'active' : '' %>">Dashboard</a>
+  <a href="/admin/courses" class="<%= active === 'courses' ? 'active' : '' %>">Kurse</a>
+  <a href="/admin/rooms" class="<%= active === 'rooms' ? 'active' : '' %>">Räume</a>
+  <a href="/admin/registrations" class="<%= active === 'registrations' ? 'active' : '' %>">Anmeldungen</a>
+  <div class="spacer"></div>
+  <span class="muted"><%= currentAdmin.email %></span>
+  <a href="/admin/profile">Profil</a>
+  <form action="/admin/logout" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit">Abmelden</button>
+  </form>
+</nav>
+<% } %>
+<div class="wrap">

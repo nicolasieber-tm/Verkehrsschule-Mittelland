@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-CH">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,48 +34,30 @@
 </script>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          brand: { 50:'#eaf6ff', 100:'#d4ecff', 200:'#a8d8ff', 300:'#7cc4ff', 400:'#4eafff', 500:'#279FF5', 600:'#1f86d6', 700:'#1a6cae', 800:'#155485', 900:'#0f3d62' },
-          ink:   { 50:'#f7f8fa', 100:'#eef0f4', 200:'#dadee6', 500:'#5b6472', 700:'#2b3340', 900:'#0c1116' }
-        },
-        fontFamily: { display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
-        boxShadow: { 'soft': '0 8px 30px rgba(15, 61, 98, 0.08)', 'glow': '0 20px 60px -10px rgba(39, 159, 245, 0.45)' },
-        animation: { 'float': 'float 6s ease-in-out infinite', 'shimmer': 'shimmer 3s linear infinite' },
-        keyframes: {
-          float:  { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-12px)' } },
-          shimmer:{ '0%':{ backgroundPosition:'-200% 0' }, '100%':{ backgroundPosition:'200% 0' } },
-        }
-      }
-    }
-  }
-</script>
-
+<script src="assets/js/tailwind-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
-<style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', system-ui, sans-serif; color: #0c1116; background: #ffffff; }
-  h1,h2,h3,h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -0.02em; }
-  .gradient-text {
-    background: linear-gradient(90deg, #279FF5 0%, #155485 50%, #279FF5 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: shimmer 6s linear infinite;
-  }
-  .blob { background: radial-gradient(closest-side, rgba(39,159,245,.45), transparent 70%); filter: blur(40px); }
-  .bg-grid { background-image: linear-gradient(to right, rgba(15,61,98,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,61,98,0.05) 1px, transparent 1px); background-size: 48px 48px; }
-  .lift { transition: transform .35s ease, box-shadow .35s ease; }
-  .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 60px -10px rgba(15, 61, 98, 0.18); }
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-</style>
+<!-- ASSETS-REFACTORED -->
+<link rel="canonical" href="https://verkehrsschule-mittelland.ch/nothelferkurs-olten.html" />
+<meta name="theme-color" content="#279FF5" />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="favicon.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_CH" />
+<meta property="og:site_name" content="Verkehrsschule Mittelland" />
+<meta property="og:title" content="Nothelferkurs Olten | ab CHF 99 — Verkehrsschule Mittelland" />
+<meta property="og:description" content="Nothelferkurs in Olten ✓ ab CHF 99 ✓ 2-Tage traditionell oder 1-Tag mit eLearning ✓ Schweizweit anerkannt. Jetzt online anmelden bei der Verkehrsschule Mittelland." />
+<meta property="og:url" content="https://verkehrsschule-mittelland.ch/nothelferkurs-olten.html" />
+<meta property="og:image" content="https://verkehrsschule-mittelland.ch/assets/img/og-default.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Nothelferkurs Olten | ab CHF 99 — Verkehrsschule Mittelland" />
+<meta name="twitter:description" content="Nothelferkurs in Olten ✓ ab CHF 99 ✓ 2-Tage traditionell oder 1-Tag mit eLearning ✓ Schweizweit anerkannt. Jetzt online anmelden bei der Verkehrsschule Mittelland." />
+<meta name="twitter:image" content="https://verkehrsschule-mittelland.ch/assets/img/og-default.jpg" />
+<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="antialiased">
 
@@ -97,14 +79,8 @@
 <!-- NAVIGATION -->
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-ink-100">
   <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between gap-8">
-    <a href="index.html" class="flex items-center gap-2 sm:gap-3">
-      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-glow flex-shrink-0">
-        <i data-lucide="car-front" class="w-5 h-5 sm:w-6 sm:h-6 text-white"></i>
-      </div>
-      <div class="leading-tight">
-        <div class="font-display font-extrabold text-ink-900 text-base sm:text-lg">Verkehrsschule</div>
-        <div class="text-brand-500 font-display font-bold text-xs sm:text-sm tracking-wide">MITTELLAND</div>
-      </div>
+    <a href="index.html" class="flex items-center flex-shrink-0" aria-label="Verkehrsschule Mittelland — Startseite">
+      <img src="assets/img/logo-transparent-svg.svg" alt="Verkehrsschule Mittelland" width="200" height="61" class="h-10 sm:h-12 w-auto"/>
     </a>
 
     <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-ink-700 font-medium">
@@ -287,6 +263,15 @@
     </div>
   </div>
 </section>
+<!-- ===================== BILD-SPOTLIGHT ===================== -->
+<section class="bg-white py-12 lg:py-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 reveal">
+    <img src="assets/img/nothilfe.webp" alt="Nothelferkurs"
+         loading="lazy" decoding="async"
+         class="w-full max-w-2xl mx-auto h-auto rounded-2xl"/>
+  </div>
+</section>
+
 
 <!-- WAS IST? -->
 <section class="py-16 lg:py-24 bg-ink-50">
@@ -444,66 +429,66 @@
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
     <div class="max-w-3xl mb-12 sm:mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-semibold text-sm mb-6">
-        <i data-lucide="tag" class="w-4 h-4 text-brand-400"></i> Preise & Termine
+        <i data-lucide="layers" class="w-4 h-4 text-brand-400"></i> Zwei Formate · Ein Ausweis
       </div>
       <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-        Direkt buchen. <br/><span class="gradient-text">Platz sichern.</span>
+        Klassisch oder <br/><span class="gradient-text">eLearning?</span>
       </h2>
-      <p class="mt-6 text-lg text-ink-100/80">Wähle dein Format und sicher dir deinen Platz in Olten.</p>
+      <p class="mt-6 text-lg text-ink-100/80">Beide Varianten enden mit dem gleichen, schweizweit anerkannten Nothilfeausweis. Such dir das Format aus, das zu deinem Alltag passt — und buch dir <a href="#termine" class="underline decoration-brand-400 underline-offset-4">weiter unten</a> direkt einen Termin.</p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
-            <i data-lucide="calendar-days" class="w-6 h-6 text-brand-500"></i>
+      <div class="reveal bg-white/[0.04] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col backdrop-blur-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
+            <i data-lucide="calendar-days" class="w-5 h-5 text-brand-400"></i>
           </div>
-          <h3 class="font-display font-extrabold text-2xl">Traditionell</h3>
+          <h3 class="font-display font-extrabold text-2xl text-white">Klassisch</h3>
         </div>
-        <p class="text-ink-500 mb-6">2-Tages-Kurs · 10 Stunden total</p>
-        <div class="mb-6">
-          <span class="font-display font-extrabold text-5xl">CHF 140</span>
-          <span class="text-ink-500 ml-2">total</span>
-        </div>
-        <ul class="space-y-3 mb-8 text-ink-700 flex-grow">
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Kursunterlagen inklusive</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Alle 10h vor Ort</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Nothilfeausweis inklusive</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Schweizweit anerkannt</li>
+        <p class="text-white/70 mb-5 text-sm sm:text-base">Zwei Tage vor Ort. Alles am Stück, keine Online-Theorie, kein eLearning-Aufschlag — du erledigst alles in einem Aufwasch.</p>
+        <ul class="space-y-2.5 text-white/85 text-sm sm:text-base">
+          <li class="flex items-start gap-3"><i data-lucide="clock" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span><strong class="text-white">10 Stunden total</strong> · klassisch verteilt auf 2 Tage</span></li>
+          <li class="flex items-start gap-3"><i data-lucide="users" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span>Theorie und Praxis gemeinsam in der Gruppe</span></li>
+          <li class="flex items-start gap-3"><i data-lucide="book-open" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span>Kursunterlagen vor Ort inklusive</span></li>
         </ul>
-        <a href="https://wa.me/41791361616" target="_blank" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
-          Termin anfragen
-        </a>
       </div>
 
-      <div class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-6 sm:p-8 lift relative shadow-glow flex flex-col">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-            <i data-lucide="laptop" class="w-6 h-6 text-white"></i>
+      <div class="reveal bg-white/[0.04] border border-brand-400/30 rounded-3xl p-6 sm:p-8 flex flex-col backdrop-blur-sm relative">
+        <div class="absolute -top-3 left-6 px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold uppercase tracking-wide">Flexibel</div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-11 h-11 rounded-xl bg-brand-500/20 flex items-center justify-center">
+            <i data-lucide="laptop" class="w-5 h-5 text-brand-400"></i>
           </div>
-          <h3 class="font-display font-extrabold text-2xl">eNothelferkurs</h3>
+          <h3 class="font-display font-extrabold text-2xl text-white">eNothelferkurs</h3>
         </div>
-        <p class="text-white/90 mb-6">3h online + 7h Praxis</p>
-        <div class="mb-6">
-          <span class="font-display font-extrabold text-5xl">CHF 99</span>
-          <span class="text-white/80 ml-2">+ CHF 15 eLearning</span>
-        </div>
-        <ul class="space-y-3 mb-8 flex-grow">
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Theorie im eigenen Tempo</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Nur 7h vor Ort</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Nothilfeausweis inklusive</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Schweizweit anerkannt</li>
+        <p class="text-white/70 mb-5 text-sm sm:text-base">Theorie zu Hause am Bildschirm im eigenen Tempo, danach nur noch ein Tag Praxis vor Ort. Spart dir den halben Tag.</p>
+        <ul class="space-y-2.5 text-white/85 text-sm sm:text-base">
+          <li class="flex items-start gap-3"><i data-lucide="monitor" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span><strong class="text-white">3 h online</strong> auf nothelfer-online.ch (CHF 15)</span></li>
+          <li class="flex items-start gap-3"><i data-lucide="clock" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span><strong class="text-white">7 h Praxis</strong> · nur 1 Tag vor Ort</span></li>
+          <li class="flex items-start gap-3"><i data-lucide="zap" class="w-4 h-4 text-brand-400 flex-shrink-0 mt-1"></i> <span>Du bestimmst wann du die Theorie machst</span></li>
         </ul>
-        <a href="https://wa.me/41791361616" target="_blank" class="block w-full py-4 rounded-full bg-white text-brand-700 font-bold text-center hover:bg-brand-50 transition">
-          Termin anfragen
-        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 sm:mt-16 max-w-3xl mx-auto text-center reveal">
+      <div class="inline-flex items-center gap-2 text-white/60 text-sm">
+        <i data-lucide="arrow-down" class="w-4 h-4"></i> Termine, Preise & Anmeldung
+      </div>
+    </div>
+
+    <!-- DYNAMISCHE KURSLISTE -->
+    <div id="termine" class="mt-8 max-w-5xl mx-auto reveal scroll-mt-24">
+      <h3 class="font-display font-extrabold text-2xl sm:text-3xl mb-2 text-center text-white">Nächste Termine</h3>
+      <p class="text-center text-white/60 mb-8 text-sm sm:text-base">Wähle einen Termin und melde dich direkt an. Der Kursraum ist gut erreichbar von Olten aus.</p>
+      <div id="kurse-liste">
+        <p class="text-center text-ink-100/60 py-8">Kurse werden geladen …</p>
       </div>
     </div>
 
     <div class="mt-12 max-w-4xl mx-auto reveal bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 text-center">
       <i data-lucide="map-pin" class="w-8 h-8 text-brand-400 mx-auto mb-3"></i>
       <h3 class="font-display font-extrabold text-2xl mb-2">Kursort: Olten</h3>
-      <p class="text-ink-100/80">Konkrete Termine und Kursnummern auf Anfrage. Schreib uns auf WhatsApp oder ruf direkt an — wir buchen dich gerne in den nächsten passenden Kurs ein.</p>
+      <p class="text-ink-100/80">Falls kein passender Termin dabei ist — schreib uns auf WhatsApp oder ruf direkt an.</p>
       <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
         <a href="https://wa.me/41791361616" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-green-500 text-white font-bold hover:bg-green-600 transition">
           <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
@@ -547,13 +532,9 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-1">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center"><i data-lucide="car-front" class="w-6 h-6 text-white"></i></div>
-          <div>
-            <div class="font-display font-extrabold text-white text-lg">Verkehrsschule</div>
-            <div class="text-brand-400 font-display font-bold text-sm tracking-wide">MITTELLAND</div>
-          </div>
-        </div>
+        <div class="flex items-center mb-6">
+        <img src="assets/img/logo-light-svg.svg" alt="Verkehrsschule Mittelland" width="200" height="61" class="h-10 w-auto"/>
+      </div>
         <p class="text-ink-100/70 text-sm leading-relaxed">Deine Fahrschule für Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair.</p>
       </div>
       <div>
@@ -601,25 +582,7 @@
   <i data-lucide="message-circle" class="w-7 h-7"></i>
 </a>
 
-<script>
-  lucide.createIcons();
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  (function() {
-    const btn = document.getElementById('mobileMenuBtn');
-    const menu = document.getElementById('mobileMenu');
-    const iconEl = document.getElementById('mobileMenuIcon');
-    if (!btn || !menu) return;
-    const closeMenu = () => { menu.classList.add('hidden'); iconEl.setAttribute('data-lucide', 'menu'); lucide.createIcons(); };
-    const openMenu = () => { menu.classList.remove('hidden'); iconEl.setAttribute('data-lucide', 'x'); lucide.createIcons(); };
-    btn.addEventListener('click', () => { menu.classList.contains('hidden') ? openMenu() : closeMenu(); });
-    document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', closeMenu));
-    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
-  })();
-</script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/kurse.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<%- include('_header', { title: 'Recovery-Codes — VSM Admin' }) %>
+<div class="card card-narrow">
+  <h1>Recovery-Codes</h1>
+  <div class="info"><strong>Wichtig:</strong> Diese Codes werden nur jetzt einmalig angezeigt. Drucke sie aus oder speichere sie in einem Passwort-Manager. Jeder Code ist nur ein Mal verwendbar und ersetzt den Authenticator-Code beim Login.</div>
+  <div class="recovery-codes">
+    <% codes.forEach(function(c) { %><%= c %><br><% }) %>
+  </div>
+  <form method="post" action="/admin/recovery-codes/acknowledge" style="margin-top:20px">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="checkbox-row">
+      <input type="checkbox" id="ack" name="ack" value="yes" required>
+      <label for="ack">Ich habe die Codes gespeichert.</label>
+    </div>
+    <button type="submit" class="btn" style="width:100%">Weiter zum Admin</button>
+  </form>
+</div>
+<%- include('_footer') %>

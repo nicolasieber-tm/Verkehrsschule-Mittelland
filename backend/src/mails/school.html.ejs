@@ -1,0 +1,15 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2>Neue Anmeldung</h2>
+<p><strong>Kurs:</strong> <%= reg.course_no %> · <%= reg.location %> · <%= variantLabel %><br>
+<strong>Beginn:</strong> <%= startsAtPretty %></p>
+<h3>Teilnehmer</h3>
+<table style="border-collapse:collapse;width:100%">
+  <tr><td style="padding:6px 0;color:#6a7180;width:30%">Name:</td><td style="padding:6px 0"><%= fullName %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Adresse:</td><td style="padding:6px 0"><%= reg.strasse %> <%= reg.hnr %>, <%= reg.plz %> <%= reg.ort %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Geburtsdatum:</td><td style="padding:6px 0"><%= reg.geburt && new Date(reg.geburt).toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich' }) %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Email:</td><td style="padding:6px 0"><a href="mailto:<%= reg.email %>"><%= reg.email %></a></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Telefon:</td><td style="padding:6px 0"><%= reg.telefon || '—' %></td></tr>
+</table>
+<p style="margin-top:24px"><a href="<%= process.env.ADMIN_BASE_URL || 'http://localhost:3000' %>/admin/registrations/<%= reg.id %>">Anmeldung im Admin öffnen</a></p>
+</body></html>
