@@ -6,6 +6,7 @@ import cookie from '@fastify/cookie';
 import session from '@fastify/session';
 import csrfProtection from '@fastify/csrf-protection';
 import formbody from '@fastify/formbody';
+import multipart from '@fastify/multipart';
 import view from '@fastify/view';
 import fastifyStatic from '@fastify/static';
 import ejs from 'ejs';
@@ -62,6 +63,10 @@ async function buildApp() {
   });
 
   await app.register(formbody);
+  await app.register(multipart, {
+    limits: { fileSize: 5 * 1024 * 1024, files: 1, fields: 50, parts: 60 },
+    throwFileSizeLimit: true,
+  });
   await app.register(cookie);
   await app.register(session, {
     secret: process.env.SESSION_SECRET,

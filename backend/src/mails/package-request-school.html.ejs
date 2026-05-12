@@ -1,0 +1,28 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2 style="color:#279ff5">Neue Anfrage: <%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %></h2>
+<p style="color:#6a7180;font-size:14px">Eingegangen am <%= createdAtPretty %> · Anfrage-ID <%= req.id %></p>
+
+<h3 style="margin-top:24px">Kunde</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0">
+  <tr><td style="padding:4px 0;color:#6a7180;width:160px">Name:</td><td style="padding:4px 0"><strong><%= fullName %></strong></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Geburtsdatum:</td><td style="padding:4px 0"><%= req.geburt %></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Adresse:</td><td style="padding:4px 0"><%= req.strasse %> <%= req.hnr %>, <%= req.plz %> <%= req.ort %></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">E-Mail:</td><td style="padding:4px 0"><a href="mailto:<%= req.email %>"><%= req.email %></a></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Telefon:</td><td style="padding:4px 0"><%= req.telefon || '—' %></td></tr>
+</table>
+
+<h3 style="margin-top:24px">Anfrage</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0">
+  <tr><td style="padding:4px 0;color:#6a7180;width:160px">Paket:</td><td style="padding:4px 0"><strong><%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %></strong></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Standort-Wunsch:</td><td style="padding:4px 0"><%= req.location_pref || '—' %></td></tr>
+  <% if (req.notes) { %>
+  <tr><td style="padding:4px 0;color:#6a7180;vertical-align:top">Bemerkung:</td><td style="padding:4px 0;white-space:pre-line"><%= req.notes %></td></tr>
+  <% } %>
+  <tr><td style="padding:4px 0;color:#6a7180">Lernfahrausweis:</td><td style="padding:4px 0"><%= hasFile ? 'Ja — im Admin einsehbar' : 'Nicht hochgeladen' %></td></tr>
+</table>
+
+<div style="background:#eaf6ff;border-left:4px solid #279ff5;padding:12px 16px;margin:24px 0;border-radius:4px">
+  Bearbeitung im Admin: <a href="https://api.verkehrsschule-mittelland.ch/admin/package-requests/<%= req.id %>">Anfrage öffnen</a>
+</div>
+</body></html>

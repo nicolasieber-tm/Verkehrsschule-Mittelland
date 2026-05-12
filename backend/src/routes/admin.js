@@ -14,6 +14,12 @@ import {
   listRooms, getRoom, createRoom, updateRoom,
   archiveRoom, restoreRoom, deleteRoom, roomInputSchema,
 } from '../services/rooms.js';
+import {
+  listPackageRequests, getPackageRequest, getPackageRequestFile,
+  updatePackageRequest, cancelPackageRequest, hardDeletePackageRequest,
+  packageRequestsToCsv, editInputSchema as packageRequestEditSchema,
+} from '../services/admin-package-requests.js';
+import { typeLabel as packageTypeLabel } from '../services/package-requests.js';
 
 export async function adminRoutes(app) {
 
@@ -27,12 +33,18 @@ export async function adminRoutes(app) {
         join courses c on c.id = r.course_id
         order by r.created_at desc limit 10`
     );
+    const recentRequests = await app.pg.query(
+      `select id, type, with_vku, vname, nname, status, created_at
+         from package_requests order by created_at desc limit 10`
+    );
     return reply.view('dashboard', {
       csrfToken: reply.generateCsrf(),
       currentAdmin: req.admin,
       active: 'dashboard',
       upcoming: upcoming.rows,
       recentRegs: recentRegs.rows,
+      recentRequests: recentRequests.rows,
+      typeLabel: packageTypeLabel,
       formatZurich,
     });
   }));
@@ -364,6 +376,106 @@ export async function adminRoutes(app) {
     } catch (err) {
       return reply.redirect(`/admin/rooms/${id}?error=${encodeURIComponent(err.userMessage || 'Fehler')}`);
     }
+  }));
+
+  // ============= PACKAGE-REQUESTS (Anfragen) =============
+
+  app.get('/package-requests', requireAuth(async (req, reply) => {
+    const type = req.query.type || null;
+    const rows = await listPackageRequests(app.pg, { type });
+    return reply.view('package-requests/list', {
+      csrfToken: reply.generateCsrf(),
+      currentAdmin: req.admin, active: 'package-requests',
+      requests: rows,
+      filterType: type,
+      typeLabel: packageTypeLabel,
+      formatZurich,
+      success: req.query.success || null,
+      error: req.query.error || null,
+    });
+  }));
+
+  app.get('/package-requests.csv', requireAuth(async (req, reply) => {
+    const type = req.query.type || null;
+    const rows = await listPackageRequests(app.pg, { type });
+    const csv = packageRequestsToCsv(rows);
+    const stamp = new Date().toISOString().slice(0, 10);
+    reply.header('Content-Type', 'text/csv; charset=utf-8');
+    reply.header('Content-Disposition', `attachment; filename="anfragen-${stamp}.csv"`);
+    return reply.send('﻿' + csv);
+  }));
+
+  app.get('/package-requests/:id', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const r = await getPackageRequest(app.pg, id);
+    if (!r) return reply.code(404).send('Anfrage nicht gefunden');
+    return reply.view('package-requests/form', {
+      csrfToken: reply.generateCsrf(),
+      currentAdmin: req.admin, active: 'package-requests',
+      req: r,
+      typeLabel: packageTypeLabel,
+      formatZurich,
+      success: req.query.success || null,
+      error: req.query.error || null,
+    });
+  }));
+
+  app.post('/package-requests/:id', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const existing = await getPackageRequest(app.pg, id);
+    if (!existing) return reply.code(404).send('Anfrage nicht gefunden');
+    const parsed = packageRequestEditSchema.safeParse({
+      status: req.body.status,
+      paid: req.body.paid,
+      admin_notes: req.body.admin_notes,
+    });
+    if (!parsed.success) {
+      return reply.redirect(`/admin/package-requests/${id}?error=${encodeURIComponent('Ungültige Eingabe.')}`);
+    }
+    await updatePackageRequest(app.pg, id, parsed.data);
+    return reply.redirect(`/admin/package-requests/${id}?success=${encodeURIComponent('Gespeichert.')}`);
+  }));
+
+  app.post('/package-requests/:id/cancel', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const changed = await cancelPackageRequest(app.pg, id);
+    const msg = changed ? 'Anfrage storniert.' : 'Anfrage war bereits storniert.';
+    return reply.redirect(`/admin/package-requests/${id}?success=${encodeURIComponent(msg)}`);
+  }));
+
+  app.post('/package-requests/:id/hard-delete', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    try {
+      await hardDeletePackageRequest(app.pg, id);
+      return reply.redirect(`/admin/package-requests?success=${encodeURIComponent('Anfrage gelöscht.')}`);
+    } catch (err) {
+      return reply.redirect(`/admin/package-requests/${id}?error=${encodeURIComponent(err.userMessage || 'Fehler')}`);
+    }
+  }));
+
+  // Authenticated file download (streams bytea from DB)
+  app.get('/package-requests/:id/files/:fileId', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const fileId = Number(req.params.fileId);
+    const f = await getPackageRequestFile(app.pg, id, fileId);
+    if (!f) return reply.code(404).send('Datei nicht gefunden');
+    // Sanitize filename for Content-Disposition (RFC: strip control chars + quotes)
+    const safeName = String(f.filename || 'download').replace(/[\r\n"\x00-\x1f]/g, '_').slice(0, 200);
+    reply.header('Content-Type', f.mime_type);
+    reply.header('Content-Disposition', `attachment; filename="${safeName}"`);
+    reply.header('Cache-Control', 'no-store');
+    return reply.send(f.data);
+  }));
+
+  // Resend mail for a package request
+  app.post('/package-requests/:id/resend-mail', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const target = req.query.target === 'school' ? 'school' : 'customer';
+    const col = target === 'school' ? 'school_mail_status' : 'customer_mail_status';
+    await app.pg.query(`update package_requests set ${col}='pending', updated_at=now() where id=$1`, [id]);
+    const { sendPackageRequestMails } = await import('../services/mail.js');
+    await sendPackageRequestMails(app.pg, id, app.log);
+    return reply.redirect(`/admin/package-requests/${id}?success=${encodeURIComponent('Mail erneut versendet.')}`);
   }));
 
   // Resend mail — actually re-send via Resend

@@ -1,0 +1,60 @@
+<%- include('../_header', { title: 'Anfragen — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Anfragen</h1>
+  <div class="actions">
+    <a class="btn btn-ghost" href="/admin/package-requests.csv<%= filterType ? '?type=' + encodeURIComponent(filterType) : '' %>">CSV-Export</a>
+  </div>
+</div>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+
+<div class="card" style="padding:12px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+  <span class="muted" style="font-size:13px">Filter:</span>
+  <a href="/admin/package-requests" class="btn <%= !filterType ? '' : 'btn-ghost' %>" style="padding:6px 14px;font-size:13px">Alle</a>
+  <a href="/admin/package-requests?type=fahrstunden_10" class="btn <%= filterType === 'fahrstunden_10' ? '' : 'btn-ghost' %>" style="padding:6px 14px;font-size:13px">10er-Paket</a>
+  <a href="/admin/package-requests?type=starterbox" class="btn <%= filterType === 'starterbox' ? '' : 'btn-ghost' %>" style="padding:6px 14px;font-size:13px">Starter-Box</a>
+</div>
+
+<div class="card" style="padding:0;overflow-x:auto">
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Paket</th>
+      <th>E-Mail</th>
+      <th>Eingegangen</th>
+      <th>Bezahlt</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (requests.length === 0) { %>
+      <tr><td colspan="7" style="text-align:center;padding:32px;color:#6a7180">Keine Anfragen.</td></tr>
+    <% } %>
+    <% requests.forEach(function(r) { %>
+      <tr>
+        <td><%= r.vname %> <%= r.nname %></td>
+        <td>
+          <%= typeLabel(r.type) %>
+          <% if (r.with_vku) { %><br><span class="muted">+ VKU-Kurs</span><% } %>
+        </td>
+        <td><%= r.email %><% if (r.telefon) { %><br><span class="muted"><%= r.telefon %></span><% } %></td>
+        <td><%= formatZurich(r.created_at) %></td>
+        <td>
+          <% if (r.paid) { %><span class="badge badge-green">bezahlt</span>
+          <% } else { %><span class="badge badge-gray">offen</span><% } %>
+        </td>
+        <td>
+          <% if (r.status === 'new') { %><span class="badge badge-green">neu</span>
+          <% } else if (r.status === 'contacted') { %><span class="badge badge-gray">kontaktiert</span>
+          <% } else if (r.status === 'closed') { %><span class="badge badge-gray">abgeschlossen</span>
+          <% } else { %><span class="badge badge-red">storniert</span><% } %>
+        </td>
+        <td><a href="/admin/package-requests/<%= r.id %>">Öffnen</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+</div>
+<%- include('../_footer') %>

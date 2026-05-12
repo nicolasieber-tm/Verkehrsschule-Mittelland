@@ -1,0 +1,21 @@
+Neue Anfrage: <%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %>
+Eingegangen: <%= createdAtPretty %> · Anfrage-ID <%= req.id %>
+
+Kunde
+-----
+Name:        <%= fullName %>
+Geburt:      <%= req.geburt %>
+Adresse:     <%= req.strasse %> <%= req.hnr %>, <%= req.plz %> <%= req.ort %>
+E-Mail:      <%= req.email %>
+Telefon:     <%= req.telefon || '—' %>
+
+Anfrage
+-------
+Paket:       <%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %>
+Standort:    <%= req.location_pref || '—' %>
+<% if (req.notes) { %>Bemerkung:
+<%= req.notes %>
+
+<% } %>Lernfahrausweis: <%= hasFile ? 'Ja — im Admin einsehbar' : 'Nicht hochgeladen' %>
+
+Admin: https://api.verkehrsschule-mittelland.ch/admin/package-requests/<%= req.id %>

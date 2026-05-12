@@ -1,0 +1,17 @@
+Anfrage erhalten — <%= typeLabel %>
+
+Hallo <%= fullName %>
+
+Vielen Dank für deine Anfrage bei der Verkehrsschule Mittelland. Wir melden uns innerhalb von 24 Stunden mit den nächsten Schritten und einer Terminvereinbarung.
+
+Paket:    <%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %>
+Adresse:  <%= req.strasse %> <%= req.hnr %>, <%= req.plz %> <%= req.ort %>
+Telefon:  <%= req.telefon || '—' %>
+<% if (req.location_pref) { %>Standort-Wunsch: <%= req.location_pref %>
+<% } %>
+<% if (hasFile) { %>Dein Lernfahrausweis wurde sicher an uns übermittelt.
+
+<% } %>Bei Fragen einfach auf diese Email antworten — oder WhatsApp: +41 79 136 16 16.
+
+Bis bald!
+Verkehrsschule Mittelland

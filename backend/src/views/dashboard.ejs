@@ -42,4 +42,28 @@
     <% } %>
   </div>
 </div>
+
+<% if (typeof recentRequests !== 'undefined') { %>
+<div class="card">
+  <h2 style="margin-top:0">Neueste Anfragen</h2>
+  <% if (recentRequests.length === 0) { %>
+    <p class="muted">Noch keine Anfragen.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Name</th><th>Paket</th><th>Status</th><th>Eingegangen</th></tr></thead>
+      <tbody>
+        <% recentRequests.forEach(function(r) { %>
+          <tr>
+            <td><a href="/admin/package-requests/<%= r.id %>"><%= r.vname %> <%= r.nname %></a></td>
+            <td><%= typeLabel(r.type) %><% if (r.with_vku) { %> + VKU<% } %></td>
+            <td><span class="badge <%= r.status === 'new' ? 'badge-green' : (r.status === 'cancelled' ? 'badge-red' : 'badge-gray') %>"><%= r.status %></span></td>
+            <td><%= formatZurich(r.created_at) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <p style="margin-top:12px"><a href="/admin/package-requests">Alle Anfragen →</a></p>
+  <% } %>
+</div>
+<% } %>
 <%- include('_footer') %>

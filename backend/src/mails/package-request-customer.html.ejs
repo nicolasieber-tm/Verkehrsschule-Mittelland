@@ -1,0 +1,21 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2 style="color:#279ff5">Anfrage erhalten — <%= typeLabel %></h2>
+<p>Hallo <%= fullName %></p>
+<p>Vielen Dank für deine Anfrage bei der Verkehrsschule Mittelland. Wir melden uns innerhalb von 24 Stunden mit den nächsten Schritten und einer Terminvereinbarung.</p>
+<table style="border-collapse:collapse;width:100%;margin:16px 0">
+  <tr><td style="padding:6px 0;color:#6a7180">Paket:</td><td style="padding:6px 0"><%= typeLabel %><% if (withVku) { %> + VKU-Kurs<% } %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Adresse:</td><td style="padding:6px 0"><%= req.strasse %> <%= req.hnr %>, <%= req.plz %> <%= req.ort %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Telefon:</td><td style="padding:6px 0"><%= req.telefon || '—' %></td></tr>
+  <% if (req.location_pref) { %>
+  <tr><td style="padding:6px 0;color:#6a7180">Standort-Wunsch:</td><td style="padding:6px 0"><%= req.location_pref %></td></tr>
+  <% } %>
+</table>
+<% if (hasFile) { %>
+<p style="color:#6a7180;font-size:14px">Dein Lernfahrausweis wurde sicher an uns übermittelt.</p>
+<% } %>
+<div style="background:#fff5e6;border-left:4px solid #f5a623;padding:12px 16px;margin:16px 0;border-radius:4px">
+  Wenn du Fragen hast, antworte einfach auf diese Email — oder schreib uns auf WhatsApp: <strong>+41 79 136 16 16</strong>.
+</div>
+<p>Bis bald!<br>Verkehrsschule Mittelland</p>
+</body></html>

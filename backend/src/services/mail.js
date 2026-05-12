@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { formatZurich } from './courses.js';
+import { typeLabel } from './package-requests.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MAILS_DIR = join(__dirname, '..', 'mails');
@@ -143,6 +144,87 @@ export async function sendRegistrationMails(pool, registrationId, log) {
         await pool.query(
           `update registrations set school_mail_status='failed', school_mail_error=$1 where id=$2`,
           [String(err.message || err).slice(0, 500), registrationId]
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Send confirmation + school-notification mails for a package_request.
+ * Updates DB per-target status (sent / failed + error). Never throws — failures stored in DB.
+ */
+export async function sendPackageRequestMails(pool, requestId, log) {
+  const { rows } = await pool.query(
+    `select * from package_requests where id = $1`,
+    [requestId]
+  );
+  const r = rows[0];
+  if (!r) { log?.warn({ requestId }, 'mail: package_request not found'); return; }
+
+  const hasFile = (await pool.query(
+    `select 1 from package_request_files where request_id=$1 limit 1`, [requestId]
+  )).rowCount > 0;
+
+  const ctx = {
+    req: r,
+    fullName: `${r.vname} ${r.nname}`,
+    typeLabel: typeLabel(r.type),
+    withVku: !!r.with_vku,
+    hasFile,
+    createdAtPretty: formatZurich(r.created_at),
+  };
+
+  // --- Customer confirmation ---
+  if (r.customer_mail_status !== 'sent') {
+    try {
+      const html = await renderTemplate('package-request-customer.html.ejs', ctx);
+      const text = await renderTemplate('package-request-customer.txt.ejs', ctx);
+      await sendOne({
+        to: r.email,
+        subject: `Anfrage erhalten — ${ctx.typeLabel}`,
+        html, text,
+        replyTo: process.env.MAIL_TO_SCHOOL,
+      });
+      await pool.query(
+        `update package_requests set customer_mail_status='sent', customer_mail_error=null, updated_at=now() where id=$1`,
+        [requestId]
+      );
+      log?.info({ requestId }, 'package customer mail sent');
+    } catch (err) {
+      log?.error({ requestId, err: err.message }, 'package customer mail failed');
+      await pool.query(
+        `update package_requests set customer_mail_status='failed', customer_mail_error=$1, updated_at=now() where id=$2`,
+        [String(err.message || err).slice(0, 500), requestId]
+      );
+    }
+  }
+
+  // --- School notification ---
+  if (r.school_mail_status !== 'sent') {
+    const schoolTo = process.env.MAIL_TO_SCHOOL;
+    if (!schoolTo) {
+      log?.warn({ requestId }, 'MAIL_TO_SCHOOL not set, skipping school mail');
+    } else {
+      try {
+        const html = await renderTemplate('package-request-school.html.ejs', ctx);
+        const text = await renderTemplate('package-request-school.txt.ejs', ctx);
+        await sendOne({
+          to: schoolTo,
+          subject: `Neue Anfrage: ${ctx.typeLabel} — ${ctx.fullName}`,
+          html, text,
+          replyTo: r.email,
+        });
+        await pool.query(
+          `update package_requests set school_mail_status='sent', school_mail_error=null, updated_at=now() where id=$1`,
+          [requestId]
+        );
+        log?.info({ requestId }, 'package school mail sent');
+      } catch (err) {
+        log?.error({ requestId, err: err.message }, 'package school mail failed');
+        await pool.query(
+          `update package_requests set school_mail_status='failed', school_mail_error=$1, updated_at=now() where id=$2`,
+          [String(err.message || err).slice(0, 500), requestId]
         );
       }
     }

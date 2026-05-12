@@ -552,19 +552,23 @@
       <p class="mt-6 text-lg text-ink-100/80">Keine versteckten Kosten. Keine Bürokratie. Wähle dein Angebot und sichere dir deinen Platz.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Pricing 1 -->
-      <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Pricing 1: Fahrstunde (Einzel / Doppel Switcher → Calendly) -->
+      <div id="card-fahrstunde" class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col" data-state="doppel">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
             <i data-lucide="car-front" class="w-6 h-6 text-brand-500"></i>
           </div>
           <h3 class="font-display font-extrabold text-2xl">Fahrstunde</h3>
         </div>
-        <p class="text-ink-500 mb-6">90 Minuten Einzelunterricht</p>
+        <div class="inline-flex p-1 rounded-full bg-ink-50 mb-6 self-start" role="tablist" aria-label="Fahrstunden-Variante">
+          <button type="button" data-fahrstunde-tab="einzel" class="px-4 py-1.5 rounded-full text-sm font-semibold text-ink-500 transition">Einzel · 45 Min</button>
+          <button type="button" data-fahrstunde-tab="doppel" class="px-4 py-1.5 rounded-full text-sm font-semibold bg-white text-ink-900 shadow-sm transition">Doppel · 90 Min</button>
+        </div>
+        <p class="text-ink-500 mb-6" data-fahrstunde-sub>90 Minuten Einzelunterricht</p>
         <div class="mb-6">
-          <span class="font-display font-extrabold text-5xl">CHF 180</span>
-          <span class="text-ink-500 ml-2">/ 90 Min</span>
+          <span class="font-display font-extrabold text-5xl" data-fahrstunde-price>CHF 180</span>
+          <span class="text-ink-500 ml-2" data-fahrstunde-unit>/ 90 Min</span>
         </div>
         <ul class="space-y-3 mb-8 text-ink-700 flex-grow">
           <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Abholung & Rückbringung</li>
@@ -572,36 +576,72 @@
           <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Ab 17 Jahren möglich</li>
           <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Individuelle Betreuung</li>
         </ul>
-        <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
-          Jetzt Fahrstunde buchen
+        <a data-fahrstunde-cta href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" rel="noopener" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
+          Jetzt Doppellektion buchen
         </a>
       </div>
 
-      <!-- Pricing 2 - Featured -->
-      <div class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-6 sm:p-8 lift relative shadow-glow flex flex-col">
+      <!-- Pricing 2: 10er Fahrstunden-Paket (+ VKU-Toggle → Anfrage) — Featured -->
+      <div id="card-paket" class="reveal bg-gradient-to-br from-brand-500 to-brand-700 text-white rounded-3xl p-6 sm:p-8 lift relative shadow-glow flex flex-col" data-vku="0">
+        <div class="absolute -top-3 right-6 px-3 py-1 rounded-full bg-white text-brand-700 text-xs font-bold uppercase tracking-wide">Beliebt</div>
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-            <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+            <i data-lucide="layers" class="w-6 h-6 text-white"></i>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl">10er-Paket</h3>
+        </div>
+        <p class="text-white/90 mb-6" data-paket-sub>10 Fahrlektionen à 45 Min</p>
+        <div class="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span class="font-display font-extrabold text-5xl whitespace-nowrap" data-paket-price>CHF 900</span>
+          <span class="text-white/60 line-through text-lg whitespace-nowrap" data-paket-strike>statt CHF 950</span>
+        </div>
+        <p class="text-sm text-white/70 mb-6" data-paket-total><span class="font-semibold text-white">Bestpreis-Paket</span> · 10× Fahrlektion</p>
+
+        <label class="flex items-center gap-3 mb-6 cursor-pointer select-none">
+          <span class="relative inline-block w-11 h-6 flex-shrink-0">
+            <input type="checkbox" data-paket-vku class="peer sr-only">
+            <span class="block w-11 h-6 rounded-full bg-white/25 peer-checked:bg-white transition"></span>
+            <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white peer-checked:bg-brand-600 peer-checked:translate-x-5 transition transform shadow"></span>
+          </span>
+          <span class="text-sm text-white/95">VKU-Kurs dazu — <strong>CHF 150</strong> <span class="text-white/70 line-through">CHF 190</span></span>
+        </label>
+
+        <ul class="space-y-3 mb-8 flex-grow">
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Abholung & Rückbringung inklusive</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Schaltung & Automat verfügbar</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Flexibel einlösbar</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> <span data-paket-vku-info>Optional mit VKU-Kurs kombinierbar</span></li>
+        </ul>
+        <a data-paket-cta href="/anfrage-paket?vku=0" class="block w-full py-4 rounded-full bg-white text-brand-700 font-bold text-center hover:bg-brand-50 transition">
+          Paket-Anfrage senden
+        </a>
+      </div>
+
+      <!-- Pricing 3: VKU-Kurs -->
+      <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
+            <i data-lucide="graduation-cap" class="w-6 h-6 text-brand-500"></i>
           </div>
           <h3 class="font-display font-extrabold text-2xl">VKU-Kurs</h3>
         </div>
-        <p class="text-white/90 mb-6">Verkehrskundeunterricht 4× 120 Min</p>
+        <p class="text-ink-500 mb-6">Verkehrskundeunterricht 4× 120 Min</p>
         <div class="mb-6">
           <span class="font-display font-extrabold text-5xl">CHF 190</span>
-          <span class="text-white/80 ml-2">total</span>
+          <span class="text-ink-500 ml-2">total</span>
         </div>
-        <ul class="space-y-3 mb-8 flex-grow">
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> 2 Kursabende à 4 Lektionen</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Interaktiver Unterricht</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Zentral in Trimbach & Olten</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5"></i> Pflicht vor praktischer Prüfung</li>
+        <ul class="space-y-3 mb-8 text-ink-700 flex-grow">
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> 2 Kursabende à 4 Lektionen</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Interaktiver Unterricht</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Zentral in Trimbach & Olten</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Pflicht vor praktischer Prüfung</li>
         </ul>
-        <a href="/vku-olten" class="block w-full py-4 rounded-full bg-white text-brand-700 font-bold text-center hover:bg-brand-50 transition">
+        <a href="/vku-olten" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
           Jetzt VKU-Kurs buchen
         </a>
       </div>
 
-      <!-- Pricing 3 -->
+      <!-- Pricing 4: Nothelferkurs -->
       <div class="reveal bg-white text-ink-900 rounded-3xl p-6 sm:p-8 lift flex flex-col">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center">
@@ -624,7 +664,121 @@
           Jetzt Nothelferkurs buchen
         </a>
       </div>
+
+      <!-- Pricing 5: Starter-Box (col-span-2 als Hero-Feature-Card mit Produktbild → Anfrage) -->
+      <div class="reveal md:col-span-2 lg:col-span-2 bg-gradient-to-br from-ink-200 via-brand-200/40 to-ink-200 text-ink-900 rounded-3xl lift relative overflow-hidden shadow-2xl border-2 border-brand-500 grid lg:grid-cols-[1fr_auto] gap-0">
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-500/20 blur-3xl pointer-events-none"></div>
+
+        <div class="relative p-6 sm:p-8 flex flex-col">
+          <div class="flex items-center gap-3 mb-4 flex-wrap">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold uppercase tracking-wide">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Komplettpaket
+            </span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wide">Spare CHF 115</span>
+          </div>
+          <h3 class="font-display font-extrabold text-3xl sm:text-4xl mb-1 text-ink-900">Starter-Box</h3>
+          <p class="text-ink-700 mb-5">All-in-One Premium-Einstieg zum Führerausweis</p>
+          <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-ink-800 mb-6">
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> Nothelferkurs <span class="text-ink-600">(inkl. Ausweis)</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> iTheorie Premium-App</li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> VKU-Kurs <span class="text-ink-600">(inkl. Unterlagen)</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> Persönliche Beratung</li>
+          </ul>
+          <div class="flex items-end gap-4 flex-wrap mt-auto">
+            <div>
+              <div class="text-sm text-ink-600 line-through leading-none mb-1">CHF 410</div>
+              <div class="font-display font-extrabold text-5xl leading-none text-brand-500">CHF 295</div>
+            </div>
+            <a href="/anfrage-starterbox" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-500 text-white font-bold hover:bg-brand-600 transition shadow-lg">
+              Starter-Box anfragen <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative hidden lg:flex items-center justify-center w-72 xl:w-80 p-6">
+          <img src="assets/img/PNG-Bild_starterbox.webp" alt="Starter-Box Paket" class="max-h-72 w-auto object-contain drop-shadow-2xl">
+        </div>
+        <div class="lg:hidden flex items-center justify-center px-6 pb-6 pt-2">
+          <img src="assets/img/PNG-Bild_starterbox.webp" alt="Starter-Box Paket" class="max-h-44 w-auto object-contain drop-shadow-xl">
+        </div>
+      </div>
     </div>
+
+    <!-- Pricing-Switcher Logic -->
+    <script>
+      (function() {
+        // ---- Fahrstunde: Einzel / Doppel ----
+        const fahrCard = document.getElementById('card-fahrstunde');
+        if (fahrCard) {
+          const tabs = fahrCard.querySelectorAll('[data-fahrstunde-tab]');
+          const subEl = fahrCard.querySelector('[data-fahrstunde-sub]');
+          const priceEl = fahrCard.querySelector('[data-fahrstunde-price]');
+          const unitEl = fahrCard.querySelector('[data-fahrstunde-unit]');
+          const cta = fahrCard.querySelector('[data-fahrstunde-cta]');
+          // NOTE: Calendly-Slugs - User bestätigt: einzellektion-45-minuten kann existieren; falls nicht, beide auf doppellektion-Link zeigen lassen.
+          const CALENDLY = {
+            einzel: 'https://calendly.com/verkehrsschule-mittelland/einzellektion-45-minuten',
+            doppel: 'https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten',
+          };
+          function setFahr(state) {
+            fahrCard.dataset.state = state;
+            tabs.forEach(t => {
+              const on = t.dataset.fahrstundeTab === state;
+              t.classList.toggle('bg-white', on);
+              t.classList.toggle('text-ink-900', on);
+              t.classList.toggle('shadow-sm', on);
+              t.classList.toggle('text-ink-500', !on);
+            });
+            if (state === 'einzel') {
+              subEl.textContent = '45 Minuten Einzelunterricht';
+              priceEl.textContent = 'CHF 95';
+              unitEl.textContent = '/ 45 Min';
+              cta.href = CALENDLY.einzel;
+              cta.textContent = 'Jetzt Einzellektion buchen';
+            } else {
+              subEl.textContent = '90 Minuten Einzelunterricht';
+              priceEl.textContent = 'CHF 180';
+              unitEl.textContent = '/ 90 Min';
+              cta.href = CALENDLY.doppel;
+              cta.textContent = 'Jetzt Doppellektion buchen';
+            }
+          }
+          tabs.forEach(t => t.addEventListener('click', () => setFahr(t.dataset.fahrstundeTab)));
+        }
+
+        // ---- Paket: 10er + VKU-Toggle ----
+        const paketCard = document.getElementById('card-paket');
+        if (paketCard) {
+          const priceEl = paketCard.querySelector('[data-paket-price]');
+          const strikeEl = paketCard.querySelector('[data-paket-strike]');
+          const totalEl = paketCard.querySelector('[data-paket-total]');
+          const vkuToggle = paketCard.querySelector('[data-paket-vku]');
+          const vkuLi = paketCard.querySelector('[data-paket-vku-info]');
+          const cta = paketCard.querySelector('[data-paket-cta]');
+
+          function render() {
+            const vku = vkuToggle.checked;
+            paketCard.dataset.vku = vku ? '1' : '0';
+
+            if (vku) {
+              priceEl.textContent = 'CHF 1050';
+              strikeEl.textContent = 'statt CHF 1140';
+              totalEl.innerHTML = '<span class="font-semibold text-white">10 Fahrlektionen + VKU-Kurs</span>';
+            } else {
+              priceEl.textContent = 'CHF 900';
+              strikeEl.textContent = 'statt CHF 950';
+              totalEl.innerHTML = '<span class="font-semibold text-white">Bestpreis-Paket</span> · 10× Fahrlektion';
+            }
+
+            if (vkuLi) vkuLi.textContent = vku ? 'Inklusive VKU-Kurs' : 'Optional mit VKU-Kurs kombinierbar';
+            cta.href = '/anfrage-paket?vku=' + (vku ? '1' : '0');
+          }
+
+          vkuToggle.addEventListener('change', render);
+          render();
+        }
+      })();
+    </script>
 
     <!-- Trust elements -->
     <div class="mt-16 grid md:grid-cols-4 gap-6 reveal">

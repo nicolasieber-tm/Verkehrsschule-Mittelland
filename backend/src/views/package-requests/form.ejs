@@ -1,0 +1,122 @@
+<%- include('../_header', { title: 'Anfrage bearbeiten — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Anfrage #<%= req.id %></h1>
+  <a class="btn btn-ghost" href="/admin/package-requests">Zurück zur Liste</a>
+</div>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+
+<div class="card">
+  <h2 style="margin-top:0">Anfrage-Details</h2>
+  <table>
+    <tr><th style="width:30%">Paket</th><td>
+      <strong><%= typeLabel(req.type) %></strong>
+      <% if (req.with_vku) { %><br><span class="muted">+ VKU-Kurs gewünscht</span><% } %>
+    </td></tr>
+    <tr><th>Standort-Wunsch</th><td><%= req.location_pref || '—' %></td></tr>
+    <% if (req.notes) { %>
+    <tr><th>Bemerkung</th><td style="white-space:pre-line"><%= req.notes %></td></tr>
+    <% } %>
+    <tr><th>Eingegangen</th><td><%= formatZurich(req.created_at) %></td></tr>
+    <tr><th>Status</th><td>
+      <% if (req.status === 'new') { %><span class="badge badge-green">neu</span>
+      <% } else if (req.status === 'contacted') { %><span class="badge badge-gray">kontaktiert</span>
+      <% } else if (req.status === 'closed') { %><span class="badge badge-gray">abgeschlossen</span>
+      <% } else { %><span class="badge badge-red">storniert</span><% } %>
+    </td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Persönliche Daten</h2>
+  <table>
+    <tr><th style="width:30%">Name</th><td><%= req.vname %> <%= req.nname %></td></tr>
+    <tr><th>Adresse</th><td><%= req.strasse %> <%= req.hnr %>, <%= req.plz %> <%= req.ort %></td></tr>
+    <tr><th>Geburtsdatum</th><td><%= req.geburt && new Date(req.geburt).toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich' }) %></td></tr>
+    <tr><th>E-Mail</th><td><a href="mailto:<%= req.email %>"><%= req.email %></a></td></tr>
+    <tr><th>Telefon</th><td><%= req.telefon || '—' %></td></tr>
+    <tr><th>Datenschutz/AGB</th><td>
+      Datenschutz: <%= req.consent_privacy ? '✓' : '✗' %> · AGB: <%= req.consent_terms ? '✓' : '✗' %>
+    </td></tr>
+    <tr><th>E-Mail (Kunde)</th><td>
+      <%= req.customer_mail_status %>
+      <% if (req.customer_mail_status !== 'sent') { %>
+        <form method="post" action="/admin/package-requests/<%= req.id %>/resend-mail?target=customer" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+    <tr><th>E-Mail (Schule)</th><td>
+      <%= req.school_mail_status %>
+      <% if (req.school_mail_status !== 'sent') { %>
+        <form method="post" action="/admin/package-requests/<%= req.id %>/resend-mail?target=school" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Lernfahrausweis</h2>
+  <% if (!req.files || req.files.length === 0) { %>
+    <p class="muted">Kein Upload vorhanden.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Dateiname</th><th>Typ</th><th>Grösse</th><th>Hochgeladen</th><th></th></tr></thead>
+      <tbody>
+        <% req.files.forEach(function(f) { %>
+          <tr>
+            <td><%= f.filename %></td>
+            <td><%= f.mime_type %></td>
+            <td><%= (f.size_bytes / 1024).toFixed(1) %> KB</td>
+            <td><%= formatZurich(f.created_at) %></td>
+            <td><a class="btn btn-ghost" href="/admin/package-requests/<%= req.id %>/files/<%= f.id %>" style="padding:6px 12px;font-size:13px">Herunterladen</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Verwaltung</h2>
+  <form method="post" action="/admin/package-requests/<%= req.id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="status">Status</label>
+    <select id="status" name="status">
+      <option value="new" <%= req.status === 'new' ? 'selected' : '' %>>neu</option>
+      <option value="contacted" <%= req.status === 'contacted' ? 'selected' : '' %>>kontaktiert</option>
+      <option value="closed" <%= req.status === 'closed' ? 'selected' : '' %>>abgeschlossen</option>
+      <option value="cancelled" <%= req.status === 'cancelled' ? 'selected' : '' %>>storniert</option>
+    </select>
+    <div class="checkbox-row">
+      <input type="checkbox" id="paid" name="paid" <%= req.paid ? 'checked' : '' %>>
+      <label for="paid">Bezahlt</label>
+    </div>
+    <label>Interne Notizen</label>
+    <textarea name="admin_notes" rows="4"><%= req.admin_notes || '' %></textarea>
+    <div style="margin-top:16px"><button class="btn" type="submit">Speichern</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Status-Aktionen</h2>
+  <div class="actions">
+    <% if (req.status !== 'cancelled') { %>
+      <form method="post" action="/admin/package-requests/<%= req.id %>/cancel">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Anfrage wirklich stornieren?')">Stornieren</button>
+      </form>
+    <% } %>
+    <% if (req.status === 'cancelled') { %>
+      <form method="post" action="/admin/package-requests/<%= req.id %>/hard-delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Anfrage WIRKLICH PHYSISCH LÖSCHEN? Inkl. Lernfahrausweis-Anhang. Unwiderruflich.')">Physisch löschen</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+<%- include('../_footer') %>
