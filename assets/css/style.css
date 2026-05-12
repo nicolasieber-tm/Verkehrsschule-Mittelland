@@ -24,6 +24,14 @@ h1, h2, h3, h4 {
   animation: shimmer 6s linear infinite;
 }
 
+/* Hellere Variante über dunklem Hintergrund (Hero) */
+#top .gradient-text {
+  background: linear-gradient(90deg, #279FF5 0%, #7CC4FA 50%, #DCEEFE 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 /* Weicher Farbverlauf-Hintergrund (Hero) */
 .blob {
   background: radial-gradient(closest-side, rgba(39, 159, 245, .45), transparent 70%);
