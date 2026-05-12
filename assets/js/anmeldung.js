@@ -2,9 +2,11 @@
 // Liest ?kurs-id=… aus URL, lädt Kursdaten, rendert Form, postet an Backend.
 
 (function () {
-  const API_BASE = window.VSM_API || (window.location.hostname === 'localhost'
-    ? 'http://localhost:3000'
-    : 'https://api.verkehrsschule-mittelland.ch');
+  const API_BASE = window.VSM_API || (
+    window.location.hostname === 'localhost' ? 'http://localhost:3000' :
+    window.location.hostname.endsWith('.up.railway.app') ? 'https://backend-production-dc0c4.up.railway.app' :
+    'https://api.verkehrsschule-mittelland.ch'
+  );
 
   const params = new URLSearchParams(window.location.search);
   const kursId = parseInt(params.get('kurs-id'), 10);

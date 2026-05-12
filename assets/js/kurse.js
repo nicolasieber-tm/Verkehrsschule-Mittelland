@@ -3,9 +3,11 @@
 // Reads data-location attribute on that element to filter.
 
 (function () {
-  const API_BASE = window.VSM_API || (window.location.hostname === 'localhost'
-    ? 'http://localhost:3000'
-    : 'https://api.verkehrsschule-mittelland.ch');
+  const API_BASE = window.VSM_API || (
+    window.location.hostname === 'localhost' ? 'http://localhost:3000' :
+    window.location.hostname.endsWith('.up.railway.app') ? 'https://backend-production-dc0c4.up.railway.app' :
+    'https://api.verkehrsschule-mittelland.ch'
+  );
 
   const container = document.getElementById('kurse-liste');
   if (!container) return;

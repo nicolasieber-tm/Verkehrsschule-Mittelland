@@ -41,11 +41,20 @@ export function requireAuth(handler) {
       return reply.redirect('/admin/login');
     }
     req.admin = admin;
-    // Enforce: must change pw OR setup 2FA before anything else
-    if (admin.must_change_password && req.url !== '/admin/profile') {
+    // Path-only (strip query string)
+    const path = (req.url || '').split('?')[0];
+    // Enforce: must change pw before anything else
+    if (admin.must_change_password
+        && path !== '/admin/profile'
+        && path !== '/admin/profile/password'
+        && path !== '/admin/logout') {
       return reply.redirect('/admin/profile?force=password');
     }
-    if (!admin.totp_enrolled_at && !req.url.startsWith('/admin/setup-2fa') && req.url !== '/admin/logout') {
+    // Enforce: must enrol 2FA (only after password change is done)
+    if (!admin.must_change_password
+        && !admin.totp_enrolled_at
+        && !path.startsWith('/admin/setup-2fa')
+        && path !== '/admin/logout') {
       return reply.redirect('/admin/setup-2fa');
     }
     return handler(req, reply);
