@@ -6,6 +6,10 @@ import {
 import { generateSecret, verifyToken, makeQrDataUrl } from '../services/totp.js';
 import { generateCodes, hashCodes, findMatchingHash } from '../services/recovery.js';
 import { requirePreAuth, requireAuth, loadAdmin } from '../middleware/auth.js';
+import {
+  setResetToken, findAdminByValidToken, clearResetToken,
+} from '../services/password-reset.js';
+import { sendPasswordResetMail } from '../services/mail.js';
 
 const PRE_AUTH_TTL_MS = 5 * 60 * 1000;
 
@@ -82,6 +86,131 @@ export async function adminAuthRoutes(app) {
 
     setPreAuth(req, admin);
     return reply.redirect('/admin/login/2fa');
+  });
+
+  // ---- PASSWORD RESET ----
+  const forgotLimiter = {
+    rateLimit: {
+      max: 3,
+      timeWindow: '1 hour',
+      keyGenerator: (req) => `${req.ip}:${req.body?.email?.toLowerCase()?.trim() || 'anon'}`,
+    },
+  };
+  const resetLimiter = {
+    rateLimit: { max: 10, timeWindow: '15 minutes' },
+  };
+
+  app.get('/forgot-password', async (req, reply) => {
+    return reply.view('forgot-password', { csrfToken: csrf(reply), error: null, info: null, email: '' });
+  });
+
+  app.post('/forgot-password', { config: forgotLimiter }, async (req, reply) => {
+    const schema = z.object({ email: z.string().email().max(200) });
+    const parsed = schema.safeParse(req.body);
+
+    const generic = () => reply.view('forgot-password', {
+      csrfToken: csrf(reply),
+      error: null,
+      info: 'Falls ein Account mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen verschickt. Prüfe dein Postfach (auch Spam).',
+      email: '',
+    });
+
+    if (!parsed.success) {
+      return reply.view('forgot-password', {
+        csrfToken: csrf(reply),
+        error: 'Bitte eine gültige E-Mail-Adresse eingeben.',
+        info: null,
+        email: req.body?.email || '',
+      });
+    }
+
+    const email = parsed.data.email.trim().toLowerCase();
+    const { rows } = await app.pg.query(
+      'select id, email from admins where email=$1 and disabled_at is null',
+      [email]
+    );
+    const admin = rows[0];
+
+    if (admin) {
+      try {
+        const { token } = await setResetToken(app.pg, admin.id);
+        const base = process.env.ADMIN_BASE_URL
+          || `${req.protocol}://${req.headers.host}`;
+        const resetUrl = `${base.replace(/\/$/, '')}/admin/reset-password?token=${encodeURIComponent(token)}`;
+        await sendPasswordResetMail(admin.email, resetUrl, req.log);
+      } catch (err) {
+        req.log.error({ err: err.message, adminId: admin.id }, 'password reset flow failed');
+        // Still respond generically — don't leak existence
+      }
+    } else {
+      req.log.info({ email }, 'forgot-password: no matching admin');
+    }
+
+    return generic();
+  });
+
+  app.get('/reset-password', { config: resetLimiter }, async (req, reply) => {
+    const token = String(req.query?.token || '');
+    const admin = await findAdminByValidToken(app.pg, token);
+    if (!admin) {
+      return reply.view('reset-password', {
+        csrfToken: csrf(reply),
+        error: 'Dieser Link ist ungültig oder abgelaufen. Bitte fordere einen neuen an.',
+        info: null,
+        token: '',
+      });
+    }
+    return reply.view('reset-password', { csrfToken: csrf(reply), error: null, info: null, token });
+  });
+
+  app.post('/reset-password', { config: resetLimiter }, async (req, reply) => {
+    const schema = z.object({
+      token: z.string().min(10).max(200),
+      new: z.string().min(12).max(200),
+      confirm: z.string().min(12).max(200),
+    });
+    const parsed = schema.safeParse(req.body);
+
+    const renderErr = (msg, token = '') => reply.view('reset-password', {
+      csrfToken: csrf(reply), error: msg, info: null, token,
+    });
+
+    if (!parsed.success) return renderErr('Ungültige Eingabe. Passwort muss mindestens 12 Zeichen lang sein.', req.body?.token || '');
+    if (parsed.data.new !== parsed.data.confirm) return renderErr('Die Passwörter stimmen nicht überein.', parsed.data.token);
+
+    const admin = await findAdminByValidToken(app.pg, parsed.data.token);
+    if (!admin) {
+      return reply.view('reset-password', {
+        csrfToken: csrf(reply),
+        error: 'Dieser Link ist ungültig oder abgelaufen. Bitte fordere einen neuen an.',
+        info: null,
+        token: '',
+      });
+    }
+
+    const newHash = await hashPassword(parsed.data.new);
+    await app.pg.query(
+      `update admins
+          set password_hash=$1,
+              must_change_password=false,
+              reset_token_hash=null,
+              reset_token_expires_at=null
+        where id=$2`,
+      [newHash, admin.id]
+    );
+    // Invalidate all sessions of this admin (defence-in-depth)
+    await app.pg.query(
+      `delete from session where sess::jsonb -> 'adminId' = to_jsonb($1::int)`,
+      [admin.id]
+    ).catch(() => { /* best-effort */ });
+
+    req.log.info({ adminId: admin.id }, 'password reset via token');
+    return reply.view('forgot-password', {
+      csrfToken: csrf(reply),
+      error: null,
+      info: 'Passwort wurde gesetzt. Du kannst dich jetzt mit dem neuen Passwort anmelden.',
+      email: '',
+    });
   });
 
   // ---- 2FA ----

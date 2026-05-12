@@ -58,6 +58,27 @@ async function sendOne({ to, subject, html, text, replyTo }) {
 }
 
 /**
+ * Send a password-reset mail to a single admin recipient.
+ * Throws on hard failure (caller decides whether to leak — currently we don't).
+ */
+export async function sendPasswordResetMail(to, resetUrl, log) {
+  const html = await renderTemplate('password-reset.html.ejs', { resetUrl });
+  const text = await renderTemplate('password-reset.txt.ejs', { resetUrl });
+  try {
+    const r = await sendOne({
+      to,
+      subject: 'Passwort zurücksetzen — VSM Admin',
+      html, text,
+    });
+    log?.info({ to }, 'password reset mail sent');
+    return r;
+  } catch (err) {
+    log?.error({ err: err.message }, 'password reset mail failed');
+    throw err;
+  }
+}
+
+/**
  * Send both confirmation mails for a registration.
  * Updates DB with per-target status (sent / failed + error).
  * Never throws — failures are stored in DB for admin to retry.
