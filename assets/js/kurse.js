@@ -174,7 +174,7 @@
       cta.textContent = 'Ausgebucht';
     } else {
       cta.className = 'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-brand-500 text-white font-bold text-sm hover:bg-brand-600 transition whitespace-nowrap shadow-[0_4px_14px_rgba(39,159,245,0.4)]';
-      cta.href = `anmeldung-nothelferkurs.html?kurs-id=${encodeURIComponent(c.id)}`;
+      cta.href = `/anmeldung-nothelferkurs?kurs-id=${encodeURIComponent(c.id)}`;
       cta.textContent = 'Jetzt anmelden';
       cta.append(svgIcon('M5 12h14 M12 5l7 7-7 7', 'w-4 h-4'));
     }
