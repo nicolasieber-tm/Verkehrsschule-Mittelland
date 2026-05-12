@@ -8,11 +8,11 @@
 	root * /app
 	encode gzip zstd
 
+	@rootIndex path /index.html /index
+	redir @rootIndex / 301
+
 	@htmlExt path_regexp htmlext ^/(.+)\.html$
 	redir @htmlExt /{re.htmlext.1} 301
-
-	@rootIndex path /index.html
-	redir @rootIndex / 301
 
 	try_files {path} {path}.html {path}/index.html
 
