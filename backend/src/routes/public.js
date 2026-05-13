@@ -5,6 +5,7 @@ import {
 } from '../services/package-requests.js';
 import { sendRegistrationMails, sendPackageRequestMails, sendVoucherOrderMails } from '../services/mail.js';
 import { voucherOrderInputSchema, createVoucherOrder } from '../services/vouchers.js';
+import { loadReviews } from '../services/google-reviews.js';
 
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
   .split(',').map(s => s.trim()).filter(Boolean);
@@ -16,6 +17,20 @@ function originOk(req) {
 }
 
 export async function publicRoutes(app) {
+
+  // ---- GET /api/reviews ----
+  app.get('/reviews', {
+    config: { rateLimit: { max: 120, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    try {
+      const data = await loadReviews();
+      reply.header('Cache-Control', 'public, max-age=3600');
+      return data;
+    } catch (err) {
+      app.log.error({ err: err.message }, 'reviews: failed to load');
+      return reply.code(500).send({ error: 'Failed to load reviews' });
+    }
+  });
 
   // ---- GET /api/courses?location=… ----
   app.get('/courses', {

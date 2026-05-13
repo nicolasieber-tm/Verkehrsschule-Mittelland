@@ -197,6 +197,10 @@ async function buildApp() {
   const { startAnonymizer } = await import('./services/anonymizer.js');
   startAnonymizer(pool, app.log);
 
+  // Google Reviews weekly sync
+  const { startReviewSync } = await import('./services/google-reviews.js');
+  startReviewSync(app.log);
+
   return app;
 }
 
