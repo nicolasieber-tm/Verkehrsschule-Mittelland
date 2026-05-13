@@ -666,30 +666,33 @@
       </div>
 
       <!-- Pricing 5: Starter-Box (col-span-2 als Hero-Feature-Card mit Produktbild → Anfrage) -->
-      <div class="reveal md:col-span-2 lg:col-span-2 bg-gradient-to-br from-ink-200 via-brand-200/40 to-ink-200 text-ink-900 rounded-3xl lift relative overflow-hidden shadow-2xl border-2 border-brand-500 grid lg:grid-cols-[1fr_auto] gap-0">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-500/20 blur-3xl pointer-events-none"></div>
+      <div class="reveal md:col-span-2 lg:col-span-2 bg-ink-900 text-white rounded-3xl lift relative overflow-visible shadow-2xl ring-4 ring-brand-500/40 border-2 border-brand-500 grid lg:grid-cols-[1fr_auto] gap-0 lg:scale-[1.02] mt-4" style="box-shadow: 0 25px 50px -12px rgba(0,0,0,.35), 0 0 60px -10px rgba(59,130,246,.55);">
+        <div class="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+          <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-500/30 blur-3xl"></div>
+          <div class="absolute -bottom-32 -left-20 w-80 h-80 rounded-full bg-brand-400/15 blur-3xl"></div>
+        </div>
 
         <div class="relative p-6 sm:p-8 flex flex-col">
           <div class="flex items-center gap-3 mb-4 flex-wrap">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold uppercase tracking-wide">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold uppercase tracking-wide shadow-md shadow-brand-500/40">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Komplettpaket
             </span>
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wide">Spare CHF 115</span>
           </div>
-          <h3 class="font-display font-extrabold text-3xl sm:text-4xl mb-1 text-ink-900">Starter-Box</h3>
-          <p class="text-ink-700 mb-5">All-in-One Premium-Einstieg zum Führerausweis</p>
-          <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-ink-800 mb-6">
-            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> Nothelferkurs <span class="text-ink-600">(inkl. Ausweis)</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> iTheorie Premium-App</li>
-            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> VKU-Kurs <span class="text-ink-600">(inkl. Unterlagen)</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"></i> Persönliche Beratung</li>
+          <h3 class="font-display font-extrabold text-3xl sm:text-4xl mb-1 text-white">Starter-Box</h3>
+          <p class="text-ink-200 mb-5">All-in-One Premium-Einstieg zum Führerausweis</p>
+          <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-ink-100 mb-6">
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5"></i><span>Nothelferkurs<br><span class="text-ink-300 text-sm">(inkl. Ausweis)</span></span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5"></i><span>iTheorie Premium-App</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5"></i><span>VKU-Kurs<br><span class="text-ink-300 text-sm">(inkl. Unterlagen)</span></span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5"></i><span>Persönliche Beratung</span></li>
           </ul>
           <div class="flex items-end gap-4 flex-wrap mt-auto">
             <div>
-              <div class="text-sm text-ink-600 line-through leading-none mb-1">CHF 410</div>
-              <div class="font-display font-extrabold text-5xl leading-none text-brand-500">CHF 295</div>
+              <div class="text-sm text-ink-400 line-through leading-none mb-1">CHF 410</div>
+              <div class="font-display font-extrabold text-5xl leading-none text-brand-400">CHF 295</div>
             </div>
-            <a href="/anfrage-starterbox" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-500 text-white font-bold hover:bg-brand-600 transition shadow-lg">
+            <a href="/anfrage-starterbox" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-500 text-white font-bold hover:bg-brand-600 hover:scale-[1.03] transition shadow-md shadow-brand-500/20">
               Starter-Box anfragen <i data-lucide="arrow-right" class="w-5 h-5"></i>
             </a>
           </div>
