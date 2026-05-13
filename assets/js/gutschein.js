@@ -104,7 +104,11 @@
           <p class="mb-3">Du erhältst gleich eine Bestätigungsmail. Die Rechnung folgt separat per E-Mail. Falls keine Mail ankommt, schau bitte im Spam-Ordner.</p>
           <a href="/" class="inline-block mt-2 px-6 py-3 rounded-full bg-brand-500 text-white font-bold hover:bg-brand-600 transition">Zur Startseite</a>
         `;
-        successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Warte einen Frame, damit das Layout nach form.display=none stabil ist,
+        // sonst scrollt der Browser auf Basis der alten Position zu weit.
+        requestAnimationFrame(() => {
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
         return;
       }
 
