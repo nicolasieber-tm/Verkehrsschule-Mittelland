@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { formatZurich } from './courses.js';
 import { typeLabel } from './package-requests.js';
+import { hasSeparateShipping, shippingAddress } from './vouchers.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MAILS_DIR = join(__dirname, '..', 'mails');
@@ -225,6 +226,84 @@ export async function sendPackageRequestMails(pool, requestId, log) {
         await pool.query(
           `update package_requests set school_mail_status='failed', school_mail_error=$1, updated_at=now() where id=$2`,
           [String(err.message || err).slice(0, 500), requestId]
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Send confirmation + school-notification mails for a voucher_order.
+ * Updates DB per-target status (sent / failed + error). Never throws.
+ */
+export async function sendVoucherOrderMails(pool, orderId, log) {
+  const { rows } = await pool.query(
+    `select * from voucher_orders where id = $1`,
+    [orderId]
+  );
+  const o = rows[0];
+  if (!o) { log?.warn({ orderId }, 'mail: voucher_order not found'); return; }
+
+  const adminBase = process.env.ADMIN_BASE_URL || 'https://admin.verkehrsschule-mittelland.ch';
+  const ctx = {
+    order: o,
+    rechnungName: `${o.rvname} ${o.rnname}`,
+    shipping: shippingAddress(o),
+    hasSeparateShipping: hasSeparateShipping(o),
+    adminUrl: `${adminBase.replace(/\/+$/, '')}/admin/vouchers/${o.id}`,
+    createdAtPretty: formatZurich(o.created_at),
+  };
+
+  // --- Customer confirmation ---
+  if (o.customer_mail_status !== 'sent') {
+    try {
+      const html = await renderTemplate('voucher-customer.html.ejs', ctx);
+      const text = await renderTemplate('voucher-customer.txt.ejs', ctx);
+      await sendOne({
+        to: o.email,
+        subject: `Gutschein-Bestellung bestätigt — CHF ${o.betrag_chf}`,
+        html, text,
+        replyTo: process.env.MAIL_TO_SCHOOL,
+      });
+      await pool.query(
+        `update voucher_orders set customer_mail_status='sent', customer_mail_error=null, updated_at=now() where id=$1`,
+        [orderId]
+      );
+      log?.info({ orderId }, 'voucher customer mail sent');
+    } catch (err) {
+      log?.error({ orderId, err: err.message }, 'voucher customer mail failed');
+      await pool.query(
+        `update voucher_orders set customer_mail_status='failed', customer_mail_error=$1, updated_at=now() where id=$2`,
+        [String(err.message || err).slice(0, 500), orderId]
+      );
+    }
+  }
+
+  // --- School notification ---
+  if (o.school_mail_status !== 'sent') {
+    const schoolTo = process.env.MAIL_TO_SCHOOL;
+    if (!schoolTo) {
+      log?.warn({ orderId }, 'MAIL_TO_SCHOOL not set, skipping voucher school mail');
+    } else {
+      try {
+        const html = await renderTemplate('voucher-school.html.ejs', ctx);
+        const text = await renderTemplate('voucher-school.txt.ejs', ctx);
+        await sendOne({
+          to: schoolTo,
+          subject: `Neue Gutschein-Bestellung: CHF ${o.betrag_chf} — ${ctx.rechnungName}`,
+          html, text,
+          replyTo: o.email,
+        });
+        await pool.query(
+          `update voucher_orders set school_mail_status='sent', school_mail_error=null, updated_at=now() where id=$1`,
+          [orderId]
+        );
+        log?.info({ orderId }, 'voucher school mail sent');
+      } catch (err) {
+        log?.error({ orderId, err: err.message }, 'voucher school mail failed');
+        await pool.query(
+          `update voucher_orders set school_mail_status='failed', school_mail_error=$1, updated_at=now() where id=$2`,
+          [String(err.message || err).slice(0, 500), orderId]
         );
       }
     }

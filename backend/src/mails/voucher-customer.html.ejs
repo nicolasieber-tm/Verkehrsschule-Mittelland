@@ -1,0 +1,20 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2 style="color:#279ff5">Gutschein-Bestellung erhalten</h2>
+<p>Hallo <%= rechnungName %></p>
+<p>Vielen Dank für deine Gutschein-Bestellung bei der Verkehrsschule Mittelland. Wir verschicken den Gutschein in den nächsten Tagen per Post. Die Rechnung folgt separat per E-Mail.</p>
+<table style="border-collapse:collapse;width:100%;margin:16px 0">
+  <tr><td style="padding:6px 0;color:#6a7180">Betrag:</td><td style="padding:6px 0"><strong>CHF <%= order.betrag_chf %></strong></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Gutschein für:</td><td style="padding:6px 0"><%= order.fuer %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Gutschein von:</td><td style="padding:6px 0"><%= order.von %></td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Lieferadresse:</td><td style="padding:6px 0">
+    <%= shipping.vname %> <%= shipping.nname %><br>
+    <%= shipping.strasse %> <%= shipping.hnr %><br>
+    <%= shipping.plz %> <%= shipping.ort %>
+  </td></tr>
+</table>
+<div style="background:#fff5e6;border-left:4px solid #f5a623;padding:12px 16px;margin:16px 0;border-radius:4px">
+  Fragen? Antworte einfach auf diese E-Mail — oder schreib uns auf WhatsApp: <strong>+41 79 136 16 16</strong>.
+</div>
+<p>Bis bald!<br>Verkehrsschule Mittelland</p>
+</body></html>

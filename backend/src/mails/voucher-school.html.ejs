@@ -1,0 +1,25 @@
+<!doctype html>
+<html><body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d23;max-width:600px;margin:0 auto;padding:24px">
+<h2 style="color:#279ff5">Neue Gutschein-Bestellung</h2>
+<p><strong>CHF <%= order.betrag_chf %></strong> für <strong><%= order.fuer %></strong> (von <%= order.von %>)</p>
+
+<h3 style="margin-top:24px">Rechnungsadresse</h3>
+<table style="border-collapse:collapse;width:100%">
+  <tr><td style="padding:4px 0;color:#6a7180;width:140px">Name:</td><td style="padding:4px 0"><%= order.rvname %> <%= order.rnname %></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Adresse:</td><td style="padding:4px 0"><%= order.rstrasse %> <%= order.rhnr %>, <%= order.rplz %> <%= order.rort %></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">E-Mail:</td><td style="padding:4px 0"><a href="mailto:<%= order.email %>"><%= order.email %></a></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Telefon:</td><td style="padding:4px 0"><%= order.telefon || '—' %></td></tr>
+</table>
+
+<h3 style="margin-top:24px">Lieferadresse</h3>
+<% if (hasSeparateShipping) { %>
+<table style="border-collapse:collapse;width:100%">
+  <tr><td style="padding:4px 0;color:#6a7180;width:140px">Name:</td><td style="padding:4px 0"><%= shipping.vname %> <%= shipping.nname %></td></tr>
+  <tr><td style="padding:4px 0;color:#6a7180">Adresse:</td><td style="padding:4px 0"><%= shipping.strasse %> <%= shipping.hnr %>, <%= shipping.plz %> <%= shipping.ort %></td></tr>
+</table>
+<% } else { %>
+<p style="color:#6a7180">Identisch mit Rechnungsadresse.</p>
+<% } %>
+
+<p style="margin-top:24px"><a href="<%= adminUrl %>" style="display:inline-block;background:#279ff5;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none">Im Admin öffnen</a></p>
+</body></html>

@@ -1,0 +1,22 @@
+Gutschein-Bestellung erhalten
+
+Hallo <%= rechnungName %>
+
+Vielen Dank für deine Gutschein-Bestellung bei der Verkehrsschule Mittelland.
+Wir verschicken den Gutschein in den nächsten Tagen per Post. Die Rechnung
+folgt separat per E-Mail.
+
+Betrag:          CHF <%= order.betrag_chf %>
+Gutschein für:   <%= order.fuer %>
+Gutschein von:   <%= order.von %>
+
+Lieferadresse:
+  <%= shipping.vname %> <%= shipping.nname %>
+  <%= shipping.strasse %> <%= shipping.hnr %>
+  <%= shipping.plz %> <%= shipping.ort %>
+
+Fragen? Antworte einfach auf diese E-Mail oder schreib uns auf WhatsApp:
++41 79 136 16 16
+
+Bis bald!
+Verkehrsschule Mittelland

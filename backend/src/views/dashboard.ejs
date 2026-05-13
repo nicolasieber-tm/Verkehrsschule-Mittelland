@@ -66,4 +66,35 @@
   <% } %>
 </div>
 <% } %>
+
+<% if (typeof recentVouchers !== 'undefined') { %>
+<div class="card">
+  <h2 style="margin-top:0">Neueste Gutschein-Bestellungen</h2>
+  <% if (recentVouchers.length === 0) { %>
+    <p class="muted">Noch keine Gutschein-Bestellungen.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Empfänger</th><th>Betrag</th><th>Besteller</th><th>Status</th><th>Eingegangen</th></tr></thead>
+      <tbody>
+        <% recentVouchers.forEach(function(v) { %>
+          <tr>
+            <td><a href="/admin/vouchers/<%= v.id %>"><%= v.fuer %></a></td>
+            <td>CHF <%= v.betrag_chf %></td>
+            <td><%= v.rvname %> <%= v.rnname %></td>
+            <td>
+              <% if (v.status === 'new') { %><span class="badge badge-green">neu</span>
+              <% } else if (v.status === 'shipped') { %><span class="badge badge-green">versendet</span>
+              <% } else if (v.status === 'cancelled') { %><span class="badge badge-red">storniert</span>
+              <% } else { %><span class="badge badge-gray"><%= v.status %></span><% } %>
+              <% if (v.paid) { %><span class="badge badge-green" style="margin-left:4px">bezahlt</span><% } %>
+            </td>
+            <td><%= formatZurich(v.created_at) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <p style="margin-top:12px"><a href="/admin/vouchers">Alle Gutscheine →</a></p>
+  <% } %>
+</div>
+<% } %>
 <%- include('_footer') %>

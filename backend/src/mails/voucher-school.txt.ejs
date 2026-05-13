@@ -1,0 +1,18 @@
+Neue Gutschein-Bestellung
+
+CHF <%= order.betrag_chf %> für <%= order.fuer %> (von <%= order.von %>)
+
+Rechnungsadresse:
+  <%= order.rvname %> <%= order.rnname %>
+  <%= order.rstrasse %> <%= order.rhnr %>
+  <%= order.rplz %> <%= order.rort %>
+  E-Mail:  <%= order.email %>
+  Telefon: <%= order.telefon || '—' %>
+
+Lieferadresse:
+<% if (hasSeparateShipping) { %>  <%= shipping.vname %> <%= shipping.nname %>
+  <%= shipping.strasse %> <%= shipping.hnr %>
+  <%= shipping.plz %> <%= shipping.ort %>
+<% } else { %>  identisch mit Rechnungsadresse
+<% } %>
+Im Admin öffnen: <%= adminUrl %>

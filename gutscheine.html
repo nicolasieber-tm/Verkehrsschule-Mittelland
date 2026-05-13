@@ -256,7 +256,13 @@
     </h2>
     <p class="text-lg text-ink-500 mb-10">In 60 Sekunden ausgefüllt — wir verschicken den Gutschein per Post an die angegebene Lieferadresse.</p>
 
-    <form action="fng_weiteres_gutscheine_insert.php" method="post" class="bg-white rounded-3xl p-6 sm:p-10 shadow-soft space-y-8">
+    <div id="success-box" style="display:none" class="bg-white rounded-3xl p-6 sm:p-10 shadow-soft"></div>
+    <div id="form-error" style="display:none" class="mb-6 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm"></div>
+
+    <form id="gutschein-form" novalidate class="bg-white rounded-3xl p-6 sm:p-10 shadow-soft space-y-8">
+      <!-- Honeypot + Time-trap -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true">
+      <input type="hidden" id="field-ts" name="ts" value="">
       <!-- Betrag -->
       <div>
         <label class="block font-display font-extrabold text-lg text-ink-900 mb-4">Betrag wählen</label>
@@ -331,6 +337,18 @@
           <input type="email" name="email" placeholder="E-Mail-Adresse" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none" required>
           <input type="text" name="telefon" placeholder="Telefonnummer (optional)" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
         </div>
+      </div>
+
+      <!-- Datenschutz / AGB -->
+      <div class="space-y-3 pt-2">
+        <label class="flex items-start gap-3 text-sm text-ink-700">
+          <input type="checkbox" name="consent_privacy" class="mt-0.5 w-4 h-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500" required>
+          <span>Ich habe die <a href="datenschutz.html" target="_blank" class="text-brand-600 underline">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
+        </label>
+        <label class="flex items-start gap-3 text-sm text-ink-700">
+          <input type="checkbox" name="consent_terms" class="mt-0.5 w-4 h-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500" required>
+          <span>Ich akzeptiere die <a href="agb.html" target="_blank" class="text-brand-600 underline">AGB</a>.</span>
+        </label>
       </div>
 
       <!-- Submit -->
@@ -426,5 +444,6 @@
 </a>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/gutschein.js" defer></script>
 </body>
 </html>

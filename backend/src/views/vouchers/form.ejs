@@ -1,0 +1,117 @@
+<%- include('../_header', { title: 'Gutschein bearbeiten — VSM Admin' }) %>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <h1 style="margin:0">Gutschein-Bestellung #<%= order.id %></h1>
+  <a class="btn btn-ghost" href="/admin/vouchers">Zurück zur Liste</a>
+</div>
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (success) { %><div class="success"><%= success %></div><% } %>
+
+<div class="card">
+  <h2 style="margin-top:0">Bestelldetails</h2>
+  <table>
+    <tr><th style="width:30%">Betrag</th><td><strong style="font-size:18px">CHF <%= order.betrag_chf %></strong></td></tr>
+    <tr><th>Gutschein für</th><td><strong><%= order.fuer %></strong></td></tr>
+    <tr><th>Gutschein von</th><td><%= order.von %></td></tr>
+    <tr><th>Eingegangen</th><td><%= formatZurich(order.created_at) %></td></tr>
+    <tr><th>Status</th><td>
+      <% if (order.status === 'new') { %><span class="badge badge-green">neu</span>
+      <% } else if (order.status === 'contacted') { %><span class="badge badge-gray">kontaktiert</span>
+      <% } else if (order.status === 'shipped') { %><span class="badge badge-green">versendet</span>
+      <% } else if (order.status === 'closed') { %><span class="badge badge-gray">abgeschlossen</span>
+      <% } else { %><span class="badge badge-red">storniert</span><% } %>
+    </td></tr>
+    <% if (order.shipped_at) { %>
+    <tr><th>Versendet am</th><td><%= formatZurich(order.shipped_at) %></td></tr>
+    <% } %>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Rechnungsadresse</h2>
+  <table>
+    <tr><th style="width:30%">Name</th><td><%= order.rvname %> <%= order.rnname %></td></tr>
+    <tr><th>Adresse</th><td><%= order.rstrasse %> <%= order.rhnr %>, <%= order.rplz %> <%= order.rort %></td></tr>
+    <tr><th>E-Mail</th><td><a href="mailto:<%= order.email %>"><%= order.email %></a></td></tr>
+    <tr><th>Telefon</th><td><%= order.telefon || '—' %></td></tr>
+    <tr><th>Datenschutz/AGB</th><td>
+      Datenschutz: <%= order.consent_privacy ? '✓' : '✗' %> · AGB: <%= order.consent_terms ? '✓' : '✗' %>
+    </td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Lieferadresse</h2>
+  <% if (hasSeparateShipping) { %>
+    <table>
+      <tr><th style="width:30%">Name</th><td><%= shipping.vname %> <%= shipping.nname %></td></tr>
+      <tr><th>Adresse</th><td><%= shipping.strasse %> <%= shipping.hnr %>, <%= shipping.plz %> <%= shipping.ort %></td></tr>
+    </table>
+  <% } else { %>
+    <p class="muted">Identisch mit Rechnungsadresse.</p>
+  <% } %>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">E-Mail-Versand</h2>
+  <table>
+    <tr><th style="width:30%">E-Mail (Kunde)</th><td>
+      <%= order.customer_mail_status %>
+      <% if (order.customer_mail_status !== 'sent') { %>
+        <form method="post" action="/admin/vouchers/<%= order.id %>/resend-mail?target=customer" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+    <tr><th>E-Mail (Schule)</th><td>
+      <%= order.school_mail_status %>
+      <% if (order.school_mail_status !== 'sent') { %>
+        <form method="post" action="/admin/vouchers/<%= order.id %>/resend-mail?target=school" style="display:inline;margin-left:8px">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn btn-ghost" type="submit">Erneut senden</button>
+        </form>
+      <% } %>
+    </td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Verwaltung</h2>
+  <form method="post" action="/admin/vouchers/<%= order.id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="status">Status</label>
+    <select id="status" name="status">
+      <option value="new" <%= order.status === 'new' ? 'selected' : '' %>>neu</option>
+      <option value="contacted" <%= order.status === 'contacted' ? 'selected' : '' %>>kontaktiert</option>
+      <option value="shipped" <%= order.status === 'shipped' ? 'selected' : '' %>>versendet</option>
+      <option value="closed" <%= order.status === 'closed' ? 'selected' : '' %>>abgeschlossen</option>
+      <option value="cancelled" <%= order.status === 'cancelled' ? 'selected' : '' %>>storniert</option>
+    </select>
+    <div class="checkbox-row">
+      <input type="checkbox" id="paid" name="paid" <%= order.paid ? 'checked' : '' %>>
+      <label for="paid">Bezahlt</label>
+    </div>
+    <label>Interne Notizen</label>
+    <textarea name="admin_notes" rows="4"><%= order.admin_notes || '' %></textarea>
+    <div style="margin-top:16px"><button class="btn" type="submit">Speichern</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Status-Aktionen</h2>
+  <div class="actions">
+    <% if (order.status !== 'cancelled') { %>
+      <form method="post" action="/admin/vouchers/<%= order.id %>/cancel">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Bestellung wirklich stornieren?')">Stornieren</button>
+      </form>
+    <% } %>
+    <% if (order.status === 'cancelled') { %>
+      <form method="post" action="/admin/vouchers/<%= order.id %>/hard-delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Bestellung WIRKLICH PHYSISCH LÖSCHEN? Unwiderruflich.')">Physisch löschen</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+<%- include('../_footer') %>

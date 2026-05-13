@@ -3,7 +3,8 @@ import {
   packageRequestInputSchema, createPackageRequest,
   isValidMagic, ALLOWED_FILE_MIME, MAX_FILE_BYTES,
 } from '../services/package-requests.js';
-import { sendRegistrationMails, sendPackageRequestMails } from '../services/mail.js';
+import { sendRegistrationMails, sendPackageRequestMails, sendVoucherOrderMails } from '../services/mail.js';
+import { voucherOrderInputSchema, createVoucherOrder } from '../services/vouchers.js';
 
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
   .split(',').map(s => s.trim()).filter(Boolean);
@@ -131,6 +132,55 @@ export async function publicRoutes(app) {
 
   // Register multipart-based package request route on the same plugin scope
   await packageRequestRoute(app);
+
+  // ---- POST /api/voucher-orders ----
+  app.post('/voucher-orders', {
+    config: { rateLimit: { max: 20, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    if (!originOk(req)) {
+      app.log.warn({ origin: req.headers.origin }, 'rejected POST /api/voucher-orders: bad origin');
+      return reply.code(403).send({ error: 'Forbidden origin' });
+    }
+
+    const parsed = voucherOrderInputSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return reply.code(400).send({
+        error: 'invalid_input',
+        details: parsed.error.issues.map(i => ({ path: i.path.join('.'), message: i.message })),
+      });
+    }
+    const data = parsed.data;
+
+    if (data.website && data.website.length > 0) {
+      app.log.warn({ ip: req.ip }, 'honeypot triggered (voucher-order)');
+      return reply.code(400).send({ error: 'invalid_input' });
+    }
+    if (data.ts) {
+      const elapsedMs = Date.now() - data.ts;
+      if (elapsedMs < 2000 || elapsedMs > 30 * 60 * 1000) {
+        app.log.warn({ elapsedMs }, 'time-trap triggered (voucher-order)');
+        return reply.code(400).send({ error: 'invalid_input' });
+      }
+    }
+    if (!data.consent_privacy || !data.consent_terms) {
+      return reply.code(400).send({ error: 'consent_required' });
+    }
+
+    try {
+      const result = await createVoucherOrder(app.pg, data, {
+        ip: req.ip,
+        userAgent: req.headers['user-agent'],
+      });
+      app.log.info({ orderId: result.orderId, betrag: data.betrag_chf }, 'voucher order created');
+      sendVoucherOrderMails(app.pg, result.orderId, app.log).catch(err => {
+        app.log.error({ err: err.message, orderId: result.orderId }, 'voucher mail send failed');
+      });
+      return reply.code(201).send({ ok: true, orderId: result.orderId });
+    } catch (err) {
+      app.log.error({ err: err.message }, 'unhandled error in /voucher-orders');
+      return reply.code(500).send({ error: 'internal' });
+    }
+  });
 }
 
 async function sendMailsAsync(app, registrationId) {

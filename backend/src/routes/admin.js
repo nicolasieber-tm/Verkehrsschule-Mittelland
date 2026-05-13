@@ -20,6 +20,12 @@ import {
   packageRequestsToCsv, editInputSchema as packageRequestEditSchema,
 } from '../services/admin-package-requests.js';
 import { typeLabel as packageTypeLabel } from '../services/package-requests.js';
+import {
+  listVoucherOrders, getVoucherOrder,
+  updateVoucherOrder, cancelVoucherOrder, hardDeleteVoucherOrder,
+  voucherOrdersToCsv, editInputSchema as voucherEditSchema,
+} from '../services/admin-vouchers.js';
+import { hasSeparateShipping, shippingAddress } from '../services/vouchers.js';
 
 export async function adminRoutes(app) {
 
@@ -37,6 +43,10 @@ export async function adminRoutes(app) {
       `select id, type, with_vku, vname, nname, status, created_at
          from package_requests order by created_at desc limit 10`
     );
+    const recentVouchers = await app.pg.query(
+      `select id, betrag_chf, fuer, von, rvname, rnname, status, paid, created_at
+         from voucher_orders order by created_at desc limit 10`
+    );
     return reply.view('dashboard', {
       csrfToken: reply.generateCsrf(),
       currentAdmin: req.admin,
@@ -44,6 +54,7 @@ export async function adminRoutes(app) {
       upcoming: upcoming.rows,
       recentRegs: recentRegs.rows,
       recentRequests: recentRequests.rows,
+      recentVouchers: recentVouchers.rows,
       typeLabel: packageTypeLabel,
       formatZurich,
     });
@@ -476,6 +487,91 @@ export async function adminRoutes(app) {
     const { sendPackageRequestMails } = await import('../services/mail.js');
     await sendPackageRequestMails(app.pg, id, app.log);
     return reply.redirect(`/admin/package-requests/${id}?success=${encodeURIComponent('Mail erneut versendet.')}`);
+  }));
+
+  // ============= VOUCHER ORDERS (Gutscheine) =============
+
+  app.get('/vouchers', requireAuth(async (req, reply) => {
+    const status = req.query.status || null;
+    const rows = await listVoucherOrders(app.pg, { status });
+    return reply.view('vouchers/list', {
+      csrfToken: reply.generateCsrf(),
+      currentAdmin: req.admin, active: 'vouchers',
+      orders: rows,
+      filterStatus: status,
+      formatZurich,
+      success: req.query.success || null,
+      error: req.query.error || null,
+    });
+  }));
+
+  app.get('/vouchers.csv', requireAuth(async (req, reply) => {
+    const status = req.query.status || null;
+    const rows = await listVoucherOrders(app.pg, { status });
+    const csv = voucherOrdersToCsv(rows);
+    const stamp = new Date().toISOString().slice(0, 10);
+    reply.header('Content-Type', 'text/csv; charset=utf-8');
+    reply.header('Content-Disposition', `attachment; filename="gutscheine-${stamp}.csv"`);
+    return reply.send('﻿' + csv);
+  }));
+
+  app.get('/vouchers/:id', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const o = await getVoucherOrder(app.pg, id);
+    if (!o) return reply.code(404).send('Bestellung nicht gefunden');
+    return reply.view('vouchers/form', {
+      csrfToken: reply.generateCsrf(),
+      currentAdmin: req.admin, active: 'vouchers',
+      order: o,
+      shipping: shippingAddress(o),
+      hasSeparateShipping: hasSeparateShipping(o),
+      formatZurich,
+      success: req.query.success || null,
+      error: req.query.error || null,
+    });
+  }));
+
+  app.post('/vouchers/:id', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const existing = await getVoucherOrder(app.pg, id);
+    if (!existing) return reply.code(404).send('Bestellung nicht gefunden');
+    const parsed = voucherEditSchema.safeParse({
+      status: req.body.status,
+      paid: req.body.paid,
+      admin_notes: req.body.admin_notes,
+    });
+    if (!parsed.success) {
+      return reply.redirect(`/admin/vouchers/${id}?error=${encodeURIComponent('Ungültige Eingabe.')}`);
+    }
+    await updateVoucherOrder(app.pg, id, parsed.data);
+    return reply.redirect(`/admin/vouchers/${id}?success=${encodeURIComponent('Gespeichert.')}`);
+  }));
+
+  app.post('/vouchers/:id/cancel', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const changed = await cancelVoucherOrder(app.pg, id);
+    const msg = changed ? 'Bestellung storniert.' : 'Bestellung war bereits storniert.';
+    return reply.redirect(`/admin/vouchers/${id}?success=${encodeURIComponent(msg)}`);
+  }));
+
+  app.post('/vouchers/:id/hard-delete', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    try {
+      await hardDeleteVoucherOrder(app.pg, id);
+      return reply.redirect(`/admin/vouchers?success=${encodeURIComponent('Bestellung gelöscht.')}`);
+    } catch (err) {
+      return reply.redirect(`/admin/vouchers/${id}?error=${encodeURIComponent(err.userMessage || 'Fehler')}`);
+    }
+  }));
+
+  app.post('/vouchers/:id/resend-mail', requireAuth(async (req, reply) => {
+    const id = Number(req.params.id);
+    const target = req.query.target === 'school' ? 'school' : 'customer';
+    const col = target === 'school' ? 'school_mail_status' : 'customer_mail_status';
+    await app.pg.query(`update voucher_orders set ${col}='pending', updated_at=now() where id=$1`, [id]);
+    const { sendVoucherOrderMails } = await import('../services/mail.js');
+    await sendVoucherOrderMails(app.pg, id, app.log);
+    return reply.redirect(`/admin/vouchers/${id}?success=${encodeURIComponent('Mail erneut versendet.')}`);
   }));
 
   // Resend mail — actually re-send via Resend
