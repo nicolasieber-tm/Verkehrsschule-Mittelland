@@ -290,9 +290,9 @@
           <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
             <i data-lucide="calendar-check" class="w-5 h-5 sm:w-6 sm:h-6 text-green-600"></i>
           </div>
-          <div>
-            <div class="font-display font-extrabold text-ink-900 text-xs sm:text-sm">8 Plätze frei</div>
-            <div class="text-[10px] sm:text-xs text-ink-500">Nothelferkurs · Mai</div>
+          <div id="hero-nothelfer-badge" data-state="loading">
+            <div id="hero-nothelfer-seats" class="font-display font-extrabold text-ink-900 text-xs sm:text-sm">Plätze prüfen…</div>
+            <div id="hero-nothelfer-meta" class="text-[10px] sm:text-xs text-ink-500">Nothelferkurs</div>
           </div>
         </div>
       </div>
@@ -1014,5 +1014,41 @@
 </a>
 
 <script src="assets/js/main.js" defer></script>
+<script>
+  // Hero floating badge: live free-seats count for next Nothelferkurs
+  (function () {
+    const badge = document.getElementById('hero-nothelfer-badge');
+    if (!badge) return;
+    const seatsEl = document.getElementById('hero-nothelfer-seats');
+    const metaEl = document.getElementById('hero-nothelfer-meta');
+    const API_BASE = window.VSM_API || (
+      window.location.hostname === 'localhost' ? 'http://localhost:3000' :
+      window.location.hostname.endsWith('.up.railway.app') ? 'https://backend-production-dc0c4.up.railway.app' :
+      'https://api.verkehrsschule-mittelland.ch'
+    );
+    const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+    fetch(API_BASE + '/api/courses', { credentials: 'omit' })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => {
+        const courses = (data.courses || [])
+          .filter(c => c.category === 'nothelfer')
+          .sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
+        const next = courses.find(c => (c.max_seats - c.booked_seats) > 0) || courses[0];
+        if (!next) {
+          seatsEl.textContent = 'Bald verfügbar';
+          metaEl.textContent = 'Nothelferkurs';
+          return;
+        }
+        const free = Math.max(0, next.max_seats - next.booked_seats);
+        const d = new Date(next.starts_at);
+        seatsEl.textContent = free === 0 ? 'Ausgebucht' : (free + ' ' + (free === 1 ? 'Platz' : 'Plätze') + ' frei');
+        metaEl.textContent = 'Nothelferkurs · ' + MONTHS[d.getMonth()];
+      })
+      .catch(() => {
+        seatsEl.textContent = 'Plätze anfragen';
+        metaEl.textContent = 'Nothelferkurs';
+      });
+  })();
+</script>
 </body>
 </html>
