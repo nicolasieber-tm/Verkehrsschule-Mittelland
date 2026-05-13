@@ -172,8 +172,14 @@ export async function publicRoutes(app) {
         userAgent: req.headers['user-agent'],
       });
       app.log.info({ orderId: result.orderId, betrag: data.betrag_chf }, 'voucher order created');
-      sendVoucherOrderMails(app.pg, result.orderId, app.log).catch(err => {
-        app.log.error({ err: err.message, orderId: result.orderId }, 'voucher mail send failed');
+      // Detach mail send to a separate microtask so any failure cannot interfere
+      // with this reply's lifecycle. Triple-guarded against unhandled rejections.
+      setImmediate(() => {
+        Promise.resolve()
+          .then(() => sendVoucherOrderMails(app.pg, result.orderId, app.log))
+          .catch(err => {
+            try { app.log.error({ err: String(err?.message || err), orderId: result.orderId }, 'voucher mail send failed'); } catch {}
+          });
       });
       return reply.code(201).send({ ok: true, orderId: result.orderId });
     } catch (err) {

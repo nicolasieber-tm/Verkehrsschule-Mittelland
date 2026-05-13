@@ -1,5 +1,15 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
+
+// Last-resort: never let an unhandled rejection / uncaught exception take the process down.
+// Fire-and-forget background tasks (e.g. mail send) should not bring down the API.
+process.on('unhandledRejection', (reason) => {
+  try { console.error('[unhandledRejection]', reason instanceof Error ? reason.stack : reason); } catch {}
+});
+process.on('uncaughtException', (err) => {
+  try { console.error('[uncaughtException]', err?.stack || err); } catch {}
+});
+
 import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
 import cookie from '@fastify/cookie';
