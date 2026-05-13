@@ -301,23 +301,6 @@
         </div>
       </div>
 
-      <!-- Lieferadresse -->
-      <div>
-        <h3 class="font-display font-extrabold text-lg text-ink-900 mb-4">Lieferadresse</h3>
-        <div class="grid md:grid-cols-2 gap-4 mb-3">
-          <input type="text" name="lvname" placeholder="Vorname" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-          <input type="text" name="lnname" placeholder="Nachname" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-        </div>
-        <div class="grid grid-cols-3 gap-4 mb-3">
-          <input type="text" name="lstrasse" placeholder="Strasse" class="col-span-2 px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-          <input type="text" name="lhnr" placeholder="Hausnr." class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-          <input type="text" name="lplz" placeholder="PLZ" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-          <input type="text" name="lort" placeholder="Ort" class="col-span-2 px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
-        </div>
-      </div>
-
       <!-- Rechnungsadresse -->
       <div>
         <h3 class="font-display font-extrabold text-lg text-ink-900 mb-4">Rechnungsadresse</h3>
@@ -336,6 +319,30 @@
         <div class="grid md:grid-cols-2 gap-4">
           <input type="email" name="email" placeholder="E-Mail-Adresse" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none" required>
           <input type="text" name="telefon" placeholder="Telefonnummer (optional)" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+        </div>
+      </div>
+
+      <!-- Lieferadresse Toggle -->
+      <div>
+        <label class="flex items-start gap-3 text-sm text-ink-700 cursor-pointer">
+          <input id="liefer-toggle" type="checkbox" class="mt-0.5 w-4 h-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500">
+          <span>Lieferadresse weicht von Rechnungsadresse ab</span>
+        </label>
+
+        <div id="liefer-fields" class="hidden mt-6">
+          <h3 class="font-display font-extrabold text-lg text-ink-900 mb-4">Lieferadresse</h3>
+          <div class="grid md:grid-cols-2 gap-4 mb-3">
+            <input type="text" name="lvname" placeholder="Vorname" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+            <input type="text" name="lnname" placeholder="Nachname" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+          </div>
+          <div class="grid grid-cols-3 gap-4 mb-3">
+            <input type="text" name="lstrasse" placeholder="Strasse" class="col-span-2 px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+            <input type="text" name="lhnr" placeholder="Hausnr." class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <input type="text" name="lplz" placeholder="PLZ" class="px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+            <input type="text" name="lort" placeholder="Ort" class="col-span-2 px-4 py-3 border border-ink-200 rounded-xl focus:border-brand-500 focus:outline-none">
+          </div>
         </div>
       </div>
 

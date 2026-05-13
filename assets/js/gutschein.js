@@ -15,6 +15,13 @@
   const tsField = document.getElementById('field-ts');
   if (tsField) tsField.value = String(loadedAt);
 
+  const lieferToggle = document.getElementById('liefer-toggle');
+  const lieferFields = document.getElementById('liefer-fields');
+  lieferToggle?.addEventListener('change', () => {
+    if (lieferToggle.checked) lieferFields.classList.remove('hidden');
+    else lieferFields.classList.add('hidden');
+  });
+
   const errBox = document.getElementById('form-error');
   const successBox = document.getElementById('success-box');
 
@@ -47,16 +54,17 @@
       return;
     }
 
+    const useSeparateShipping = lieferToggle?.checked;
     const payload = {
       betrag_chf,
       fuer: String(fd.get('fuer') || '').trim(),
       von: String(fd.get('von') || '').trim(),
-      lvname: String(fd.get('lvname') || '').trim(),
-      lnname: String(fd.get('lnname') || '').trim(),
-      lstrasse: String(fd.get('lstrasse') || '').trim(),
-      lhnr: String(fd.get('lhnr') || '').trim(),
-      lplz: String(fd.get('lplz') || '').trim(),
-      lort: String(fd.get('lort') || '').trim(),
+      lvname: useSeparateShipping ? String(fd.get('lvname') || '').trim() : '',
+      lnname: useSeparateShipping ? String(fd.get('lnname') || '').trim() : '',
+      lstrasse: useSeparateShipping ? String(fd.get('lstrasse') || '').trim() : '',
+      lhnr: useSeparateShipping ? String(fd.get('lhnr') || '').trim() : '',
+      lplz: useSeparateShipping ? String(fd.get('lplz') || '').trim() : '',
+      lort: useSeparateShipping ? String(fd.get('lort') || '').trim() : '',
       rvname: String(fd.get('rvname') || '').trim(),
       rnname: String(fd.get('rnname') || '').trim(),
       rstrasse: String(fd.get('rstrasse') || '').trim(),
