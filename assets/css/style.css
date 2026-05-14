@@ -7,7 +7,11 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   color: #0c1116;
   background: #ffffff;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
+
+body.menu-open { overflow: hidden; }
 
 h1, h2, h3, h4 {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -67,6 +71,67 @@ h1, h2, h3, h4 {
 
 /* Vertikale Schritt-Linie */
 .step-line { background: linear-gradient(180deg, #279FF5 0%, #d4ecff 100%); }
+
+/* Verhindert iOS-Auto-Zoom beim Fokussieren von Formularfeldern (< 16px triggert Zoom) */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="search"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* ===================== Mobile-Optimierungen ===================== */
+@media (max-width: 640px) {
+  /* Hero-Blobs auf Mobile dezenter (sonst dominieren sie den Viewport) */
+  .blob {
+    transform: scale(0.55);
+    transform-origin: top left;
+    opacity: 0.65;
+  }
+
+  /* Sehr grosse Preise nicht horizontal sprengen */
+  .whitespace-nowrap.text-5xl { font-size: 2.5rem; line-height: 1.05; }
+
+  /* Marquee etwas langsamer & kompakter */
+  .marquee-track { animation-duration: 40s; }
+
+  /* Sticky-Header nicht zu hoch (verhindert, dass Anchor-Links Inhalt verstecken) */
+  html { scroll-padding-top: 72px; }
+}
+
+/* Mindestgrösse für Touch-Targets (Apple HIG / WCAG: 44×44) */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-link,
+  header a,
+  header button,
+  a.rounded-full,
+  button.rounded-full {
+    min-height: 44px;
+  }
+  /* iOS-Tap-Highlight zurückhaltend */
+  a, button { -webkit-tap-highlight-color: rgba(39, 159, 245, 0.15); }
+}
+
+/* Floating WhatsApp-Button: iOS-Safari Bottom-Bar berücksichtigen */
+@media (max-width: 640px) {
+  a.fixed.bottom-6.right-6 {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+  }
+}
+
+/* Auf sehr kleinen Geräten zusätzlich kürzen */
+@media (max-width: 380px) {
+  .text-4xl { font-size: 1.875rem; line-height: 1.1; }
+  .text-5xl { font-size: 2.25rem; line-height: 1.05; }
+}
 
 /* Barrierearmut: bevorzugt reduzierte Bewegung respektieren */
 @media (prefers-reduced-motion: reduce) {
