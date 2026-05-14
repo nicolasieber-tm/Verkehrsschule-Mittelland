@@ -4,6 +4,129 @@
    - Mobile-Menü Toggle */
 
 (function () {
+  const MOBILE_GROUPS = [
+    {
+      label: 'Standorte',
+      icon: 'map-pin',
+      links: [
+        ['/fahrschule-aarau', 'Fahrschule Aarau'],
+        ['/fahrschule-basel', 'Fahrschule Basel'],
+        ['/fahrschule-baselland', 'Fahrschule Baselland'],
+        ['/fahrschule-langenthal', 'Fahrschule Langenthal'],
+        ['/fahrschule-olten', 'Fahrschule Olten'],
+        ['/fahrschule-trimbach', 'Fahrschule Trimbach'],
+      ],
+    },
+    {
+      label: 'VKU Kurs',
+      icon: 'graduation-cap',
+      links: [
+        ['/vku-olten', 'VKU Olten'],
+        ['/vku-trimbach', 'VKU Trimbach'],
+      ],
+    },
+    {
+      label: 'Nothelferkurs',
+      icon: 'heart-pulse',
+      links: [
+        ['/nothelferkurs-olten', 'Nothelferkurs Olten'],
+        ['/nothelferkurs-trimbach', 'Nothelferkurs Trimbach'],
+      ],
+    },
+    {
+      label: 'Weiteres',
+      icon: 'layers',
+      links: [
+        ['/wab', 'WAB-Kurs'],
+        ['/anhanger', 'Anhänger (BE)'],
+        ['/kontrollfahrt', 'Kontrollfahrt'],
+        ['/taxi-bpt', 'Taxi BPT'],
+        ['/gutscheine', 'Gutscheine'],
+        ['/starterbox', 'Starter-Box'],
+        ['/wissen', 'Wissen'],
+        ['/jobs', 'Jobs'],
+        ['/partner', 'Partner werden'],
+        ['/nachfolge', 'Nachfolgelösung'],
+      ],
+    },
+    {
+      label: 'Über VSM',
+      icon: 'info',
+      links: [
+        ['/#angebote', 'Angebote'],
+        ['/#preise', 'Preise'],
+        ['/#weg', 'Dein Weg'],
+        ['/#ueber', 'Über uns'],
+      ],
+    },
+  ];
+
+  function rebuildMobileMenu(menu) {
+    const container = document.createElement('div');
+    container.className = 'px-4 sm:px-6 py-4 space-y-2';
+
+    MOBILE_GROUPS.forEach(function (group) {
+      const wrap = document.createElement('div');
+      wrap.className = 'rounded-xl overflow-hidden';
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mobile-group-toggle w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-ink-900 font-semibold hover:bg-ink-50 transition';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML =
+        '<span class="flex items-center gap-3">' +
+          '<i data-lucide="' + group.icon + '" class="w-5 h-5 text-brand-500"></i>' +
+          '<span>' + group.label + '</span>' +
+        '</span>' +
+        '<i data-lucide="chevron-down" class="w-5 h-5 text-ink-500 transition-transform"></i>';
+
+      const panel = document.createElement('div');
+      panel.className = 'hidden pl-3 pr-1 pb-2 pt-1 space-y-1';
+      group.links.forEach(function (l) {
+        const a = document.createElement('a');
+        a.href = l[0];
+        a.className = 'mobile-link flex items-center justify-between px-4 py-2.5 rounded-xl text-ink-700 hover:bg-ink-50';
+        a.innerHTML = '<span>' + l[1] + '</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-400"></i>';
+        panel.appendChild(a);
+      });
+
+      btn.addEventListener('click', function () {
+        const open = !panel.classList.contains('hidden');
+        if (open) {
+          panel.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+          const chev = btn.querySelector('[data-lucide="chevron-down"], svg.lucide-chevron-down');
+          if (chev) chev.style.transform = '';
+        } else {
+          panel.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          const chev = btn.querySelector('[data-lucide="chevron-down"], svg.lucide-chevron-down');
+          if (chev) chev.style.transform = 'rotate(180deg)';
+        }
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(panel);
+      container.appendChild(wrap);
+    });
+
+    // Action-Buttons (Anrufen, WhatsApp, Jetzt buchen)
+    const actions = document.createElement('div');
+    actions.className = 'pt-3 mt-2 border-t border-ink-100 space-y-2';
+    actions.innerHTML =
+      '<div class="grid grid-cols-2 gap-2">' +
+        '<a href="tel:+41791361616" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold"><i data-lucide="phone" class="w-4 h-4"></i>Anrufen</a>' +
+        '<a href="https://wa.me/41791361616" target="_blank" rel="noopener" class="mobile-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-ink-200 text-ink-700 font-semibold"><i data-lucide="message-circle" class="w-4 h-4"></i>WhatsApp</a>' +
+      '</div>' +
+      '<a href="/#preise" class="mobile-link block text-center px-4 py-3 rounded-xl bg-brand-500 text-white font-bold">Jetzt buchen</a>';
+    container.appendChild(actions);
+
+    menu.innerHTML = '';
+    menu.appendChild(container);
+
+    if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
+  }
+
   function init() {
     if (window.lucide && typeof lucide.createIcons === 'function') {
       lucide.createIcons();
@@ -28,6 +151,9 @@
     const btn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
     if (!btn || !menu) return;
+
+    // Menu in 4 ausklappbare Gruppen umbauen (Standorte / VKU / Nothelferkurs / Weiteres)
+    rebuildMobileMenu(menu);
 
     function setIcon(name) {
       // Lucide ersetzt <i data-lucide> einmalig durch <svg>; daher bei jedem
