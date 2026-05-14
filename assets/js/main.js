@@ -27,26 +27,26 @@
     // Mobile-Menü
     const btn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
-    const iconEl = document.getElementById('mobileMenuIcon');
     if (!btn || !menu) return;
 
-    function refreshIcons() {
+    function setIcon(name) {
+      // Lucide ersetzt <i data-lucide> einmalig durch <svg>; daher bei jedem
+      // Toggle ein frisches Placeholder-<i> einsetzen und neu rendern.
+      btn.innerHTML = '<i data-lucide="' + name + '" class="w-5 h-5"></i>';
       if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
     }
     function closeMenu() {
       menu.classList.add('hidden');
-      if (iconEl) iconEl.setAttribute('data-lucide', 'menu');
+      setIcon('menu');
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-label', 'Menü öffnen');
-      refreshIcons();
       document.body.classList.remove('menu-open');
     }
     function openMenu() {
       menu.classList.remove('hidden');
-      if (iconEl) iconEl.setAttribute('data-lucide', 'x');
+      setIcon('x');
       btn.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-label', 'Menü schliessen');
-      refreshIcons();
       document.body.classList.add('menu-open');
     }
 
