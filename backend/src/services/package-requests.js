@@ -11,7 +11,7 @@ const boolFromForm = z.preprocess(
 );
 
 export const packageRequestInputSchema = z.object({
-  type: z.enum(['fahrstunden_10', 'starterbox']),
+  type: z.enum(['fahrstunden_10']),
   with_vku: boolFromForm.default(false),
   vname: z.string().trim().min(1).max(100),
   nname: z.string().trim().min(1).max(100),
@@ -52,7 +52,6 @@ export function isValidMagic(buf, mime) {
 export function typeLabel(t) {
   return {
     fahrstunden_10: '10er Fahrstunden-Paket',
-    starterbox: 'Starter-Box',
   }[t] || t;
 }
 
