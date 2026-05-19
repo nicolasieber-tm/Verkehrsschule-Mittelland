@@ -9,10 +9,15 @@
   <tr><td style="padding:6px 0;color:#6a7180;vertical-align:top">Ort:</td><td style="padding:6px 0;white-space:pre-line"><%= hasRoom ? roomAddress : reg.location %></td></tr>
   <tr><td style="padding:6px 0;color:#6a7180">Beginn:</td><td style="padding:6px 0"><%= startsAtPretty %></td></tr>
   <tr><td style="padding:6px 0;color:#6a7180;vertical-align:top">Termine:</td><td style="padding:6px 0;white-space:pre-line"><%= sessionsText %></td></tr>
+<% if (isElearning) { %>
+  <tr><td style="padding:6px 0;color:#6a7180">Kursgebühr:</td><td style="padding:6px 0">CHF <%= reg.price_chf %>.– (an Fahrschule)</td></tr>
+  <tr><td style="padding:6px 0;color:#6a7180">Online-Plattform:</td><td style="padding:6px 0">CHF 15.– (separat an Anbieter)</td></tr>
+<% } else { %>
   <tr><td style="padding:6px 0;color:#6a7180">Gebühr:</td><td style="padding:6px 0">CHF <%= reg.price_chf %>.–</td></tr>
+<% } %>
 </table>
 <div style="background:#fff5e6;border-left:4px solid #f5a623;padding:12px 16px;margin:16px 0;border-radius:4px">
-  <strong>Bitte beachten:</strong> Die Kursgebühr ist <strong>am ersten Kurstag vor Kursbeginn in BAR oder per TWINT</strong> zu bezahlen.
+  <strong>Bitte beachten:</strong> Die Kursgebühr von <strong>CHF <%= reg.price_chf %>.–</strong> ist <strong>am ersten Kurstag vor Kursbeginn in BAR oder per TWINT</strong> zu bezahlen.<% if (isElearning) { %> Die CHF 15.– für die Online-Plattform werden separat direkt beim Anbieter beglichen.<% } %>
 </div>
 <p>Wenn du Fragen hast, antworte einfach auf diese Email.</p>
 <p>Viel Erfolg und bis bald!<br>Verkehrsschule Mittelland</p>

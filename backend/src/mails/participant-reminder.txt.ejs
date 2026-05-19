@@ -13,9 +13,14 @@ Mittelland startet morgen. Hier nochmal die wichtigsten Infos:
   Beginn:      <%= startsAtPretty %>
   Termine:
 <%= sessionsText.split('\n').map(l => '    ' + l).join('\n') %>
-
-Bitte beachten: Die Kursgebühr (CHF <%= reg.price_chf %>.–) ist am
-ersten Kurstag vor Kursbeginn in BAR oder per TWINT zu bezahlen.
+<% if (isElearning) { %>  Kursgebühr:        CHF <%= reg.price_chf %>.– (an Fahrschule)
+  Online-Plattform:  CHF 15.– (separat an Anbieter)
+<% } else { %>  Gebühr:      CHF <%= reg.price_chf %>.–
+<% } %>
+Bitte beachten: Die Kursgebühr von CHF <%= reg.price_chf %>.– ist am
+ersten Kurstag vor Kursbeginn in BAR oder per TWINT zu bezahlen.<% if (isElearning) { %>
+Die CHF 15.– für die Online-Plattform werden separat direkt beim
+Anbieter beglichen.<% } %>
 <% if (isElearning) { %>
 Wichtig für den eNothelferkurs: Bitte bring dein Zertifikat des
 e-Learning-Abschlusses ausgedruckt oder digital zum Kurs mit.

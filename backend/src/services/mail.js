@@ -88,6 +88,7 @@ export async function sendRegistrationMails(pool, registrationId, log) {
     reg: r,
     fullName: `${r.vname} ${r.nname}`,
     variantLabel: r.variant === 'classic' ? 'Klassischer Nothelferkurs' : 'eNothelferkurs',
+    isElearning: r.variant === 'elearning',
     coursePretty: `${r.course_no} (${r.location})`,
     startsAtPretty: formatZurich(r.starts_at),
     sessionsText: sessionsTable(r.sessions),
