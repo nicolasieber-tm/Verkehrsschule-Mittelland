@@ -152,6 +152,67 @@ export async function sendRegistrationMails(pool, registrationId, log) {
 }
 
 /**
+ * Send the 24h reminder mail for a single registration.
+ * Updates DB status (sent / failed). Never throws.
+ */
+export async function sendReminderMail(pool, registrationId, log) {
+  const { rows } = await pool.query(
+    `select r.*, c.course_no, c.location, c.variant, c.price_chf, c.starts_at, c.sessions,
+            rm.name as room_name, rm.address_line1 as room_addr1, rm.address_line2 as room_addr2,
+            rm.postal_code as room_plz, rm.city as room_city
+       from registrations r
+       join courses c on c.id = r.course_id
+       left join rooms rm on rm.id = c.room_id
+      where r.id = $1`,
+    [registrationId]
+  );
+  const r = rows[0];
+  if (!r) { log?.warn({ registrationId }, 'reminder: registration not found'); return; }
+  if (r.reminder_mail_status === 'sent') return;
+
+  const roomAddressLines = [];
+  if (r.room_name) roomAddressLines.push(r.room_name);
+  if (r.room_addr1) roomAddressLines.push(r.room_addr1);
+  if (r.room_addr2) roomAddressLines.push(r.room_addr2);
+  if (r.room_plz) roomAddressLines.push(`${r.room_plz} ${r.room_city}`);
+
+  const ctx = {
+    reg: r,
+    fullName: `${r.vname} ${r.nname}`,
+    variantLabel: r.variant === 'classic' ? 'Klassischer Nothelferkurs' : 'eNothelferkurs',
+    isElearning: r.variant === 'elearning',
+    startsAtPretty: formatZurich(r.starts_at),
+    sessionsText: sessionsTable(r.sessions),
+    roomAddress: roomAddressLines.join('\n'),
+    hasRoom: roomAddressLines.length > 0,
+  };
+
+  try {
+    const html = await renderTemplate('participant-reminder.html.ejs', ctx);
+    const text = await renderTemplate('participant-reminder.txt.ejs', ctx);
+    await sendOne({
+      to: r.email,
+      subject: `Erinnerung: Nothelferkurs morgen — ${r.course_no}`,
+      html, text,
+      replyTo: process.env.MAIL_TO_SCHOOL,
+    });
+    await pool.query(
+      `update registrations
+          set reminder_mail_status='sent', reminder_mail_error=null, reminder_mail_sent_at=now()
+        where id=$1`,
+      [registrationId]
+    );
+    log?.info({ registrationId }, 'reminder mail sent');
+  } catch (err) {
+    log?.error({ registrationId, err: err.message }, 'reminder mail failed');
+    await pool.query(
+      `update registrations set reminder_mail_status='failed', reminder_mail_error=$1 where id=$2`,
+      [String(err.message || err).slice(0, 500), registrationId]
+    );
+  }
+}
+
+/**
  * Send confirmation + school-notification mails for a package_request.
  * Updates DB per-target status (sent / failed + error). Never throws — failures stored in DB.
  */

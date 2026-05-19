@@ -201,6 +201,10 @@ async function buildApp() {
   const { startReviewSync } = await import('./services/google-reviews.js');
   startReviewSync(app.log);
 
+  // 24h reminder mails for Nothelferkurs participants
+  const { startReminderSender } = await import('./services/reminder-mailer.js');
+  startReminderSender(pool, app.log);
+
   return app;
 }
 

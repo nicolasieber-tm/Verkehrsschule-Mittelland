@@ -1,0 +1,27 @@
+Erinnerung: Dein Nothelferkurs beginnt morgen
+=============================================
+
+Hallo <%= fullName %>
+
+Eine kurze Erinnerung: Dein Nothelferkurs bei der Verkehrsschule
+Mittelland startet morgen. Hier nochmal die wichtigsten Infos:
+
+  Kurs:        <%= variantLabel %>
+  Kursnummer:  <%= reg.course_no %>
+  Ort:
+<%= (hasRoom ? roomAddress : reg.location).split('\n').map(l => '    ' + l).join('\n') %>
+  Beginn:      <%= startsAtPretty %>
+  Termine:
+<%= sessionsText.split('\n').map(l => '    ' + l).join('\n') %>
+
+Bitte beachten: Die Kursgebühr (CHF <%= reg.price_chf %>.–) ist am
+ersten Kurstag vor Kursbeginn in BAR oder per TWINT zu bezahlen.
+<% if (isElearning) { %>
+Wichtig für den eNothelferkurs: Bitte bring dein Zertifikat des
+e-Learning-Abschlusses ausgedruckt oder digital zum Kurs mit.
+<% } %>
+Bei Fragen oder falls du verhindert bist, einfach auf diese Email
+antworten.
+
+Wir freuen uns auf dich!
+Verkehrsschule Mittelland
