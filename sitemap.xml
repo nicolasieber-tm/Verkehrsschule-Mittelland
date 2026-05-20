@@ -21,7 +21,7 @@
 
   <url><loc>https://verkehrsschule-mittelland.ch/gutscheine</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/starterbox</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://verkehrsschule-mittelland.ch/wissen</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- <url><loc>https://verkehrsschule-mittelland.ch/wissen</loc><changefreq>monthly</changefreq><priority>0.6</priority></url> -->
   <url><loc>https://verkehrsschule-mittelland.ch/jobs</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/partner</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/nachfolge</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
