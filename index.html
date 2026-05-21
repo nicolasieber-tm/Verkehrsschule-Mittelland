@@ -590,7 +590,7 @@
           <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Ab 17 Jahren möglich</li>
           <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5"></i> Individuelle Betreuung</li>
         </ul>
-        <a data-fahrstunde-cta href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" rel="noopener" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
+        <a data-fahrstunde-cta href="#" onclick="event.preventDefault();if(window.openCalendly)openCalendly('https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten');" class="block w-full py-4 rounded-full bg-brand-500 text-white font-bold text-center hover:bg-brand-600 transition">
           Jetzt Doppellektion buchen
         </a>
       </div>
@@ -746,17 +746,17 @@
               t.classList.toggle('shadow-sm', on);
               t.classList.toggle('text-ink-500', !on);
             });
+            const url = state === 'einzel' ? CALENDLY.einzel : CALENDLY.doppel;
+            cta.setAttribute('onclick', "event.preventDefault();if(window.openCalendly)openCalendly('" + url + "');");
             if (state === 'einzel') {
               subEl.textContent = '45 Minuten Einzelunterricht';
               priceEl.textContent = 'CHF 95';
               unitEl.textContent = '/ 45 Min';
-              cta.href = CALENDLY.einzel;
               cta.textContent = 'Jetzt Einzellektion buchen';
             } else {
               subEl.textContent = '90 Minuten Einzelunterricht';
               priceEl.textContent = 'CHF 180';
               unitEl.textContent = '/ 90 Min';
-              cta.href = CALENDLY.doppel;
               cta.textContent = 'Jetzt Doppellektion buchen';
             }
           }
@@ -980,7 +980,7 @@
           Sichere dir deine erste Fahrstunde, direkt online, ohne Anruf, ohne Stress.
         </p>
         <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
-          <a href="https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full bg-white text-brand-700 font-bold text-base sm:text-lg hover:bg-brand-50 transition">
+          <a href="#" onclick="event.preventDefault();if(window.openCalendly)openCalendly('https://calendly.com/verkehrsschule-mittelland/doppellektion-90-minuten');" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full bg-white text-brand-700 font-bold text-base sm:text-lg hover:bg-brand-50 transition">
             <i data-lucide="calendar" class="w-5 h-5"></i> Fahrstunde buchen
           </a>
           <a href="https://wa.me/41791361616" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-full border-2 border-white/40 text-white font-bold text-base sm:text-lg hover:bg-white/10 transition">
