@@ -1,0 +1,12 @@
+.git
+node_modules
+backend
+Dockerfile
+.dockerignore
+DEPLOY.md
+package.json
+package-lock.json
+tailwind.config.js
+assets/css/tailwind-input.css
+**/.DS_Store
+Icon?
