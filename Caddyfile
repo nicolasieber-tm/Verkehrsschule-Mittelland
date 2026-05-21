@@ -11,6 +11,14 @@
 	@rootIndex path /index.html /index
 	redir @rootIndex /?{query} 301
 
+	# 301 redirects from old standort URLs to new region URLs (SEO)
+	redir /fahrschule-aarau /fahrschule-aargau 301
+	redir /fahrschule-aarau.html /fahrschule-aargau 301
+	redir /fahrschule-olten /fahrschule-solothurn 301
+	redir /fahrschule-olten.html /fahrschule-solothurn 301
+	redir /fahrschule-langenthal /fahrschule-bern 301
+	redir /fahrschule-langenthal.html /fahrschule-bern 301
+
 	@htmlExt path_regexp htmlext ^/(.+)\.html$
 	redir @htmlExt /{re.htmlext.1}?{query} 301
 

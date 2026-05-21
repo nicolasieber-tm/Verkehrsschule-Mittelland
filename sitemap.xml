@@ -3,12 +3,13 @@
   <url><loc>https://verkehrsschule-mittelland.ch/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/verkehrsschule-mittelland</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
-  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-aarau</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-basel</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-solothurn</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-aargau</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-baselland</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-langenthal</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-olten</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-trimbach</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-basel</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-bern</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-luzern</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://verkehrsschule-mittelland.ch/fahrschule-trimbach</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
   <url><loc>https://verkehrsschule-mittelland.ch/vku-olten</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://verkehrsschule-mittelland.ch/vku-trimbach</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

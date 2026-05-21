@@ -3,18 +3,73 @@
    - Reveal-on-Scroll via IntersectionObserver
    - Mobile-Menü Toggle */
 
+/* Calendly: Widget wird deferred geladen (nach window.load / requestIdleCallback),
+   damit es zur Klickzeit synchron verfügbar ist (sonst stuft der Browser den Popup
+   als "non-user-initiated" ein und öffnet ihn als neuen Tab statt Overlay).
+   Hover/Focus auf einen Calendly-Button löst ebenfalls den Preload aus. */
+(function () {
+  let loaded = false;
+  let loading = null;
+  function loadCalendly() {
+    if (loaded) return Promise.resolve();
+    if (loading) return loading;
+    loading = new Promise(function (resolve) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(link);
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = function () { loaded = true; resolve(); };
+      document.head.appendChild(script);
+    });
+    return loading;
+  }
+  window.openCalendly = function (url) {
+    if (window.Calendly) {
+      Calendly.initPopupWidget({ url: url });
+    } else {
+      loadCalendly().then(function () {
+        if (window.Calendly) Calendly.initPopupWidget({ url: url });
+      });
+    }
+    return false;
+  };
+  // Preload-Trigger: Idle-Zeit nach Page-Load oder bei Hover/Focus auf Calendly-Button
+  function schedulePreload() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadCalendly, { timeout: 3000 });
+    } else {
+      setTimeout(loadCalendly, 1500);
+    }
+  }
+  if (document.readyState === 'complete') schedulePreload();
+  else window.addEventListener('load', schedulePreload);
+  // Frühes Warm-up bei Interaktion (Hover/Focus auf Calendly-Buttons)
+  document.addEventListener('mouseover', function (e) {
+    const a = e.target && e.target.closest && e.target.closest('a[onclick*="openCalendly"]');
+    if (a) loadCalendly();
+  }, { passive: true });
+  document.addEventListener('focusin', function (e) {
+    const a = e.target && e.target.closest && e.target.closest('a[onclick*="openCalendly"]');
+    if (a) loadCalendly();
+  });
+})();
+
 (function () {
   const MOBILE_GROUPS = [
     {
       label: 'Standorte',
       icon: 'map-pin',
       links: [
-        ['/fahrschule-aarau', 'Fahrschule Aarau'],
-        ['/fahrschule-basel', 'Fahrschule Basel'],
-        ['/fahrschule-baselland', 'Fahrschule Baselland'],
-        ['/fahrschule-langenthal', 'Fahrschule Langenthal'],
-        ['/fahrschule-olten', 'Fahrschule Olten'],
-        ['/fahrschule-trimbach', 'Fahrschule Trimbach'],
+        ['/fahrschule-solothurn', 'Kanton Solothurn'],
+        ['/fahrschule-aargau', 'Kanton Aargau'],
+        ['/fahrschule-baselland', 'Kanton Basel-Land'],
+        ['/fahrschule-basel', 'Kanton Basel-Stadt'],
+        ['/fahrschule-bern', 'Kanton Bern'],
+        ['/fahrschule-luzern', 'Kanton Luzern'],
+        ['/fahrschule-trimbach', 'Hauptstandort Trimbach'],
       ],
     },
     {

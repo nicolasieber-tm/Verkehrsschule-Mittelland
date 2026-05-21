@@ -17,5 +17,8 @@ backend/.env
 backend/.env.local
 backend/*.log
 
+# Frontend build tooling (Tailwind local build)
+node_modules/
+
 # Logs
 *.log

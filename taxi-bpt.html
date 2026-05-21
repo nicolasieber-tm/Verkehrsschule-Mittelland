@@ -19,8 +19,6 @@
 }
 </script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="assets/js/tailwind-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -43,6 +41,7 @@
 <meta name="twitter:title" content="Taxi BPT 121 | Personentransport-Ausbildung — Verkehrsschule Mittelland" />
 <meta name="twitter:description" content="Taxi-Führerausweis (BPT 121) Vorbereitung ✓ professionell, persönlich, mit hoher Erfolgsquote ✓ ab CHF 95. Starte deine neue Karriere im Personentransport." />
 <meta name="twitter:image" content="https://verkehrsschule-mittelland.ch/assets/img/og-default.jpg" />
+<link rel="stylesheet" href="assets/css/tailwind.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="antialiased">
@@ -51,7 +50,7 @@
 <div class="hidden md:block bg-ink-900 text-white text-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
     <div class="flex items-center gap-6 text-ink-100">
-      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Aarau · Basel · Langenthal · Olten · Trimbach</span>
+      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Solothurn · Aargau · Baselland · Basel · Bern · Luzern</span>
       <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>5 / 5 · Google Bewertungen</span>
     </div>
     <div class="flex items-center gap-4">
@@ -73,12 +72,13 @@
       <div class="relative group">
         <button class="flex items-center gap-1 hover:text-brand-500 transition">Standorte <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
         <div class="absolute top-full left-0 mt-2 before:content-[''] before:absolute before:-top-2 before:left-0 before:right-0 before:h-2 w-64 bg-white border border-ink-100 rounded-2xl shadow-soft p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-          <a href="/fahrschule-aarau" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Aarau</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
-          <a href="/fahrschule-basel" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Basel</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
-          <a href="/fahrschule-baselland" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Baselland</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
-          <a href="/fahrschule-langenthal" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Langenthal</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
-          <a href="/fahrschule-olten" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
-          <a href="/fahrschule-trimbach" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Fahrschule Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-aargau" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Aargau</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-basel" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Basel-Stadt</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-baselland" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Basel-Land</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-bern" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Bern</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-luzern" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Luzern</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-solothurn" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Kanton Solothurn</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+          <a href="/fahrschule-trimbach" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-ink-50 text-ink-700"><span>Hauptstandort Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
         </div>
       </div>
       <div class="relative group">
@@ -134,12 +134,13 @@
     <div class="px-4 sm:px-6 py-4 space-y-1">
       <a href="/" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Home</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
       <div class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold">Standorte</div>
-      <a href="/fahrschule-aarau" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Aarau</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
-      <a href="/fahrschule-basel" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Basel</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
-      <a href="/fahrschule-baselland" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Baselland</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
-      <a href="/fahrschule-langenthal" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Langenthal</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
-      <a href="/fahrschule-olten" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Olten</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
-      <a href="/fahrschule-trimbach" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Fahrschule Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-aargau" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Aargau</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-basel" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Basel-Stadt</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-baselland" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Basel-Land</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-bern" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Bern</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-luzern" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Luzern</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-solothurn" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Kanton Solothurn</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
+      <a href="/fahrschule-trimbach" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>Hauptstandort Trimbach</span><i data-lucide="chevron-right" class="w-4 h-4 text-ink-500"></i></a>
 
       <div class="pt-3 px-4 pb-1 text-xs uppercase tracking-wider text-ink-500 font-semibold border-t border-ink-100 mt-3">Kurse</div>
       <a href="/vku-olten" class="mobile-link flex items-center justify-between px-4 py-3 rounded-xl text-ink-700 font-medium hover:bg-ink-50"><span>VKU Olten</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
@@ -303,6 +304,24 @@
 </section>
 
 <!-- FOOTER -->
+<!-- ===================== GOOGLE REZENSIONEN ===================== -->
+<section id="rezensionen" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal text-center max-w-3xl mx-auto mb-12">
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-700 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="star" class="w-4 h-4 text-brand-500"></i> Google Rezensionen
+      </span>
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-ink-900">
+        Das sagen unsere Fahrschüler
+      </h2>
+      <p class="mt-6 text-lg text-ink-500">Echte Stimmen von echten Fahrschülern, direkt von Google.</p>
+    </div>
+    <div class="reveal">
+      <div id="google-reviews"></div>
+    </div>
+  </div>
+</section>
+
 <footer class="bg-ink-900 text-ink-100 pt-16 sm:pt-20 pb-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
@@ -332,12 +351,12 @@
       <div>
         <h4 class="font-display font-extrabold text-white mb-5">Standorte</h4>
         <ul class="space-y-3 text-ink-100/70 text-sm">
-          <li><a href="/fahrschule-aarau" class="hover:text-white">Fahrschule Aarau</a></li>
-          <li><a href="/fahrschule-basel" class="hover:text-white">Fahrschule Basel</a></li>
-          <li><a href="/fahrschule-baselland" class="hover:text-white">Fahrschule Baselland</a></li>
-          <li><a href="/fahrschule-langenthal" class="hover:text-white">Fahrschule Langenthal</a></li>
-          <li><a href="/fahrschule-olten" class="hover:text-white">Fahrschule Olten</a></li>
-          <li><a href="/fahrschule-trimbach" class="hover:text-white">Fahrschule Trimbach</a></li>
+          <li><a href="/fahrschule-aargau" class="hover:text-white">Kanton Aargau</a></li>
+          <li><a href="/fahrschule-basel" class="hover:text-white">Kanton Basel-Stadt</a></li>
+          <li><a href="/fahrschule-baselland" class="hover:text-white">Kanton Basel-Land</a></li>
+          <li><a href="/fahrschule-bern" class="hover:text-white">Kanton Bern</a></li>
+          <li><a href="/fahrschule-solothurn" class="hover:text-white">Kanton Solothurn</a></li>
+          <li><a href="/fahrschule-trimbach" class="hover:text-white">Hauptstandort Trimbach</a></li>
         </ul>
       </div>
       <div>
@@ -366,5 +385,6 @@
 </a>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/reviews.js" defer></script>
 </body>
 </html>

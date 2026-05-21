@@ -7,8 +7,6 @@
 <meta name="description" content="Fahrstunden, Verkehrskundeunterricht, Theorieunterricht und Nothelferkurse in Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair." />
 
 <!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="assets/js/tailwind-config.js"></script>
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +32,7 @@
 <meta name="twitter:title" content="Verkehrsschule Mittelland — Deine Fahrschule. Modern. Persönlich. Fair." />
 <meta name="twitter:description" content="Fahrstunden, Verkehrskundeunterricht, Theorieunterricht und Nothelferkurse in Aarau, Basel, Langenthal, Olten und Trimbach. Modern. Persönlich. Fair." />
 <meta name="twitter:image" content="https://verkehrsschule-mittelland.ch/assets/img/og-default.jpg" />
+<link rel="stylesheet" href="assets/css/tailwind.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="antialiased">
@@ -42,7 +41,7 @@
 <div class="hidden md:block bg-ink-900 text-white text-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
     <div class="flex items-center gap-6 text-ink-100">
-      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Aarau · Basel · Langenthal · Olten · Trimbach</span>
+      <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>Solothurn · Aargau · Baselland · Basel · Bern · Luzern</span>
       <span class="flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>5 / 5 · Google Bewertungen</span>
     </div>
     <div class="flex items-center gap-4">
@@ -697,6 +696,24 @@
 </section>
 
 <!-- ===================== FOOTER ===================== -->
+<!-- ===================== GOOGLE REZENSIONEN ===================== -->
+<section id="rezensionen" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal text-center max-w-3xl mx-auto mb-12">
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-700 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="star" class="w-4 h-4 text-brand-500"></i> Google Rezensionen
+      </span>
+      <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-ink-900">
+        Das sagen unsere Fahrschüler
+      </h2>
+      <p class="mt-6 text-lg text-ink-500">Echte Stimmen von echten Fahrschülern, direkt von Google.</p>
+    </div>
+    <div class="reveal">
+      <div id="google-reviews"></div>
+    </div>
+  </div>
+</section>
+
 <footer class="bg-ink-900 text-ink-100 pt-20 pb-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-16">
@@ -771,5 +788,6 @@
 </a>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/reviews.js" defer></script>
 </body>
 </html>
