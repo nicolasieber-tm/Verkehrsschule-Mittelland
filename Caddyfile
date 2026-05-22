@@ -19,6 +19,12 @@
 	redir /fahrschule-langenthal /fahrschule-bern 301
 	redir /fahrschule-langenthal.html /fahrschule-bern 301
 
+	# 301 redirects: alte Trimbach-Kursseiten -> konsolidierte Olten-Seiten
+	redir /vku-trimbach /vku-olten 301
+	redir /vku-trimbach.html /vku-olten 301
+	redir /nothelferkurs-trimbach /nothelferkurs-olten 301
+	redir /nothelferkurs-trimbach.html /nothelferkurs-olten 301
+
 	@htmlExt path_regexp htmlext ^/(.+)\.html$
 	redir @htmlExt /{re.htmlext.1}?{query} 301
 
