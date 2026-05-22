@@ -73,19 +73,11 @@
       ],
     },
     {
-      label: 'VKU Kurs',
+      label: 'Kurse',
       icon: 'graduation-cap',
       links: [
-        ['/vku-olten', 'VKU Olten'],
-        ['/vku-trimbach', 'VKU Trimbach'],
-      ],
-    },
-    {
-      label: 'Nothelferkurs',
-      icon: 'heart-pulse',
-      links: [
-        ['/nothelferkurs-olten', 'Nothelferkurs Olten'],
-        ['/nothelferkurs-trimbach', 'Nothelferkurs Trimbach'],
+        ['/vku-olten', 'VKU'],
+        ['/nothelferkurs-olten', 'Nothelferkurs'],
       ],
     },
     {
