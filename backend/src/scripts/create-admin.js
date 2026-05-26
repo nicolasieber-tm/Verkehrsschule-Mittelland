@@ -20,7 +20,7 @@ let password = process.env.ADMIN_PASSWORD;
 if (!email || !password) {
   if (process.stdin.isTTY) {
     email = email || (await prompt('Admin Email: ')).toLowerCase();
-    password = password || await prompt('Admin Passwort (min. 12 Zeichen): ');
+    password = password || await prompt('Admin Passwort (min. 11 Zeichen): ');
   } else {
     // Read piped stdin lines
     const chunks = [];
@@ -31,8 +31,8 @@ if (!email || !password) {
   }
 }
 
-if (!email || !email.includes('@') || !password || password.length < 12) {
-  console.error('Ungültige Eingabe. Email muss gültig sein, Passwort mind. 12 Zeichen.');
+if (!email || !email.includes('@') || !password || password.length < 11) {
+  console.error('Ungültige Eingabe. Email muss gültig sein, Passwort mind. 11 Zeichen.');
   process.exit(1);
 }
 
