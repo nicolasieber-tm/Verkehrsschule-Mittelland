@@ -183,6 +183,8 @@ async function buildApp() {
     reply.code(204).send();
   });
 
+  app.get('/', (req, reply) => reply.redirect('/admin/login'));
+
   // Routes (lazy registration in subsequent phases)
   const { publicRoutes } = await import('./routes/public.js');
   await app.register(publicRoutes, { prefix: '/api' });
