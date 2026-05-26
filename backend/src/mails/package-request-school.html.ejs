@@ -23,6 +23,6 @@
 </table>
 
 <div style="background:#eaf6ff;border-left:4px solid #279ff5;padding:12px 16px;margin:24px 0;border-radius:4px">
-  Bearbeitung im Admin: <a href="https://api.verkehrsschule-mittelland.ch/admin/package-requests/<%= req.id %>">Anfrage öffnen</a>
+  Bearbeitung im Admin: <a href="<%= process.env.ADMIN_BASE_URL || 'https://admin.verkehrsschule-mittelland.ch' %>/admin/package-requests/<%= req.id %>">Anfrage öffnen</a>
 </div>
 </body></html>

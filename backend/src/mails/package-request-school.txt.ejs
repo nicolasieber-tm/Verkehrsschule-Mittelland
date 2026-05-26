@@ -18,4 +18,4 @@ Standort:    <%= req.location_pref || '—' %>
 
 <% } %>Lernfahrausweis: <%= hasFile ? 'Ja — im Admin einsehbar' : 'Nicht hochgeladen' %>
 
-Admin: https://api.verkehrsschule-mittelland.ch/admin/package-requests/<%= req.id %>
+Admin: <%= process.env.ADMIN_BASE_URL || 'https://admin.verkehrsschule-mittelland.ch' %>/admin/package-requests/<%= req.id %>
