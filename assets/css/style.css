@@ -142,3 +142,18 @@ h1, h2, h3, h4 {
     scroll-behavior: auto !important;
   }
 }
+
+/* Credit-Label im Footer: Unterstrich im Trending-Media-Farbverlauf */
+.tm-credit {
+  text-decoration: none;
+  padding-bottom: 2px;
+  background-image: linear-gradient(105deg, #ff9a3c, #ff6a2c 24%, #8b5cf6 58%, #2f9fd6 88%, #6cc6f5);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  transition: background-size .2s ease, color .2s ease;
+}
+
+.tm-credit:hover {
+  background-size: 100% 2px;
+}
