@@ -33,8 +33,7 @@
 
   function renderCourse(c) {
     courseBox.replaceChildren();
-    const variant = c.variant === 'classic' ? 'Klassischer Nothelferkurs' : 'eNothelferkurs';
-    courseBox.append(el('h2', 'font-display font-extrabold text-2xl mb-2', variant));
+    courseBox.append(el('h2', 'font-display font-extrabold text-2xl mb-2', 'Gratis Nothelferkurs'));
     courseBox.append(el('p', 'text-ink-500 mb-4', `Kursnr. ${c.course_no} · ${c.location}`));
 
     const list = el('ul', 'space-y-2 mb-4 text-ink-700');
@@ -44,9 +43,14 @@
     courseBox.append(list);
 
     const price = el('p', 'text-lg', '');
-    price.append(el('strong', '', `CHF ${c.price_chf}.–`));
-    price.append(document.createTextNode(c.variant === 'classic' ? ' (inkl. Nothilfeausweis)' : ' (+ eLearning CHF 15)'));
+    price.append(el('strong', '', `Kursgeld CHF ${c.price_chf}.–`));
+    price.append(document.createTextNode(' (inkl. Nothilfeausweis)'));
     courseBox.append(price);
+
+    const voucher = el('div', 'mt-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-900 rounded');
+    voucher.append(el('strong', '', 'Gratis dank Gutschein: '));
+    voucher.append(document.createTextNode(`Für dein Kursgeld erhältst du einen Gutschein im Wert von CHF ${c.price_chf}.– für Fahrlektionen. Der Nothelferkurs kostet dich damit effektiv nichts.`));
+    courseBox.append(voucher);
 
     const hint = el('div', 'mt-4 p-4 bg-amber-50 border-l-4 border-amber-400 text-amber-900 rounded');
     hint.append(el('strong', '', 'Bitte beachten: '));
