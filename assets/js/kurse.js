@@ -53,12 +53,10 @@
   function renderCourse(c) {
     const free = c.max_seats - c.booked_seats;
     const isFull = free <= 0;
-    const variantLabel = c.variant === 'classic' ? 'Klassisch' : 'eNothelferkurs';
+    const variantLabel = 'Gratis Nothelferkurs';
     const dayCount = (c.sessions || []).length;
     const daysLabel = dayCount === 1 ? '1 Tag' : `${dayCount} Tage`;
-    const variantSub = c.variant === 'classic'
-      ? `${daysLabel} vor Ort`
-      : `3 h online + ${daysLabel} Praxis`;
+    const variantSub = `${daysLabel} vor Ort`;
 
     const card = document.createElement('article');
     card.className = [
@@ -96,10 +94,11 @@
     priceWrap.className = 'text-right';
     const priceVal = document.createElement('div');
     priceVal.className = 'font-display font-extrabold text-2xl sm:text-3xl leading-none';
-    priceVal.textContent = `CHF ${c.price_chf}.–`;
+    priceVal.className += ' text-green-600';
+    priceVal.textContent = 'Gratis';
     const priceLbl = document.createElement('div');
     priceLbl.className = 'text-xs text-ink-500 mt-1';
-    priceLbl.textContent = c.variant === 'classic' ? 'inkl. Ausweis' : 'zzgl. eLearning CHF 15';
+    priceLbl.textContent = `CHF ${c.price_chf}.– zurück als Gutschein`;
     priceWrap.append(priceVal, priceLbl);
 
     const seatsBadge = document.createElement('div');
@@ -222,13 +221,15 @@
     .then((r) => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
     .then((data) => {
       container.replaceChildren();
-      if (!data.courses || data.courses.length === 0) {
+      // eNothelferkurs wird nicht mehr angeboten, nur klassische Kurse anzeigen
+      const courses = (data.courses || []).filter((c) => c.variant === 'classic');
+      if (courses.length === 0) {
         container.append(renderEmpty());
         return;
       }
       const wrap = document.createElement('div');
       wrap.className = 'grid gap-5 sm:gap-6 max-w-3xl mx-auto';
-      data.courses.forEach((c) => wrap.append(renderCourse(c)));
+      courses.forEach((c) => wrap.append(renderCourse(c)));
       container.append(wrap);
     })
     .catch(() => {

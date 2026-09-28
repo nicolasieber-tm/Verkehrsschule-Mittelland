@@ -21,7 +21,11 @@ Bitte beachten: Die Kursgebühr von CHF <%= reg.price_chf %>.– ist am
 ersten Kurstag vor Kursbeginn in BAR oder per TWINT zu bezahlen.<% if (isElearning) { %>
 Die CHF 15.– für die Online-Plattform werden separat direkt beim
 Anbieter beglichen.<% } %>
-
+<% if (!isElearning) { %>
+Dein Nothelferkurs ist gratis: Für dein Kursgeld erhältst du einen
+Gutschein im Wert von CHF <%= reg.price_chf %>.– für Fahrlektionen bei der
+Verkehrsschule Mittelland.
+<% } %>
 Bei Fragen einfach auf diese Email antworten.
 
 Viel Erfolg und bis bald!
